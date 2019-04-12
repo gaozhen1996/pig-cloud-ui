@@ -44,14 +44,15 @@
 </template>
 
 <script>
+    import Global from '../common/Global'
     import axios from 'axios'
+    
     export default {
         name: 'basetable',
         data() {
             return {
                 editVisible: false,
                 delVisible: false,
-                url: "http://47.94.131.201:9050",
                 tableData: [],
                 cur_page: 1,
                 total:1000,
@@ -88,7 +89,7 @@
             // 获取 easy-mock 的模拟数据
             getData() {
                 let startRow=10*(this.cur_page-1)+1;
-                axios.get(this.url+"/video-service/web/rest/videoInfo/getVideoInfoByPage?startRow="
+                axios.get(Global.baseurl+"/video-service/web/rest/videoInfo/getVideoInfoByPage?startRow="
                             +startRow+"&rowSize=10")
                 .then((response) => {
                     var code = response.data.code;

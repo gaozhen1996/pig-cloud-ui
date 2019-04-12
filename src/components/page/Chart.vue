@@ -40,12 +40,12 @@
 <script>
 import echarts from 'echarts'
 import axios from 'axios'
+import Global from '../common/Global'
 
 export default {
     data() {
         return {
             today:'',
-            url:"http://47.94.131.201:9050",
         }
     },
     mounted() {
@@ -115,7 +115,7 @@ export default {
                 chartData.xdata.push(this.getNowFormatDate(i).substring(5,10));
             }
             var date = this.getNowFormatDate(-6);
-            axios.get(this.url+"/video-service/web/rest/videoInfo/selectCountGreaterDate?date="+date)
+            axios.get(Global.baseurl+"/video-service/web/rest/videoInfo/selectCountGreaterDate?date="+date)
                 .then((response) => {
                     console.log(response)
                     var code = response.data.code;

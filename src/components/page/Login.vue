@@ -24,12 +24,11 @@
 
 <script>
     import axios from 'axios'
+    import Global from '../common/Global'
 
     export default {
         data: function(){
             return {
-                // url:"http://47.94.131.201:9050",
-                url:"http://127.0.0.1:9050",
                 ruleForm: {
                     username: '',
                     password: ''
@@ -48,7 +47,7 @@
             submitForm() {
                 let request = {"username":this.ruleForm.username,"password":this.ruleForm.password};
                 if(request.username!=""){
-                    axios.post(this.url+"/webRest/user/login",request)
+                    axios.post(Global.baseurl+"/webRest/user/login",request)
                     .then(res=>{
                         console.log(res)
                         if(res.data.code==2){
