@@ -10,7 +10,7 @@
                 </el-table-column>
                 <el-table-column label="操作" width="180" align="center">
                     <template slot-scope="scope">
-                        <el-button type="text" icon="el-icon-caret-right" @click="handleEdit(scope.$index, scope.row)">查询</el-button>
+                        <el-button type="text" icon="el-icon-caret-right" @click="handleSelect(scope.$index, scope.row)">查询</el-button>
                         <el-button type="text" icon="el-icon-delete" class="red" @click="handleDelete(scope.$index, scope.row)">删除</el-button>
                     </template>
                 </el-table-column>
@@ -21,14 +21,13 @@
             </div>
         </div>
 
-        <!-- 编辑弹出框 -->
-        <el-dialog class="center" :visible.sync="editVisible" width="50%">
-            <video :src="video.videoURL" height="240" controls="controls">
+        <!-- 查看弹出框 -->
+        <el-dialog class="center" :visible.sync="slectVisible" :before-close="closeSelect">
+            <video :src="video.videoURL" height="520" controls="controls" autoplay="autoplay">
                 您的浏览器不支持 video 标签。
             </video>
             <span slot="footer" class="dialog-footer">
-                <el-button @click="editVisible = false">取 消</el-button>
-                <el-button type="primary" @click="saveEdit">确 定</el-button>
+                <el-button type="primary" @click="closeSelect">关闭</el-button>
             </span>
         </el-dialog>
 
@@ -51,7 +50,7 @@
         name: 'basetable',
         data() {
             return {
-                editVisible: false,
+                slectVisible: false,
                 delVisible: false,
                 tableData: [],
                 cur_page: 1,
@@ -105,7 +104,7 @@
             });
 
             },
-            handleEdit(index, row) {
+            handleSelect(index, row) {
                 this.idx = index;
                 const item = this.tableData[index];
                 this.video = {
@@ -114,17 +113,16 @@
                     content:item.content,
                     videoURL:item.videoURL
                 }
-                this.editVisible = true;
+                this.slectVisible = true;
             },
             handleDelete(index, row) {
                 this.idx = index;
                 this.delVisible = true;
             },
-            // 保存编辑
-            saveEdit() {
-                this.$set(this.tableData, this.idx, this.form);
-                this.editVisible = false;
-                this.$message.success(`修改第 ${this.idx+1} 行成功`);
+            //关闭视频遮藏
+            closeSelect(){
+                this.video.videoURL="";
+                this.slectVisible = false;
             },
             // 确定删除
             deleteRow(){
