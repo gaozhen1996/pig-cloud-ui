@@ -49,7 +49,6 @@
                 if(request.username!=""){
                     axios.post(Global.baseurl+"/webRest/user/login",request)
                     .then(res=>{
-                        console.log(res)
                         if(res.data.code==2){
                             localStorage.setItem('user',JSON.stringify(res.data.data));
                             this.$router.push('/');

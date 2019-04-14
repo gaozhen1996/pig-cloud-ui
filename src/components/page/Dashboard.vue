@@ -178,10 +178,13 @@
         getPlansGroupType: function(){
             axios.get(Global.baseurl+"/plan-service/web/rest/plan/getVideoInfoByPage?today="+this.today+"&uid="+this.uid)
                 .then((response) => {
+                    console.log(response)
                     var code = response.data.code;
                     if(code==2){
                        this.plans = response.data.data;
                        this.lastArrLen = response.data.lastArrLen;
+                    }else if(code==4){
+                        this.$router.push('/login');
                     }else{
                         this.$message.error('亲，错了哦，出了一点小异常');
                     }
