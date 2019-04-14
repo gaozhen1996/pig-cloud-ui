@@ -9,7 +9,7 @@ import './assets/css/icon.css';
 import './components/common/directives';
 import "babel-polyfill";
 
-axios.defaults.withCredentials=true
+// axios.defaults.withCredentials=true
 Vue.prototype.$axios = axios
 Vue.config.productionTip = false
 Vue.use(ElementUI, {

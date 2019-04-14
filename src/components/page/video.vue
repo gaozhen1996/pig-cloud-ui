@@ -86,7 +86,6 @@
                 this.cur_page = val;
                 this.getData();
             },
-            // 获取 easy-mock 的模拟数据
             getData() {
                 let startRow=10*(this.cur_page-1)+1;
                 axios.get(Global.baseurl+"/video-service/web/rest/videoInfo/getVideoInfoByPage?startRow="

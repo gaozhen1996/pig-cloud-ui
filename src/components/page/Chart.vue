@@ -120,8 +120,14 @@ export default {
                     console.log(response)
                     var code = response.data.code;
                     if(code==2){
-                       chartData.ydata.data = response.data.data;
-                       this.ChartConfig(chartData);
+                        let less = 7-response.data.data.length;
+                        if(less>0){
+                            for(let i = 0 ; i<less ; i++){
+                                response.data.data.push(0);
+                            }
+                        }
+                        chartData.ydata.data = response.data.data;
+                        this.ChartConfig(chartData);
                     }else{
                         this.$message.error('亲，错了哦，出了一点小异常');
                     }

@@ -39,6 +39,9 @@
 </template>
 <script>
     import bus from '../common/bus';
+    import axios from 'axios'
+    import Global from '../common/Global'
+
     export default {
         data() {
             return {
