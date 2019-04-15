@@ -1,10 +1,15 @@
 <template>
     <div class="header">
+        <transition name="el-zoom-in-center">
+            <div class="logo1" v-if="this.collapse"><font>PLAN</font></div>
+        </transition>
+        <transition name="el-zoom-in-center">
+            <div class="logo2" v-if="!this.collapse"><font>后台管理系统</font></div>
+        </transition>
         <!-- 折叠按钮 -->
         <div class="collapse-btn" @click="collapseChage">
             <i class="el-icon-menu"></i>
         </div>
-        <div class="logo">后台管理系统</div>
         <div class="header-right">
             <div class="header-user-con">
                 <!-- 全屏显示 -->
@@ -70,6 +75,7 @@
             collapseChage(){
                 this.collapse = !this.collapse;
                 bus.$emit('collapse', this.collapse);
+                // this.myCollapse = !this.myCollapse
             },
             // 全屏事件
             handleFullScreen(){
@@ -100,7 +106,7 @@
             }
         },
         mounted(){
-            if(document.body.clientWidth < 1500){
+            if(document.body.clientWidth < 1200){
                 this.collapseChage();
             }
         }
@@ -113,7 +119,8 @@
         width: 100%;
         height: 70px;
         font-size: 22px;
-        color: #fff;
+        color: #000000;
+        background:#F8F8F8
     }
     .collapse-btn{
         float: left;
@@ -121,11 +128,33 @@
         cursor: pointer;
         line-height: 70px;
     }
-    .header .logo{
+
+    .header .logo1 {
+        float: left;
+        width:64px;
+        line-height: 70px;
+        background:#000000;
+        text-align: center;
+    }
+
+    .header .logo1 font{
+        color: white;
+    }
+
+
+    .header .logo2 {
         float: left;
         width:250px;
         line-height: 70px;
+        background:#000000;
+        text-align: center;
     }
+
+
+    .header .logo2 font{
+        color: white;
+    }
+
     .header-right{
         float: right;
         padding-right: 50px;
@@ -156,10 +185,10 @@
         height: 8px;
         border-radius: 4px;
         background: #f56c6c;
-        color: #fff;
+        color: #000000;
     }
     .btn-bell .el-icon-bell{
-        color: #fff;
+        color: #000000;
     }
     .user-name{
         margin-left: 10px;
@@ -174,7 +203,7 @@
         border-radius: 50%;
     }
     .el-dropdown-link{
-        color: #fff;
+        color: #000000;
         cursor: pointer;
     }
     .el-dropdown-menu__item{

@@ -1,6 +1,6 @@
 <template>
     <div class="sidebar">
-        <el-menu class="sidebar-el-menu" :default-active="onRoutes" :collapse="collapse" background-color="#324157"
+        <el-menu class="sidebar-el-menu" :default-active="onRoutes" :collapse="collapse" background-color="#000000"
             text-color="#bfcbd9" active-text-color="#20a0ff" unique-opened router>
             <template v-for="item in items">
                 <template v-if="item.subs">

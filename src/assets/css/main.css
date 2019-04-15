@@ -171,3 +171,12 @@ a {
 .v-note-wrapper .v-note-panel {
     min-height: 500px;
 }
+
+/* header */
+.header .logo {
+    float: left;
+    width:250px;
+    line-height: 70px;
+    background:#000000;
+    text-align: center;
+}
