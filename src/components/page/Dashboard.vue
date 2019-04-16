@@ -180,7 +180,6 @@
                 .then((response) => {
                     var code = response.data.code;
                     if(code==2){
-                        console.log(response.data.data)
                         this.plans = response.data.data;
                         this.lastArrLen = response.data.lastArrLen;
                     }else if(code==4){
@@ -258,7 +257,6 @@
         changeStatus:function(element){
             
             let request = {"id":element.id,"status":element.status};
-            console.log(request)
             axios.post(Global.baseurl+"/plan-service/web/rest/plan/updatePlanStatus",request)
             .then(res=>{
                 if(res.data.code==2){
@@ -295,7 +293,6 @@
             .then(res=>{
                 if(res.data.code==2){
                     var obj = res.data.data;
-                    console.log(obj)
                     this.plans[obj.planType].push(obj);
                     this.initPlan();
                 }else{
@@ -324,7 +321,6 @@
         },
         updatePlan(){
             let request = this.plan;
-            console.log(request)
             axios.post(Global.baseurl+"/plan-service/web/rest/plan/updateNonEmptyPlanById",request)
             .then(res=>{
                 if(res.data.code==2){

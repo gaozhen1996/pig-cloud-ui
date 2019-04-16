@@ -22,7 +22,7 @@
         </div>
 
         <!-- 查看弹出框 -->
-        <el-dialog class="center" :visible.sync="slectVisible" :before-close="closeSelect">
+        <el-dialog class="center" :visible.sync="slectVisible" :before-close="closeSelect" :fullscreen="true">
             <video :src="video.videoURL" height="520" controls="controls" autoplay="autoplay">
                 您的浏览器不支持 video 标签。
             </video>
