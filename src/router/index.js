@@ -20,6 +20,11 @@ export default new Router({
                     meta: { title: '系统首页' }
                 },
                 {
+                    path: '/planMange',
+                    component: resolve => require(['../components/page/PlanManage.vue'], resolve),
+                    meta: { title: '计划管理' }
+                },
+                {
                     path: '/video',
                     component: resolve => require(['../components/page/video.vue'], resolve),
                     meta: { title: '视频管理' }

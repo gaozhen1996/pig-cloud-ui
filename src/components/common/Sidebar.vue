@@ -44,6 +44,11 @@
                         title: '系统首页'
                     },
                     {
+                        icon: 'el-icon-edit-outline',
+                        index: 'planMange',
+                        title: '计划管理'
+                    },
+                    {
                         icon: 'el-icon-date',
                         index: 'video',
                         title: '视频管理'
