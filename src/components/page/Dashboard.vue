@@ -94,7 +94,7 @@
         <el-dialog title="编辑" :visible.sync="addVisible" width="500px">
             <el-form ref="form" :model="plan" label-width="100px">
                 <el-form-item label="计划内容">
-                    <el-input v-model="plan.content"></el-input>
+                    <el-input v-model="plan.content" @keyup.enter.native="addPlan()"></el-input>
                 </el-form-item>
                 <el-form-item label="创建日期">
                     <el-date-picker type="date" placeholder="选择日期" v-model="plan.createDate" value-format="yyyy-MM-dd" style="width: 100%;"></el-date-picker>
@@ -180,8 +180,9 @@
                 .then((response) => {
                     var code = response.data.code;
                     if(code==2){
-                       this.plans = response.data.data;
-                       this.lastArrLen = response.data.lastArrLen;
+                        console.log(response.data.data)
+                        this.plans = response.data.data;
+                        this.lastArrLen = response.data.lastArrLen;
                     }else if(code==4){
                         // this.$router.push('/login');
                     }else{
