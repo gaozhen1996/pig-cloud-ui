@@ -55,8 +55,8 @@
                     },
                     {
                         icon: 'el-icon-tickets',
-                        index: 'chart',
-                        title: '图表组件'
+                        index: 'wormConfig',
+                        title: '爬虫控制'
                     },
                     {
                         icon: 'el-icon-lx-cascades',

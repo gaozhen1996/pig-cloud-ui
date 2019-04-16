@@ -64,9 +64,9 @@ export default new Router({
                 },
                 {
                     // chart
-                    path: '/chart',
-                    component: resolve => require(['../components/page/Chart.vue'], resolve),
-                    meta: { title: '图表组件' }   
+                    path: '/wormConfig',
+                    component: resolve => require(['../components/page/WormConfig.vue'], resolve),
+                    meta: { title: '爬虫控制' }   
                 },
                 {
                     // 权限页面

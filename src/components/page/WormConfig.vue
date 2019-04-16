@@ -1,7 +1,7 @@
 <template>
     <div>
-        <el-row :gutter="20">
-            <el-col :span="12">
+        <el-row :gutter="10">
+            <el-col :span="24">
                 <el-card shadow="hover" style="height:350px;">
                     <div slot="header" class="clearfix">
                         <span>最近一周爬取个数</span>
@@ -9,26 +9,10 @@
                     <div id="main" style="height:300px;"></div>
                 </el-card>
             </el-col>
-            <el-col :span="12">
-                <el-card shadow="hover" style="height:350px;">
+            <el-col :span="24">
+                <el-card shadow="hover" style="height:250px;">
                     <div slot="header" class="clearfix">
                         <span>用户数量</span>
-                    </div>
-                </el-card>
-            </el-col>
-        </el-row>
-        <el-row :gutter="20">
-            <el-col :span="12">
-                <el-card shadow="hover" style="height:350px;">
-                    <div slot="header" class="clearfix">
-                        <span>IP访问次数</span>
-                    </div>
-                </el-card>
-            </el-col>
-            <el-col :span="12">
-                <el-card shadow="hover" style="height:350px;">
-                    <div slot="header" class="clearfix">
-                        <span>重要且紧急</span>
                     </div>
                 </el-card>
             </el-col>
@@ -157,8 +141,8 @@ export default {
 
 }
 </script>
-<style>
-  .el-row {
-    margin-bottom: 10px;
+ <style>
+  .el-col {
+    margin-top: 10px;
   }
 </style>
