@@ -69,6 +69,12 @@ export default new Router({
                     meta: { title: '爬虫控制' }   
                 },
                 {
+                    // note
+                    path: '/note',
+                    component: resolve => require(['../components/page/Note.vue'], resolve),
+                    meta: { title: '笔记' }   
+                },
+                {
                     // 权限页面
                     path: '/permission',
                     component: resolve => require(['../components/page/Permission.vue'], resolve),

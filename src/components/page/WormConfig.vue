@@ -57,7 +57,7 @@ export default {
     },
     mounted() {
         this.today=this.getNowFormatDate(0);
-        // this.createChart1();
+        this.createChart1();
         this.getWormInfo();
     },
     methods: {
