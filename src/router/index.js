@@ -64,12 +64,6 @@ export default new Router({
                     component: resolve => require(['../components/page/Note.vue'], resolve),
                     meta: { title: '笔记' }   
                 },
-                // {
-                //     // 权限页面
-                //     path: '/permission',
-                //     component: resolve => require(['../components/page/Permission.vue'], resolve),
-                //     meta: { title: '权限测试', permission: true }
-                // },
                 {
                     path: '/404',
                     component: resolve => require(['../components/page/404.vue'], resolve),
