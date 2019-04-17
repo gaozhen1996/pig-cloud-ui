@@ -74,10 +74,6 @@
                         title: '表单相关',
                         subs: [
                             {
-                                index: 'form',
-                                title: '基本表单'
-                            },
-                            {
                                 index: '3-2',
                                 title: '三级菜单',
                                 subs: [
