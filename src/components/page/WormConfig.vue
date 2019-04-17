@@ -4,7 +4,7 @@
             <el-col :span="24">
                 <el-card shadow="hover" style="height:350px;">
                     <div slot="header" class="clearfix">
-                        <span>最近一周爬取个数</span>
+                        <span>最近一个月爬取个数</span>
                     </div>
                     <div id="main" style="height:300px;"></div>
                 </el-card>
@@ -119,15 +119,15 @@ export default {
                 }
 
             };
-            for(let i=-6;i<=0;i++){
+            for(let i=-29;i<=0;i++){
                 chartData.xdata.push(this.getNowFormatDate(i).substring(5,10));
             }
-            var date = this.getNowFormatDate(-6);
+            var date = this.getNowFormatDate(-29);
             axios.get(Global.baseurl+"/video-service/web/rest/videoInfo/selectCountGreaterDate?date="+date)
                 .then((response) => {
                     var code = response.data.code;
                     if(code==2){
-                        let less = 7-response.data.data.length;
+                        let less = 30-response.data.data.length;
                         if(less>0){
                             for(let i = 0 ; i<less ; i++){
                                 response.data.data.push(0);

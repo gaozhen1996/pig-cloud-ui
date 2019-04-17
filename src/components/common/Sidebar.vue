@@ -64,11 +64,6 @@
                         title: '爬虫控制'
                     },
                     {
-                        icon: 'el-icon-lx-cascades',
-                        index: 'table',
-                        title: '基础表格'
-                    },
-                    {
                         icon: 'el-icon-lx-copy',
                         index: 'tabs',
                         title: 'tab选项卡'
@@ -102,21 +97,6 @@
                             }
                         ]
                     },
-                    {
-                        icon: 'el-icon-lx-warn',
-                        index: '7',
-                        title: '错误处理',
-                        subs: [
-                            {
-                                index: 'permission',
-                                title: '权限测试'
-                            },
-                            {
-                                index: '404',
-                                title: '404页面'
-                            }
-                        ]
-                    }
                 ]
             }
         },

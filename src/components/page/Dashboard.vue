@@ -176,7 +176,7 @@
     },    
     methods: {
         getPlansGroupType: function(){
-            axios.get(Global.baseurl+"/plan-service/web/rest/plan/getVideoInfoByPage?today="+this.today+"&uid="+this.uid)
+            axios.get(Global.baseurl+"/plan-service/web/rest/plan/getPlansGroupType?today="+this.today+"&uid="+this.uid)
                 .then((response) => {
                     var code = response.data.code;
                     if(code==2){
