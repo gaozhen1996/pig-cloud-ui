@@ -16,7 +16,10 @@
                 </el-table-column>
                 <el-table-column prop="content" label="内容" width="400">
                 </el-table-column>
-                <el-table-column prop="status" label="状态">
+                <el-table-column label="状态"  align="center">
+                    <template slot-scope="scope">
+                        <el-switch v-model="scope.row.status" @click="changeStatus(scope.$index, scope.row)"></el-switch>
+                    </template>
                 </el-table-column>
                 <el-table-column prop="createDate" label="创建日期">
                 </el-table-column>
@@ -80,12 +83,6 @@
                     }else if(d.planType==3){
                         d.planType="不重要不紧急" 
                     }
-                    //status
-                    if(d.status){
-                        d.status="已完成";
-                    }else{
-                        d.status="未完成";
-                    }
                     return d;
                 })
             }
@@ -105,7 +102,6 @@
                 }
                 url=url+"&sel_status="+this.select_cate.status
                     +"&sel_word="+this.select_cate.word+"&sel_date="+this.select_cate.date;
-                console.log(url)
                 axios.get(url)
                     .then((response) => {
                         var code = response.data.code;
@@ -120,7 +116,10 @@
                     console.log(error);
                 });
             },
-
+            changeStatus(index, row) {
+                this.idx = index;
+                console.log(row)
+            },
         }
     }
 
@@ -134,7 +133,6 @@
     .handle-select {
         width: 120px;
     }
-
     .handle-input {
         width: 300px;
         display: inline-block;
@@ -147,13 +145,13 @@
         width: 100%;
         font-size: 14px;
     }
-    .red{
-        color: #ff0000;
-    }
     .mr10{
         margin-right: 10px;
     }
     .center{
         text-align: center;
+    }
+    .el-switch{
+        pointer-events:none;
     }
 </style>

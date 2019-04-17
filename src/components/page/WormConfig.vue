@@ -12,8 +12,27 @@
             <el-col :span="24">
                 <el-card shadow="hover" style="height:250px;">
                     <div slot="header" class="clearfix">
-                        <span>用户数量</span>
+                        <span>爬虫总控</span>
                     </div>
+                    <el-form ref="form" :model="wormInfo" label-width="80px">
+                    <el-form-item label="爬取数量">
+                        <el-select v-model="wormInfo.num" placeholder="请选择爬取数量">
+                        <el-option label="1" value="1"></el-option>
+                        <el-option label="2" value="2"></el-option>
+                        <el-option label="3" value="3"></el-option>
+                        <el-option label="5" value="5"></el-option>
+                        <el-option label="10" value="10"></el-option>
+                        <el-option label="20" value="20"></el-option>
+                        </el-select>
+                    </el-form-item>
+                    <el-form-item label="自动爬取">
+                        <el-switch v-model="wormInfo.autoFlag"></el-switch>
+                    </el-form-item>
+                    <el-form-item label="修改参数">
+                        <el-button type="primary" @click="getWormInfo">取消</el-button>
+                        <el-button type="primary" @click="setWormInfo">确认</el-button>
+                    </el-form-item>
+                    </el-form>                   
                 </el-card>
             </el-col>
         </el-row>
@@ -30,11 +49,16 @@ export default {
     data() {
         return {
             today:'',
+            wormInfo:{
+                "autoFlag":true,
+                "num":0
+            }
         }
     },
     mounted() {
         this.today=this.getNowFormatDate(0);
-        this.createChart1();
+        // this.createChart1();
+        this.getWormInfo();
     },
     methods: {
         ChartConfig(chartData) {
@@ -101,7 +125,6 @@ export default {
             var date = this.getNowFormatDate(-6);
             axios.get(Global.baseurl+"/video-service/web/rest/videoInfo/selectCountGreaterDate?date="+date)
                 .then((response) => {
-                    console.log(response)
                     var code = response.data.code;
                     if(code==2){
                         let less = 7-response.data.data.length;
@@ -136,7 +159,35 @@ export default {
             var currentdate = year + seperator1 + month + seperator1 + strDate;
             return currentdate;
         },
-
+        getWormInfo(){
+            axios.get(Global.baseurl+"/worm-service/web/rest/setting/getWormInfo")
+                .then((response) => {
+                    var code = response.data.code;
+                    if(code==2){
+                        this.wormInfo = response.data.data;
+                    }else{
+                        this.$message.error('亲，错了哦，出了一点小异常');
+                    }
+                })
+                .catch(function (error) {
+                console.log(error);
+            });            
+        },
+        setWormInfo(){
+            axios.get(Global.baseurl+"/worm-service/web/rest/setting/setWormInfo?flag="+this.wormInfo.autoFlag
+                        +"&num="+this.wormInfo.num)
+                .then((response) => {
+                    var code = response.data.code;
+                    if(code==2){
+                        this.$message.success('设置成功');
+                    }else{
+                        this.$message.error('亲，错了哦，出了一点小异常');
+                    }
+                })
+                .catch(function (error) {
+                console.log(error);
+            });            
+        },
     }
 
 }
