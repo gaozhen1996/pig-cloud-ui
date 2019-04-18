@@ -282,14 +282,15 @@
 
         },
         changeStatus:function(element){
+            this.planToShowPlan(element);
             let request = {"id":element.id,"status":element.status};
             axios.post(Global.baseurl+"/plan-service/web/rest/plan/updatePlanStatus",request)
             .then(res=>{
                 if(res.data.code==2){
-                    this.getPlansGroupType();
+                    // this.getPlansGroupType();
                 }else{
                     console.log("修改状态失败")
-                    this.$message.error('亲，错了哦，出了一点小异常');
+                    this.$message.error('亲，错了哦，出了一点小异常,请刷新试试哟！');
                 }         
             })
 
