@@ -282,12 +282,11 @@
 
         },
         changeStatus:function(element){
-            
             let request = {"id":element.id,"status":element.status};
             axios.post(Global.baseurl+"/plan-service/web/rest/plan/updatePlanStatus",request)
             .then(res=>{
                 if(res.data.code==2){
-                   
+                    this.getPlansGroupType();
                 }else{
                     console.log("修改状态失败")
                     this.$message.error('亲，错了哦，出了一点小异常');
@@ -408,12 +407,20 @@
             let dateStart = new Date(this.today);
             let dateEnd = new Date(obj.finishDate);
             let difValue = ((dateEnd - dateStart) / (1000 * 60 * 60 * 24));
-            if(difValue>=0){
+            if(obj.status==false){
+                if(difValue>0){
+                    obj.delay = false;
+                    obj.delayDay = "剩余"+difValue+"天";
+                }else if(difValue == 0){
+                    obj.delay = false;
+                    obj.delayDay = "今天需完成";
+                }else{
+                    obj.delay = true;
+                    obj.delayDay = "延期"+(-difValue)+"天";
+                }               
+            }else{
                 obj.delay = false;
                 obj.delayDay = "";
-            }else{
-                obj.delay = true;
-                obj.delayDay = "延期"+(-difValue)+"天";
             }
             //2.检查内容长度
             if(obj.content.length>20){
