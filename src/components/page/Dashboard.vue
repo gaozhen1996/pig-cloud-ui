@@ -206,24 +206,7 @@
                             let tArr = this.plans[i];
                             for(let j =0 ; j<tArr.length;j++){
                                 let tPlan = tArr[j];
-                                //1.添加过期标识
-                                let dateStart = new Date(this.today);
-                                let dateEnd = new Date(tPlan.finishDate);
-                                let difValue = ((dateEnd - dateStart) / (1000 * 60 * 60 * 24));
-                                if(difValue>=0){
-                                    tPlan.delay = false;
-                                }else{
-                                    tPlan.delay = true;
-                                    tPlan.delayDay = "延期"+(-difValue)+"天";
-                                }
-                                //2.检查内容长度
-                                if(tPlan.content.length>20){
-                                    console.log(tPlan.content)
-                                    tPlan.showContent = tPlan.content.substring(0,20)+"......"
-                                }else{
-                                    tPlan.showContent = tPlan.content
-                                }
-                                // console.log(tPlan)
+                                tPlan = this.planToShowPlan(tPlan)
                             }
                         }
                     }else if(code==4){
@@ -326,7 +309,6 @@
         },
         addPlan() {
             this.addVisible=false;
-            
             let request = {"uid":this.uid , 
                            "createDate":this.plan.createDate,
                            "finishDate":this.plan.finishDate,
@@ -337,6 +319,7 @@
             .then(res=>{
                 if(res.data.code==2){
                     var obj = res.data.data;
+                    obj = this.planToShowPlan(obj);
                     this.plans[obj.planType].push(obj);
                     this.initPlan();
                 }else{
@@ -369,7 +352,8 @@
             .then(res=>{
                 if(res.data.code==2){
                     this.$message.success('修改成功');
-                    this.getPlansGroupType();
+                    this.plan = this.planToShowPlan(this.plan);
+                    // this.getPlansGroupType();
                     this.initPlan();
                 }else{
                     console.log("修改失败")
@@ -417,6 +401,27 @@
                 createDate:this.getNowFormatDate(),
                 finishDate:this.getNowFormatDate(),
             }
+        },
+        //plan对象转化为需要显示的plan对象
+        planToShowPlan(obj){
+            //1.添加过期标识
+            let dateStart = new Date(this.today);
+            let dateEnd = new Date(obj.finishDate);
+            let difValue = ((dateEnd - dateStart) / (1000 * 60 * 60 * 24));
+            if(difValue>=0){
+                obj.delay = false;
+                obj.delayDay = "";
+            }else{
+                obj.delay = true;
+                obj.delayDay = "延期"+(-difValue)+"天";
+            }
+            //2.检查内容长度
+            if(obj.content.length>20){
+                obj.showContent = obj.content.substring(0,20)+"......"
+            }else{
+                obj.showContent = obj.content
+            }
+            return obj;
         }
 
     }
