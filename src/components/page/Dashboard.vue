@@ -9,11 +9,12 @@
                     </div>
                     <div class="scroll">
                         <draggable :list="plans[0]" group="people" @change="log">
-                            <div class="text item" v-for="(element) in plans[0]" :key="element.id">
+                            <div class="text item" v-for="(element) in plans[0]" :key="element.id" @dblclick="showPlan(element)">
                                 <el-checkbox v-model="element.status" @change="changeStatus(element)"></el-checkbox>
-                                <a class="todo-item" :class="{'del': element.status}">{{element.content}}</a>
+                                <a class="todo-item" :class="{'del': element.status}">{{element.showContent}}</a>
                                 <i class="el-icon-delete update" v-on:click="handleDelete(element)"></i>
                                 <i class="el-icon-edit update" v-on:click="handleUpdate(element)"></i>
+                                <a class="todo-item update" :class="{'delay': element.delay}">{{element.delayDay}}</a> 
                             </div>
                         </draggable>
                     </div>
@@ -27,11 +28,12 @@
                     </div>
                     <div class="scroll">
                         <draggable :list="plans[2]" group="people" @change="log">
-                            <div class="text item" v-for="(element) in plans[2]" :key="element.id">
+                            <div class="text item" v-for="(element) in plans[2]" :key="element.id" @dblclick="showPlan(element)">
                                 <el-checkbox v-model="element.status" @change="changeStatus(element)"></el-checkbox>
-                                <a class="todo-item" :class="{'del': element.status}">{{element.content}}</a>
+                                <a class="todo-item" :class="{'del': element.status}">{{element.showContent}}</a>
                                 <i class="el-icon-delete update" v-on:click="handleDelete(element)"></i>
                                 <i class="el-icon-edit update" v-on:click="handleUpdate(element)"></i>
+                                <a class="todo-item update" :class="{'delay': element.delay}">{{element.delayDay}}</a> 
                             </div>
                         </draggable> 
                     </div>
@@ -48,11 +50,12 @@
                     </div>
                     <div class="scroll">
                         <draggable :list="plans[1]" group="people" @change="log">
-                            <div class="text item" v-for="(element) in plans[1]" :key="element.id">
+                            <div class="text item" v-for="(element) in plans[1]" :key="element.id" @dblclick="showPlan(element)">
                                 <el-checkbox v-model="element.status" @change="changeStatus(element)"></el-checkbox>
-                                <a class="todo-item" :class="{'del': element.status}">{{element.content}}</a>
+                                <a class="todo-item" :class="{'del': element.status}">{{element.showContent}}</a>
                                 <i class="el-icon-delete update" v-on:click="handleDelete(element)"></i>
                                 <i class="el-icon-edit update" v-on:click="handleUpdate(element)"></i>
+                                <a class="todo-item update" :class="{'delay': element.delay}">{{element.delayDay}}</a> 
                             </div>
                         </draggable>
                     </div>
@@ -66,11 +69,12 @@
                     </div>
                     <div class="scroll">
                         <draggable :list="plans[3]" group="people" @change="log">
-                            <div class="text item" v-for="(element) in plans[3]" :key="element.id">
+                            <div class="text item" v-for="(element) in plans[3]" :key="element.id" @dblclick="showPlan(element)">
                                 <el-checkbox v-model="element.status" @change="changeStatus(element)"></el-checkbox>
-                                <a class="todo-item" :class="{'del': element.status}">{{element.content}}</a>
+                                <a class="todo-item" :class="{'del': element.status}">{{element.showContent}}</a>
                                 <i class="el-icon-delete update" v-on:click="handleDelete(element)"></i>
                                 <i class="el-icon-edit update" v-on:click="handleUpdate(element)"></i>
+                                <a class="todo-item update" :class="{'delay': element.delay}">{{element.delayDay}}</a> 
                             </div>
                         </draggable> 
                     </div>
@@ -89,9 +93,23 @@
             </el-row>
         </el-col> 
 
+        <!-- 查看提示框 -->
+        <el-dialog title="查看" :visible.sync="showVisible" width="500px">
+            <el-form ref="form" :model="plan" label-width="100px">
+                <el-form-item label="计划内容">
+                    <el-input v-model="plan.content"></el-input>
+                </el-form-item>
+                <el-form-item label="创建日期">
+                    <el-date-picker type="date" placeholder="选择日期" v-model="plan.createDate" value-format="yyyy-MM-dd" style="width: 100%;"></el-date-picker>
+                </el-form-item>
+                <el-form-item label="完成日期">
+                    <el-date-picker type="date" placeholder="选择日期" v-model="plan.finishDate" value-format="yyyy-MM-dd" style="width: 100%;"></el-date-picker>
+                </el-form-item>
+            </el-form>
+        </el-dialog>  
 
         <!-- 添加提示框 -->
-        <el-dialog title="编辑" :visible.sync="addVisible" width="500px">
+        <el-dialog title="添加" :visible.sync="addVisible" width="500px">
             <el-form ref="form" :model="plan" label-width="100px">
                 <el-form-item label="计划内容">
                     <el-input v-model="plan.content" @keyup.enter.native="addPlan()"></el-input>
@@ -155,6 +173,7 @@
     },
     data() {
         return {
+            showVisible:false,
             addVisible: false,
             delVisible: false,
             updateVisible:false,
@@ -182,6 +201,31 @@
                     if(code==2){
                         this.plans = response.data.data;
                         this.lastArrLen = response.data.lastArrLen;
+                        //1.添加过期标识 2.检查内容长度
+                        for(let i = 0;i<4;i++){
+                            let tArr = this.plans[i];
+                            for(let j =0 ; j<tArr.length;j++){
+                                let tPlan = tArr[j];
+                                //1.添加过期标识
+                                let dateStart = new Date(this.today);
+                                let dateEnd = new Date(tPlan.finishDate);
+                                let difValue = ((dateEnd - dateStart) / (1000 * 60 * 60 * 24));
+                                if(difValue>=0){
+                                    tPlan.delay = false;
+                                }else{
+                                    tPlan.delay = true;
+                                    tPlan.delayDay = "延期"+(-difValue)+"天";
+                                }
+                                //2.检查内容长度
+                                if(tPlan.content.length>20){
+                                    console.log(tPlan.content)
+                                    tPlan.showContent = tPlan.content.substring(0,20)+"......"
+                                }else{
+                                    tPlan.showContent = tPlan.content
+                                }
+                                // console.log(tPlan)
+                            }
+                        }
                     }else if(code==4){
                         // this.$router.push('/login');
                     }else{
@@ -325,7 +369,7 @@
             .then(res=>{
                 if(res.data.code==2){
                     this.$message.success('修改成功');
-                    // this.getPlansGroupType();
+                    this.getPlansGroupType();
                     this.initPlan();
                 }else{
                     console.log("修改失败")
@@ -333,6 +377,11 @@
                 }         
             })
             this.updateVisible = false;
+        },
+        //弹出详细信息
+        showPlan(element){
+            this.plan=element;
+            this.showVisible = true;
         },
         toNextDay(num){
             this.changeDay+=num;
@@ -391,8 +440,13 @@
         color: #999;
     }
 
+    .delay {
+        color: red;
+    }  
+
     .update {
         float:right;
+        margin-right: 5px;
     }
 
     .scroll {
