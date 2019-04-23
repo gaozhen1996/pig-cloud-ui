@@ -47,7 +47,7 @@
             submitForm() {
                 let request = {"username":this.ruleForm.username,"password":this.ruleForm.password};
                 if(request.username!=""){
-                    axios.post(Global.baseurl+"/webRest/user/login",request)
+                    axios.post(Global.baseurl+"/auth-api/UserWebRest/login",request)
                     .then(res=>{
                         if(res.data.code==2){
                             localStorage.setItem('user',JSON.stringify(res.data.data));

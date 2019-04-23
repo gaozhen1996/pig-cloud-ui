@@ -15,23 +15,31 @@
                         <span>爬虫总控</span>
                     </div>
                     <el-form ref="form" :model="wormInfo" label-width="80px">
-                    <el-form-item label="爬取数量">
-                        <el-select v-model="wormInfo.num" placeholder="请选择爬取数量">
-                        <el-option label="1" value="1"></el-option>
-                        <el-option label="2" value="2"></el-option>
-                        <el-option label="3" value="3"></el-option>
-                        <el-option label="5" value="5"></el-option>
-                        <el-option label="10" value="10"></el-option>
-                        <el-option label="20" value="20"></el-option>
-                        </el-select>
-                    </el-form-item>
-                    <el-form-item label="自动爬取">
-                        <el-switch v-model="wormInfo.autoFlag"></el-switch>
-                    </el-form-item>
-                    <el-form-item label="修改参数">
-                        <el-button type="primary" @click="getWormInfo">取消</el-button>
-                        <el-button type="primary" @click="setWormInfo">确认</el-button>
-                    </el-form-item>
+                    <div style="float:left"> 
+                        <el-form-item label="URL">
+                            <el-input v-model="wormInfo.url" style="width:300px"></el-input>
+                        </el-form-item>    
+                                       
+                        <el-form-item label="爬取数量">
+                            <el-select v-model="wormInfo.num" placeholder="请选择爬取数量">
+                            <el-option label="1" value="1"></el-option>
+                            <el-option label="2" value="2"></el-option>
+                            <el-option label="3" value="3"></el-option>
+                            <el-option label="5" value="5"></el-option>
+                            <el-option label="10" value="10"></el-option>
+                            <el-option label="20" value="20"></el-option>
+                            </el-select>
+                        </el-form-item>
+                    </div> 
+                    <div style="float:left"> 
+                        <el-form-item label="自动爬取">
+                            <el-switch v-model="wormInfo.autoFlag"></el-switch>
+                        </el-form-item>
+                        <el-form-item label="修改参数">
+                            <el-button type="primary" @click="getWormInfo">取消</el-button>
+                            <el-button type="primary" @click="setWormInfo">确认</el-button>
+                        </el-form-item>
+                    </div> 
                     </el-form>                   
                 </el-card>
             </el-col>
@@ -50,8 +58,9 @@ export default {
         return {
             today:'',
             wormInfo:{
-                "autoFlag":true,
-                "num":0
+                autoFlag:true,
+                num:0,
+                url:""
             }
         }
     },
@@ -175,7 +184,7 @@ export default {
         },
         setWormInfo(){
             axios.get(Global.baseurl+"/worm-service/web/rest/setting/setWormInfo?flag="+this.wormInfo.autoFlag
-                        +"&num="+this.wormInfo.num)
+                        +"&num="+this.wormInfo.num+"&url="+this.wormInfo.url)
                 .then((response) => {
                     var code = response.data.code;
                     if(code==2){
