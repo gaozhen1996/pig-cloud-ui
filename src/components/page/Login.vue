@@ -47,10 +47,11 @@
             submitForm() {
                 let request = {"username":this.ruleForm.username,"password":this.ruleForm.password};
                 if(request.username!=""){
-                    axios.post(Global.baseurl+"/auth-api/UserWebRest/login",request)
+                    axios.post(Global.baseurl+"/auth-api/userWebRest/login",request)
                     .then(res=>{
                         if(res.data.code==2){
                             localStorage.setItem('user',JSON.stringify(res.data.data));
+                            localStorage.setItem('Authorization',res.data.token);
                             this.$router.push('/');
                         }else{
                             console.log("登录异常")
@@ -60,7 +61,13 @@
                 }else{
                     this.$message.error('亲，请输入账号！');
                 }
-            }
+            },
+            article(){
+                axios.get(Global.baseurl+"/auth-api/userWebRest/article")
+                .then(res=>{
+                    console.log(res.data.msg)
+                })
+            },
         }
     }
 </script>

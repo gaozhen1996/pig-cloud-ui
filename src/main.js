@@ -9,8 +9,11 @@ import './assets/css/icon.css';
 import './components/common/directives';
 import "babel-polyfill";
 
-// axios.defaults.withCredentials=true
+//配置axios
+let Authorization = localStorage.getItem("Authorization");
+axios.defaults.headers.common['Authorization'] = Authorization;
 Vue.prototype.$axios = axios
+
 Vue.config.productionTip = false
 Vue.use(ElementUI, {
     size: 'small'

@@ -95,7 +95,7 @@
             },
             getData() {
                 let startRow=10*(this.cur_page-1);
-                var url = Global.baseurl+"/plan-service/web/rest/plan/listByUidAndPaging?uid="
+                var url = Global.baseurl+"/plan-api/web/rest/plan/listByUidAndPaging?uid="
                             +this.user.id+"&startRow="+startRow+"&rowSize=10";
                 if(this.select_cate.date==null){
                     this.select_cate.date="";

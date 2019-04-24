@@ -122,7 +122,7 @@
             },
             getData() {
                 let startRow=10*(this.cur_page-1);
-                axios.get(Global.baseurl+"/plan-service/web/rest/note/listNoteByUidAndPaging?uid="+this.uid+"&startRow="
+                axios.get(Global.baseurl+"/plan-api/web/rest/note/listNoteByUidAndPaging?uid="+this.uid+"&startRow="
                             +startRow+"&rowSize=10")
                 .then((response) => {
                     var code = response.data.code;
@@ -156,7 +156,7 @@
             // 确定删除
             deleteRow(){
                 let request = {"id":this.note.id};
-                axios.post(Global.baseurl+"/plan-service/web/rest/note/deleteNoteById",request)
+                axios.post(Global.baseurl+"/plan-api/web/rest/note/deleteNoteById",request)
                 .then(res=>{
                     if(res.data.code==2){
                         this.tableData.splice(this.idx, 1);
@@ -172,7 +172,7 @@
                 let request = {"uid":this.uid,"content":this.note.content,
                                "fromid":0,
                                "title":this.note.title};
-                axios.post(Global.baseurl+"/plan-service/web/rest/note/addNote",request)
+                axios.post(Global.baseurl+"/plan-api/web/rest/note/addNote",request)
                 .then(res=>{
                     if(res.data.code==2){
                         this.addVisible = false;
@@ -187,7 +187,7 @@
             updateNoteById(){
                 let request = {"id":this.note.id,"content":this.note.content,
                                "title":this.note.title};
-                axios.post(Global.baseurl+"/plan-service/web/rest/note/updateNoteById",request)
+                axios.post(Global.baseurl+"/plan-api/web/rest/note/updateNoteById",request)
                 .then(res=>{
                     if(res.data.code==2){
                         this.updateVisible = false;

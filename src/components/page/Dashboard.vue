@@ -195,7 +195,7 @@
     },    
     methods: {
         getPlansGroupType: function(){
-            axios.get(Global.baseurl+"/plan-service/web/rest/plan/getPlansGroupType?today="+this.today+"&uid="+this.uid)
+            axios.get(Global.baseurl+"/plan-api/web/rest/plan/getPlansGroupType?today="+this.today+"&uid="+this.uid)
                 .then((response) => {
                     var code = response.data.code;
                     if(code==2){
@@ -229,7 +229,7 @@
                                "newType":evt.moved.element.planType,
                                "oldType":evt.moved.element.planType,
                                "newIndex":evt.moved.newIndex,"oldIndex":evt.moved.oldIndex};
-                axios.post(Global.baseurl+"/plan-service/web/rest/plan/updatePlanType",request)
+                axios.post(Global.baseurl+"/plan-api/web/rest/plan/updatePlanType",request)
                 .then(res=>{
                     if(res.data.code==2){
                         this.getPlansGroupType();
@@ -268,7 +268,7 @@
                     let request = {"id":evt.added.element.id,"uid":evt.added.element.uid,
                                    "newType":addIndex,"oldType":removeIndex,
                                    "newIndex":evt.added.newIndex,"oldIndex":evt.added.element.planIndex};
-                    axios.post(Global.baseurl+"/plan-service/web/rest/plan/updatePlanType",request)
+                    axios.post(Global.baseurl+"/plan-api/web/rest/plan/updatePlanType",request)
                     .then(res=>{
                         if(res.data.code==2){
                             this.getPlansGroupType();
@@ -284,7 +284,7 @@
         changeStatus:function(element){
             this.planToShowPlan(element);
             let request = {"id":element.id,"status":element.status};
-            axios.post(Global.baseurl+"/plan-service/web/rest/plan/updatePlanStatus",request)
+            axios.post(Global.baseurl+"/plan-api/web/rest/plan/updatePlanStatus",request)
             .then(res=>{
                 if(res.data.code==2){
                     // this.getPlansGroupType();
@@ -315,7 +315,7 @@
                            "planIndex":this.plans[this.plan.planType].length,
                            "planType":this.plan.planType,
                            "content":this.plan.content};
-            axios.post(Global.baseurl+"/plan-service/web/rest/plan/addPlan",request)
+            axios.post(Global.baseurl+"/plan-api/web/rest/plan/addPlan",request)
             .then(res=>{
                 if(res.data.code==2){
                     var obj = res.data.data;
@@ -334,7 +334,7 @@
                            "uid":this.plan.uid,
                            "planType":this.plan.planType,
                            "planIndex":this.plan.planIndex};
-            axios.post(Global.baseurl+"/plan-service/web/rest/plan/deletePlanById",request)
+            axios.post(Global.baseurl+"/plan-api/web/rest/plan/deletePlanById",request)
             .then(res=>{
                 if(res.data.code==2){
                     this.$message.success('删除成功');
@@ -348,7 +348,7 @@
         },
         updatePlan(){
             let request = this.plan;
-            axios.post(Global.baseurl+"/plan-service/web/rest/plan/updateNonEmptyPlanById",request)
+            axios.post(Global.baseurl+"/plan-api/web/rest/plan/updateNonEmptyPlanById",request)
             .then(res=>{
                 if(res.data.code==2){
                     this.$message.success('修改成功');

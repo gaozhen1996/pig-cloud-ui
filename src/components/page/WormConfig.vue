@@ -132,7 +132,7 @@ export default {
                 chartData.xdata.push(this.getNowFormatDate(i).substring(5,10));
             }
             var date = this.getNowFormatDate(-29);
-            axios.get(Global.baseurl+"/video-service/web/rest/videoInfo/selectCountGreaterDate?date="+date)
+            axios.get(Global.baseurl+"/video-api/web/rest/videoInfo/selectCountGreaterDate?date="+date)
                 .then((response) => {
                     var code = response.data.code;
                     if(code==2){
@@ -169,7 +169,7 @@ export default {
             return currentdate;
         },
         getWormInfo(){
-            axios.get(Global.baseurl+"/worm-service/web/rest/setting/getWormInfo")
+            axios.get(Global.baseurl+"/worm-api/web/rest/setting/getWormInfo")
                 .then((response) => {
                     var code = response.data.code;
                     if(code==2){
@@ -183,7 +183,7 @@ export default {
             });            
         },
         setWormInfo(){
-            axios.get(Global.baseurl+"/worm-service/web/rest/setting/setWormInfo?flag="+this.wormInfo.autoFlag
+            axios.get(Global.baseurl+"/worm-api/web/rest/setting/setWormInfo?flag="+this.wormInfo.autoFlag
                         +"&num="+this.wormInfo.num+"&url="+this.wormInfo.url)
                 .then((response) => {
                     var code = response.data.code;

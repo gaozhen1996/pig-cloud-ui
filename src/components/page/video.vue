@@ -87,7 +87,7 @@
             },
             getData() {
                 let startRow=10*(this.cur_page-1)+1;
-                axios.get(Global.baseurl+"/video-service/web/rest/videoInfo/getVideoInfoByPage?startRow="
+                axios.get(Global.baseurl+"/video-api/web/rest/videoInfo/getVideoInfoByPage?startRow="
                             +startRow+"&rowSize=10")
                 .then((response) => {
                     var code = response.data.code;
