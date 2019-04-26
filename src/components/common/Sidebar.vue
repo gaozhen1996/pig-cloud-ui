@@ -33,67 +33,13 @@
 
 <script>
     import bus from '../common/bus';
+    import Global from '../common/Global'
+    import axios from 'axios'
     export default {
         data() {
             return {
                 collapse: false,
-                items: [
-                    {
-                        icon: 'el-icon-lx-home',
-                        index: 'dashboard',
-                        title: '系统首页'
-                    },
-                    {
-                        icon: 'el-icon-mobile-phone',
-                        index: 'planMange',
-                        title: '计划管理'
-                    },
-                    {
-                        icon: 'el-icon-edit-outline',
-                        index: 'note',
-                        title: '我的笔记'
-                    },
-                    {
-                        icon: 'el-icon-date',
-                        index: 'video',
-                        title: '视频管理'
-                    },
-                    {
-                        icon: 'el-icon-tickets',
-                        index: 'wormConfig',
-                        title: '爬虫控制'
-                    },
-                    {
-                        icon: 'el-icon-lx-copy',
-                        index: 'tabs',
-                        title: 'tab选项卡'
-                    },
-                    {
-                        icon: 'el-icon-lx-calendar',
-                        index: '3',
-                        title: '表单相关',
-                        subs: [
-                            {
-                                index: '3-2',
-                                title: '三级菜单',
-                                subs: [
-                                    {
-                                        index: 'editor',
-                                        title: '富文本编辑器'
-                                    },
-                                    {
-                                        index: 'markdown',
-                                        title: 'markdown编辑器'
-                                    },
-                                ]
-                            },
-                            {
-                                index: 'upload',
-                                title: '文件上传'
-                            }
-                        ]
-                    },
-                ]
+                items:[]
             }
         },
         computed:{
@@ -102,6 +48,20 @@
             }
         },
         created(){
+            //获取侧边栏
+            let user = JSON.parse(localStorage.getItem('user'));
+            let request = {"username":user.account};
+            axios.post(Global.baseurl+"/auth-api/userWebRest/getMenuByAccount",request)
+                    .then(res=>{
+                        if(res.data.code==2){
+                            let menu = JSON.parse(res.data.data);
+                            this.items = menu;
+                        }else if(res.data.code==4){
+                             this.$router.push('/login');
+                        }else{
+                            this.$message.error('亲，获取菜单栏异常，不要慌张呢，请联系管理员哟！');
+                        }        
+                    })
             // 通过 Event Bus 进行组件间通信，来折叠侧边栏
             bus.$on('collapse', msg => {
                 this.collapse = msg;

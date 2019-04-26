@@ -55,7 +55,7 @@
                 collapse: false,
                 fullscreen: false,
                 name: 'linxin',
-                message: 2
+                message: 0
             }
         },
         computed:{
