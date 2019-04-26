@@ -1,6 +1,6 @@
 <script type="text/javascript">
-// const baseurl = "http://47.94.131.201:9050"
-const baseurl = "http://127.0.0.1:9050"
+const baseurl = "http://47.94.131.201:9050"
+// const baseurl = "http://127.0.0.1:9050"
 const sayings = ['岁月催人老，风月花鸟一笑尘缘了',
                  '人生不要错过两样东西：最后一班回家的车和一个深爱你的人',
                  '山有木兮木有枝，心悦君兮君不知',

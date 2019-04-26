@@ -1,6 +1,7 @@
 <template>
     <div class="table">
         <div class="container">
+            <!-- 表格版本 -->
             <el-table :data="data" border class="table">
                 <el-table-column prop="id" label="id" sortable width="70">
                 </el-table-column>
@@ -15,6 +16,19 @@
                     </template>
                 </el-table-column>
             </el-table>
+            
+            <!-- 网格版本 
+            <el-row>
+                <el-col :span="4" v-for="(element,index) in tableData" :key="element.id">
+                    <div class="grid-content bg-purple center" @click="handleSelect(index)">
+                        <video :src="element.videoURL" height="200">
+                                您的浏览器不支持 video 标签。
+                        </video>
+                    </div>
+                    <h6 class="center">{{element.createTime}}</h6>
+                </el-col>
+            </el-row>
+            -->
             <div class="pagination">
                 <el-pagination background @current-change="handleCurrentChange" layout="prev, pager, next" :total="total">
                 </el-pagination>
@@ -23,10 +37,12 @@
 
         <!-- 查看弹出框 -->
         <el-dialog class="center" :visible.sync="slectVisible" :before-close="closeSelect" :fullscreen="true">
+            <h3 class="center">{{video.content}}</h3>
             <video :src="video.videoURL" height="520" controls="controls" autoplay="autoplay">
                 您的浏览器不支持 video 标签。
             </video>
             <span slot="footer" class="dialog-footer">
+                <el-button type="primary" @click="next()">下一个</el-button>
                 <el-button type="primary" @click="closeSelect">关闭</el-button>
             </span>
         </el-dialog>
@@ -55,11 +71,6 @@
                 tableData: [],
                 cur_page: 1,
                 total:1000,
-                form: {
-                    name: '',
-                    date: '',
-                    address: ''
-                },
                 video:{
                     id:'',
                     createTime:'',
@@ -86,7 +97,7 @@
                 this.getData();
             },
             getData() {
-                let startRow=10*(this.cur_page-1)+1;
+                let startRow=10*(this.cur_page-1);
                 axios.get(Global.baseurl+"/video-api/web/rest/videoInfo/getVideoInfoByPage?startRow="
                             +startRow+"&rowSize=10")
                 .then((response) => {
@@ -94,7 +105,6 @@
                     if(code==0){
                        this.tableData=response.data.data;
                        this.total=response.data.count-1;
-                       console.log(this.tableData);
                     }else{
                         this.$message.error('亲，错了哦，出了一点小异常');
                     }
@@ -129,6 +139,17 @@
                 this.tableData.splice(this.idx, 1);
                 this.$message.success('删除成功');
                 this.delVisible = false;
+            },
+            next(){
+                this.idx = this.idx+1;
+                if(this.idx>=this.tableData.length){
+                    this.cur_page++;
+                    this.handleCurrentChange(this.cur_page);
+                    this.idx = 0;
+                }
+                const item = this.tableData[this.idx];
+                this.video = item;
+                
             }
         }
     }
@@ -165,4 +186,20 @@
     .center{
         text-align: center;
     }
+
+
+    .el-col {
+        border-radius: 4px;
+        margin: 10px
+    }
+    .grid-content {
+        border-radius: 5px;
+        min-height: 36px;
+    }
+
+    video {
+        border-radius: 5px;
+    }
+
+
 </style>

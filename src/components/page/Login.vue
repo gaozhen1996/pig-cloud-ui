@@ -1,7 +1,7 @@
 <template>
     <div class="login-wrap">
         <div class="ms-login">
-            <div class="ms-title">后台管理系统</div>
+            <div class="ms-title">欢迎登陆</div>
             <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="0px" class="ms-content">
                 <el-form-item prop="username">
                     <el-input v-model="ruleForm.username" placeholder="username">
@@ -16,7 +16,6 @@
                 <div class="login-btn">
                     <el-button type="primary" @click="submitForm()">登录</el-button>
                 </div>
-                <p class="login-tips">Tips : 用户名和密码随便填。</p>
             </el-form>
         </div>
     </div>
@@ -83,19 +82,19 @@
     .ms-title{
         width:100%;
         line-height: 50px;
-        text-align: center;
-        font-size:20px;
-        color: #fff;
+        font-size:15px;
+        color:black;
+        margin-left: 30px;
         border-bottom: 1px solid #ddd;
     }
     .ms-login{
         position: absolute;
-        left:50%;
-        top:50%;
-        width:350px;
+        left:75%;
+        top:55%;
+        width:300px;
         margin:-190px 0 0 -175px;
         border-radius: 5px;
-        background: rgba(255,255,255, 0.3);
+        background:white;
         overflow: hidden;
     }
     .ms-content{
