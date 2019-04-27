@@ -30,6 +30,11 @@ export default new Router({
                     meta: { title: '视频管理' }
                 },
                 {
+                    path: '/roleManage',
+                    component: resolve => require(['../components/page/RoleManage.vue'], resolve),
+                    meta: { title: '角色管理' }
+                },
+                {
                     path: '/tabs',
                     component: resolve => require(['../components/page/Tabs.vue'], resolve),
                     meta: { title: 'tab选项卡' }
@@ -73,7 +78,7 @@ export default new Router({
                     path: '/403',
                     component: resolve => require(['../components/page/403.vue'], resolve),
                     meta: { title: '403' }
-                }
+                },
             ]
         },
         {
