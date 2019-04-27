@@ -1,42 +1,39 @@
 <template>
     <div class="table">
         <div class="container">
-            <el-row :gutter="20">
-                <!-- 表格 -->
-                <el-col :span="12">
-                    <div>
-                        <el-table :data="data" border class="table">
-                            <el-table-column prop="content" label="内容">
-                            </el-table-column>
-                            <el-table-column label="操作" width="100" align="center">
-                                <template slot-scope="scope">
-                                    <el-button type="text" icon="el-icon-caret-right" @click="handleSelect(scope.$index, scope.row)">查询</el-button>
-                                </template>
-                            </el-table-column>
-                        </el-table>
-                        
-                        <div class="pagination">
-                            <el-pagination background @current-change="handleCurrentChange" layout="prev, pager, next" :total="total">
-                            </el-pagination>
-                        </div>
-                    </div>
-                </el-col>
-                <!-- video -->
-                <el-col :span="12" class="center">
-                    <div v-if="slectVisible">
-                        <h3 class="center">{{video.content}}</h3>
-                        <h3 class="center">{{video.createTime}}</h3>
-                        <video :src="video.videoURL" height="500" autoplay="autoplay">
-                            您的浏览器不支持 video 标签。
-                        </video>
-                        <el-form>
-                            <el-button type="primary" @click="next()">下一个</el-button>
-                            <el-button type="primary" @click="closeSelect">关闭</el-button>
-                        </el-form>
-                    </div>
-                </el-col>
-            </el-row>
+            <!-- 表格版本 -->
+            <el-table :data="data" border class="table">
+                <el-table-column prop="id" label="id" sortable width="70">
+                </el-table-column>
+                <el-table-column prop="createTime" label="时间" width="200">
+                </el-table-column>
+                <el-table-column prop="content" label="内容">
+                </el-table-column>
+                <el-table-column label="操作" width="180" align="center">
+                    <template slot-scope="scope">
+                        <el-button type="text" icon="el-icon-caret-right" @click="handleSelect(scope.$index, scope.row)">查询</el-button>
+                        <el-button type="text" icon="el-icon-delete" class="red" @click="handleDelete(scope.$index, scope.row)">删除</el-button>
+                    </template>
+                </el-table-column>
+            </el-table>
+            
+            <div class="pagination">
+                <el-pagination background @current-change="handleCurrentChange" layout="prev, pager, next" :total="total">
+                </el-pagination>
+            </div>
         </div>
+
+        <!-- 查看弹出框 -->
+        <el-dialog class="center" :visible.sync="slectVisible" :before-close="closeSelect" :fullscreen="true">
+            <h3 class="center">{{video.content}}</h3>
+            <video :src="video.videoURL" height="520" controls="controls" autoplay="autoplay">
+                您的浏览器不支持 video 标签。
+            </video>
+            <span slot="footer" class="dialog-footer">
+                <el-button type="primary" @click="next()">下一个</el-button>
+                <el-button type="primary" @click="closeSelect">关闭</el-button>
+            </span>
+        </el-dialog>
 
         <!-- 删除提示框 -->
         <el-dialog title="提示" :visible.sync="delVisible" width="300px" center>
