@@ -35,9 +35,14 @@ export default new Router({
                     meta: { title: '角色管理' }
                 },
                 {
+                    path: '/euraka',
+                    component: resolve => require(['../components/page/Euraka.vue'], resolve),
+                    meta: { title: 'Euraka服务' }
+                },
+                {
                     path: '/tabs',
                     component: resolve => require(['../components/page/Tabs.vue'], resolve),
-                    meta: { title: 'tab选项卡' }
+                    meta: { title: '消息中心' }
                 },
                 {
                     // 富文本编辑器组件

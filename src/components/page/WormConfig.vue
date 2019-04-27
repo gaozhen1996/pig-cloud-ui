@@ -15,31 +15,59 @@
                         <span>爬虫总控</span>
                     </div>
                     <el-form ref="form" :model="wormInfo" label-width="80px">
-                    <div style="float:left"> 
-                        <el-form-item label="URL">
-                            <el-input v-model="wormInfo.url" style="width:300px"></el-input>
-                        </el-form-item>    
-                                       
-                        <el-form-item label="爬取数量">
-                            <el-select v-model="wormInfo.num" placeholder="请选择爬取数量">
-                            <el-option label="1" value="1"></el-option>
-                            <el-option label="2" value="2"></el-option>
-                            <el-option label="3" value="3"></el-option>
-                            <el-option label="5" value="5"></el-option>
-                            <el-option label="10" value="10"></el-option>
-                            <el-option label="20" value="20"></el-option>
-                            </el-select>
-                        </el-form-item>
-                    </div> 
-                    <div style="float:left"> 
-                        <el-form-item label="自动爬取">
-                            <el-switch v-model="wormInfo.autoFlag"></el-switch>
-                        </el-form-item>
-                        <el-form-item label="修改参数">
-                            <el-button type="primary" @click="getWormInfo">取消</el-button>
-                            <el-button type="primary" @click="setWormInfo">确认</el-button>
-                        </el-form-item>
-                    </div> 
+                        <el-row>
+                            <el-col :span="8">
+                                <div>
+                                    <el-form-item label="URL">
+                                        <el-input v-model="wormInfo.url" style="width:250px"></el-input>
+                                    </el-form-item> 
+                                </div>
+                            </el-col>
+                            <el-col :span="8">
+                                <div>
+                                    <el-form-item label="爬取数量">
+                                        <el-select v-model="wormInfo.num" placeholder="请选择爬取数量">
+                                        <el-option label="1" value="1"></el-option>
+                                        <el-option label="2" value="2"></el-option>
+                                        <el-option label="3" value="3"></el-option>
+                                        <el-option label="5" value="5"></el-option>
+                                        <el-option label="10" value="10"></el-option>
+                                        <el-option label="20" value="20"></el-option>
+                                        </el-select>
+                                    </el-form-item>   
+                                
+                                </div>
+                            </el-col>
+                            <el-col :span="2">
+                                <div>
+                                    <el-form-item label="自动爬取">
+                                        <el-switch v-model="wormInfo.autoFlag"></el-switch>
+                                    </el-form-item> 
+                                </div>
+                            </el-col>
+                            <el-col :span="6">
+                                <div>
+                                    <el-form-item label="">
+                                        <el-button type="primary" @click="getWormInfo">取消</el-button>
+                                        <el-button type="primary" @click="setWormInfo">确认</el-button>
+                                    </el-form-item>
+                                </div>
+                            </el-col>
+                        </el-row>
+                        <el-row>
+                            <el-col :span="12">
+                                <div>
+                                    <el-form-item label="爬去数量">
+                                        <el-input v-model="num" style="width:300px"></el-input>
+                                    </el-form-item>
+                                </div>
+                            </el-col> 
+                            <el-col :span="12">
+                                <div>
+                                    <el-button type="primary" @click="startWorm">开始爬取</el-button>
+                                </div>
+                            </el-col> 
+                        </el-row>
                     </el-form>                   
                 </el-card>
             </el-col>
@@ -52,6 +80,7 @@
 import echarts from 'echarts'
 import axios from 'axios'
 import Global from '../common/Global'
+import { Loading } from 'element-ui';
 
 export default {
     data() {
@@ -61,7 +90,8 @@ export default {
                 autoFlag:true,
                 num:0,
                 url:""
-            }
+            },
+            num:1//手工爬取数量
         }
     },
     mounted() {
@@ -197,6 +227,26 @@ export default {
                 console.log(error);
             });            
         },
+        startWorm(){
+            let options = {};
+            let loadingInstance = Loading.service(options);
+            axios.get(Global.baseurl+"/worm-api/worm/"+this.num)
+                .then((response) => {
+                    this.$nextTick(() => {
+                        loadingInstance.close();
+                    });
+                    this.$message.success(response.data);
+                    // const h = this.$createElement;
+                    // this.$notify({
+                    // title: '爬取结果',
+                    // message: h('i', { style: 'color: teal'},response.data)
+                    // });
+                    console.log(response.data)
+                })
+                .catch(function (error) {
+                console.log(error);
+            });             
+        }
     }
 
 }
