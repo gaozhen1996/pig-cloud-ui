@@ -204,6 +204,8 @@ export default {
                     var code = response.data.code;
                     if(code==2){
                         this.wormInfo = response.data.data;
+                    }else if(code==4){
+                        this.$message.error('亲，没有权限获取爬虫信息哟！');
                     }else{
                         this.$message.error('亲，错了哦，出了一点小异常');
                     }
@@ -219,6 +221,8 @@ export default {
                     var code = response.data.code;
                     if(code==2){
                         this.$message.success('设置成功');
+                    }else if(code==4){
+                        this.$message.error('亲，没有权限修改爬虫信息哟！');
                     }else{
                         this.$message.error('亲，错了哦，出了一点小异常');
                     }
