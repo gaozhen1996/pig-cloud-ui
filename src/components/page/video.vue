@@ -5,13 +5,8 @@
                 <!-- 表格 -->
                 <el-col :span="12">
                     <div>
-                        <el-table :data="data" border class="table">
+                        <el-table :data="data" border class="table" @row-click="handleSelect">
                             <el-table-column prop="content" label="内容">
-                            </el-table-column>
-                            <el-table-column label="操作" width="100" align="center">
-                                <template slot-scope="scope">
-                                    <el-button type="text" icon="el-icon-caret-right" @click="handleSelect(scope.$index, scope.row)">查询</el-button>
-                                </template>
                             </el-table-column>
                         </el-table>
                         
@@ -105,17 +100,6 @@
             });
 
             },
-            handleSelect(index, row) {
-                this.idx = index;
-                const item = this.tableData[index];
-                this.video = {
-                    id:item.id,
-                    createTime:item.createTime,
-                    content:item.content,
-                    videoURL:item.videoURL
-                }
-                this.slectVisible = true;
-            },
             handleDelete(index, row) {
                 this.idx = index;
                 this.delVisible = true;
@@ -141,7 +125,17 @@
                 const item = this.tableData[this.idx];
                 this.video = item;
                 
+            },
+            handleSelect(row, event, column) {
+                this.video = {
+                    id:row.id,
+                    createTime:row.createTime,
+                    content:row.content,
+                    videoURL:row.videoURL
+                }
+                this.slectVisible = true;
             }
+
         }
     }
 

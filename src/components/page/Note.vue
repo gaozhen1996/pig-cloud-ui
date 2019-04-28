@@ -1,13 +1,13 @@
 <template>
     <div class="table">
         <div class="container">
-            <div class="handle-box">
-                <el-button type="primary" icon="search" @click="handleAdd">新建备忘录</el-button>
-            </div>
 
             <el-row :gutter="20">
                 <el-col :span="8">
                     <div>
+                        <div class="handle-box">
+                            <el-button type="primary" icon="search" @click="handleAdd">新建备忘录</el-button>
+                        </div>
                         <el-table :data="data" border class="table">
                             <el-table-column prop="title" label="标题" sortable width="200">
                             </el-table-column>
@@ -24,31 +24,21 @@
                         </div>                         
                     </div>
                 </el-col>
+                <!-- 修改框 -->
                 <el-col :span="16">
                     <div>
                         <el-form ref="note" :model="note" label-width="80px">
                             <el-input v-model="note.title"></el-input>
                         </el-form>             
                         <quill-editor ref="myTextEditor" v-model="note.content" :options="editorOption"></quill-editor>
-                        <el-button @click="updateVisible = false">取 消</el-button>
-                        <el-button class="editor-btn" type="primary" @click="updateNoteById">修改</el-button>
+                        <!-- 修改 -->
+                        <el-button v-if="updateVisible" class="editor-btn" type="primary" @click="updateNoteById" style="float: right;">修改</el-button>
+                        <!-- 添加 -->
+                        <el-button v-if="!updateVisible" class="editor-btn" type="primary" @click="addNote" style="float: right;">添加</el-button>
                     </div>
                 </el-col>
             </el-row>
-
         </div>
-
-        <!-- 添加弹出框 -->
-        <el-dialog class="center" :visible.sync="addVisible" :fullscreen="true">
-            <el-form ref="note" :model="note" label-width="80px">
-                <el-form-item label="文件名称" >
-                    <el-input v-model="note.title"></el-input>
-                </el-form-item>  
-            </el-form>             
-            <quill-editor ref="myTextEditor" v-model="note.content" :options="editorOption"></quill-editor>
-            <el-button @click="addVisible = false">取 消</el-button>
-            <el-button class="editor-btn" type="primary" @click="addNote">添加</el-button>
-        </el-dialog>
 
         <!-- 删除提示框 -->
         <el-dialog title="提示" :visible.sync="delVisible" width="300px" center>
@@ -73,9 +63,8 @@
         name: 'basetable',
         data() {
             return {
-                slectVisible: false,
+                updateVisible: true,
                 delVisible: false,
-                addVisible:false,
                 tableData: [],
                 cur_page: 1,
                 total:1000,
@@ -146,13 +135,14 @@
                     title:'新建文件',
                     type:'',
                     updateTime:''
-                },  
-                this.addVisible = true;
+                }
+                this.updateVisible=false;
             },
             handleUpdate(index, row) {
                 this.idx = index;
                 const item = this.tableData[index];
                 this.note = item;
+                this.updateVisible=true;
             },
             handleDelete(index, row) {
                 this.idx = index;
@@ -182,7 +172,7 @@
                 axios.post(Global.baseurl+"/plan-api/web/rest/note/addNote",request)
                 .then(res=>{
                     if(res.data.code==2){
-                        this.addVisible = false;
+                        this.updateVisible=true;
                         this.tableData.unshift(res.data.data);
                         this.$message.success('提交成功！');
                     }else{
@@ -203,7 +193,7 @@
                         this.$message.error('亲，错了哦，出了一点小异常');
                     }         
                 })
-            }            
+            },
         }
     }
 

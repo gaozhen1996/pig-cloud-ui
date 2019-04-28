@@ -27,6 +27,11 @@ export default new Router({
                 {
                     path: '/video',
                     component: resolve => require(['../components/page/Video.vue'], resolve),
+                    meta: { title: '视频浏览' }
+                },
+                {
+                    path: '/videoManage',
+                    component: resolve => require(['../components/page/VideoManage.vue'], resolve),
                     meta: { title: '视频管理' }
                 },
                 {

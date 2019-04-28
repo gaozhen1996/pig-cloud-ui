@@ -49,22 +49,22 @@
                                 <div>
                                     <el-form-item label="">
                                         <el-button type="primary" @click="getWormInfo">取消</el-button>
-                                        <el-button type="primary" @click="setWormInfo">确认</el-button>
+                                        <el-button type="warning" @click="setWormInfo">确认</el-button>
                                     </el-form-item>
                                 </div>
                             </el-col>
                         </el-row>
                         <el-row>
-                            <el-col :span="12">
+                            <el-col :span="8">
                                 <div>
                                     <el-form-item label="爬去数量">
-                                        <el-input v-model="num" style="width:300px"></el-input>
+                                        <el-input v-model="num" style="width:250px"></el-input>
                                     </el-form-item>
                                 </div>
                             </el-col> 
-                            <el-col :span="12">
+                            <el-col :span="8">
                                 <div>
-                                    <el-button type="primary" @click="startWorm">开始爬取</el-button>
+                                    <el-button type="danger" @click="startWorm">开始爬取</el-button>
                                 </div>
                             </el-col> 
                         </el-row>
