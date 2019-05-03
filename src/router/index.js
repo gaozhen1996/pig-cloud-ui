@@ -55,6 +55,11 @@ export default new Router({
                     meta: { title: '个人资料' }
                 },
                 {
+                    path: '/editpw',
+                    component: resolve => require(['../components/page/Editpw.vue'], resolve),
+                    meta: { title: '修改密码' }
+                },
+                {
                     // 富文本编辑器组件
                     path: '/editor',
                     component: resolve => require(['../components/page/VueEditor.vue'], resolve),

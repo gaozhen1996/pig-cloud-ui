@@ -37,6 +37,7 @@
                     </span>
                     <el-dropdown-menu slot="dropdown">
                         <el-dropdown-item divided  command="toUserInfo">个人资料</el-dropdown-item>
+                        <el-dropdown-item divided  command="editpw">修改密码</el-dropdown-item>
                         <el-dropdown-item divided  command="loginout">退出登录</el-dropdown-item>
                     </el-dropdown-menu>
                 </el-dropdown>
@@ -58,7 +59,6 @@
                 name: 'gz',
                 message: 0, //消息
                 defaultSrc:require('../../assets/img/img.jpg')
-
             }
         },
         computed:{
@@ -81,6 +81,8 @@
                     this.$router.push('/login');
                 }else if(command == 'toUserInfo'){
                     this.$router.push('userInfo');
+                }else if(command == 'editpw'){
+                    this.$router.push('editpw');
                 }
             },
             // 侧边栏折叠
