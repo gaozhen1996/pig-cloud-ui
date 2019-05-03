@@ -29,13 +29,14 @@
                     <span class="btn-bell-badge" v-if="message"></span>
                 </div>
                 <!-- 用户头像 -->
-                <div class="user-avator"><img src="../../assets/img/img.jpg"></div>
+                <div class="user-avator"><img :src="defaultSrc"></div>
                 <!-- 用户名下拉菜单 -->
                 <el-dropdown class="user-name" trigger="click" @command="handleCommand">
                     <span class="el-dropdown-link">
                         {{username}} <i class="el-icon-caret-bottom"></i>
                     </span>
                     <el-dropdown-menu slot="dropdown">
+                        <el-dropdown-item divided  command="toUserInfo">个人资料</el-dropdown-item>
                         <el-dropdown-item divided  command="loginout">退出登录</el-dropdown-item>
                     </el-dropdown-menu>
                 </el-dropdown>
@@ -54,8 +55,10 @@
                 saying:'人生不要错过两样东西：最后一班回家的车和一个深爱你的人',
                 collapse: false,
                 fullscreen: false,
-                name: 'linxin',
-                message: 0
+                name: 'gz',
+                message: 0, //消息
+                defaultSrc:require('../../assets/img/img.jpg')
+
             }
         },
         computed:{
@@ -74,7 +77,10 @@
             handleCommand(command) {
                 if(command == 'loginout'){
                     localStorage.removeItem('user')
+                    localStorage.removeItem('Authorization')
                     this.$router.push('/login');
+                }else if(command == 'toUserInfo'){
+                    this.$router.push('userInfo');
                 }
             },
             // 侧边栏折叠
@@ -109,13 +115,19 @@
                     }
                 }
                 this.fullscreen = !this.fullscreen;
-            }
+            },
         },
         mounted(){
             if(document.body.clientWidth < 1200){
                 this.collapseChage();
             }
+            //填充诗句
             this.setSaying();
+            //获取用户头像
+            let user = JSON.parse(localStorage.getItem('user'));
+            if(user.logo!=undefined){
+                this.defaultSrc=user.logo;
+            }
             // setInterval(this.setSaying, 1000);
         }
     }

@@ -50,6 +50,11 @@ export default new Router({
                     meta: { title: '消息中心' }
                 },
                 {
+                    path: '/userInfo',
+                    component: resolve => require(['../components/page/UserInfo.vue'], resolve),
+                    meta: { title: '个人资料' }
+                },
+                {
                     // 富文本编辑器组件
                     path: '/editor',
                     component: resolve => require(['../components/page/VueEditor.vue'], resolve),

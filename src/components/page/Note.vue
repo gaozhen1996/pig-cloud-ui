@@ -67,7 +67,7 @@
                 delVisible: false,
                 tableData: [],
                 cur_page: 1,
-                total:1000,
+                total:10,
                 note:{
                     id:'',
                     uid:'',
