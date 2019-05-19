@@ -106,6 +106,10 @@ export default new Router({
             component: resolve => require(['../components/page/Login.vue'], resolve)
         },
         {
+            path: '/search',
+            component: resolve => require(['../components/page/Search.vue'], resolve)
+        },
+        {
             path: '*',
             redirect: '/404'
         }

@@ -1,0 +1,43 @@
+{
+	"manifest_version": 2,
+	"name": "Chrome插件demo",
+	"version": "1.0",
+	"description": "最简单的Chrome插件demo，需要快速做一个简单的插件时可以基于这个仓库开发",
+	"author": "sxei",
+	"icons":
+	{
+		"48": "img/icon.png",
+		"128": "img/icon.png"
+	},
+	"browser_action": 
+	{
+		"default_icon": "img/icon.png",
+		"default_popup": "popup.html"
+	},
+	"content_scripts": 
+	[
+		{
+			"matches": ["https://www.baidu.com/*"],
+			"js": ["content-script.js"]
+		}
+	],
+	"permissions":
+	[
+		"contextMenus", 
+		"tabs", 
+		"notifications", 
+		"webRequest", 
+		"webRequestBlocking", 
+		"storage", 
+		"http://*/*", 
+		"https://*/*"
+	],
+	"web_accessible_resources": 
+	[
+		"inject.js"
+	],
+	"chrome_url_overrides":
+	{
+		"newtab": "index.html#/search"
+	}
+}
