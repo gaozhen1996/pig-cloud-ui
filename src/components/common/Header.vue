@@ -19,6 +19,10 @@
                         <i class="el-icon-rank"></i>
                     </el-tooltip>
                 </div>
+                <!-- 跳转搜索页 -->
+                 <div class="search">
+                    <i class="el-icon-location" @click="hrefSearch()"></i>
+                </div>               
                 <!-- 消息中心 -->
                 <div class="btn-bell">
                     <el-tooltip effect="dark" :content="message?`有${message}条未读消息`:`消息中心`" placement="bottom">
@@ -118,6 +122,9 @@
                 }
                 this.fullscreen = !this.fullscreen;
             },
+            hrefSearch(){
+                this.$router.push('/search');
+            }
         },
         mounted(){
             if(document.body.clientWidth < 1200){
@@ -236,5 +243,12 @@
     }
     .el-dropdown-menu__item{
         text-align: center;
+    }
+
+    .search{
+        transform: rotate(45deg);
+        margin-right: 5px;
+        font-size: 24px;
+        cursor: pointer;
     }
 </style>
