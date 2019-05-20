@@ -4,6 +4,7 @@
         <div class="header">
             <div class="setting-btn" @click="hrefHome()"></div>
         </div>
+
         <!-- 搜索框 -->
         <div class="search-div">
             <el-select v-model="value" placeholder="请选择搜索引擎">
@@ -14,6 +15,7 @@
                 :value="item.value">
                 <span style="float: left">{{ item.label }}</span>
                 <span style="float: right; color: #8492a6; font-size: 13px">{{ item.value }}</span>
+                
                 </el-option>
             </el-select>
 
@@ -30,8 +32,43 @@
         </div> 
 
         <!-- 快捷方式 -->
-        <div class="shortcut">
+        <div class="shortcutList">
+            <el-row :gutter="20">
+                <el-col :span="6">
+                    <div class="grid-content bg-purple">
+                            <div class="shortcut">
+                                <img :src="defaultSrc" class="icon">
+                                <div class="icon-name">知乎</div>
+                            </div>     
+                    </div>
+                </el-col>
+                <el-col :span="6">
+                    <div class="grid-content bg-purple">
+                            <div class="shortcut">
+                                <img :src="defaultSrc" class="icon">
+                                <div class="icon-name">知乎</div>
+                            </div>     
+                    </div>
+                </el-col>
+                <el-col :span="6">
+                    <div class="grid-content bg-purple">
+                            <div class="shortcut">
+                                <img :src="defaultSrc" class="icon">
+                                <div class="icon-name">知乎</div>
+                            </div>     
+                    </div>
+                </el-col>
+                <el-col :span="6">
+                    <div class="grid-content bg-purple">
+                            <div class="shortcut">
+                                <img :src="defaultSrc" class="icon">
+                                <div class="icon-name">知乎</div>
+                            </div>     
+                    </div>
+                </el-col>
+            </el-row>
         </div>
+
 
     </div>
 
@@ -43,12 +80,14 @@
     export default {
         data: function(){
             return {
+                // defaultSrc:'https://infinityicon.infinitynewtab.com/user-share-icon/2b89ebe968d8cafe77a5c587daa79c7f.png?imageMogr2/thumbnail/260x/format/webp/blur/1x0/quality/100|imageslim',
+                defaultSrc: require('../../assets/img/zhihu.png'),
                 options: [{
-                value: '百度',
-                label: 'Baidu'
+                value: 'Baidu',
+                label: '百度'
                 }, {
-                value: '谷歌',
-                label: 'Google'
+                value: 'Google',
+                label: '谷歌'
                 }],
                 value: '百度',
                 loadwd: [],
@@ -88,10 +127,38 @@
 </script>
 
 <style>
+    .search-div .el-input__inner {
+        border: none;
+        font-size: 20px;
+    }
+
+    .search-div .el-input--small .el-input__inner{
+        text-align: center;
+        width:150px;
+        border-radius: 50px
+    }
+    .search-div .el-select-dropdown__item{
+        font-size: 20px;
+    }
+
+    .shortcutList{
+        width: 70%;
+        margin: 0 auto;
+    }
+
+    .shortcut{
+        margin: 0 auto;
+        display: flex;
+        flex-direction: column;
+        width: calc(100%/5);
+        align-items: center;
+    }
+</style>
+<style scoped>
 
     .wrap{
 	    height: 100%;
-		background-image: url(../../assets/img/bg2.jpg);
+		background-image: url(../../assets/img/bg0.jpg);
 		background-size:100% 100%;
     }
 
@@ -104,15 +171,6 @@
 		background-image: url(../../assets/img/bg0.jpg);
 		background-size:100% 100%;
     } */
-    .el-input__inner {
-        border: none;
-        font-size: 20px;
-    }
-
-    .el-input--small .el-input__inner{
-        text-align: center;
-        width:150px;
-    }
 
     .search-div{
         font-size: 20px;
@@ -125,14 +183,14 @@
 		padding-left: 0px;
 		color: #555;
 		border: none;
-		border-radius: 10px;
+		border-radius: 50px;
 		outline: 0;
 		background-color: #fff;
         margin: 0 auto
     }
 
     .header{
-        height:150px;
+        height:130px;
         background-color: #242f4200;
     }
 
@@ -151,4 +209,40 @@
         background-repeat: no-repeat;
         background-position: center;
     }
+
+    .icon{   
+        font-size: 28px;
+        display: flex;
+        width: 100px;
+        cursor: pointer;
+        transition: transform .2s linear;
+        transform: translate3d(0,0,0);
+        letter-spacing: 1px;
+        color: #fff;
+        border-radius:27%;
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: cover;
+        box-shadow: 2px 2px 20px rgba(0,0,0,.06);
+        justify-content: center;
+        align-items: center;
+    }
+
+    .icon-name{
+        font-size: 15px;
+        overflow: hidden;
+        box-sizing: border-box;
+        max-width: 70%;
+        padding-top: 20px;
+        transform: translate3d(0,0,0);
+        text-align: left;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        color: rgba(255,255,255,.9);
+    }
+
+    .el-row {
+        margin: 30px;
+    }
+
 </style>
