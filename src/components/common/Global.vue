@@ -12,8 +12,41 @@ const sayings = ['岁月催人老，风月花鸟一笑尘缘了',
                  '我是人间惆怅客，知君何事泪纵横，断肠声里忆生平。',
                  '宠辱不惊，看庭前花开花落；去留无意，望天上云卷云舒'
                 ]
+const shortcutList = [{
+                        id:1,                        
+                        img:require('../../assets/img/ext.png'),
+                        name:'插件',
+                        url:'https://chrome.google.com/webstore/category/extensions',
+                    },{
+                        id:2,                        
+                        img:require('../../assets/img/zhihu.png'),
+                        name:'知乎',
+                        url:'https://www.zhihu.com/',
+                    },{
+                        id:3,
+                        img:require('../../assets/img/douban.png'),
+                        name:'豆瓣',
+                        url:'https://www.douban.com/',
+                    },{
+                        id:4,
+                        img:require('../../assets/img/jianshu.png'),
+                        name:'简书',
+                        url:'https://www.jianshu.com/',
+                    },{
+                        id:5,
+                        img:require('../../assets/img/qqmail.png'),
+                        name:'邮箱',
+                        url:'https://mail.qq.com/',
+                    },{
+                        id:6,
+                        img:require('../../assets/img/zuimei.png'),
+                        name:'最美',
+                        url:'http://zuimeia.com/',
+                    }
+                ]
 export default{
     baseurl,
-    sayings
+    sayings,
+    shortcutList
 }
 </script>

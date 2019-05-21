@@ -7,10 +7,10 @@
 
         <!-- 搜索框 -->
         <div class="search-div">
-            <el-select v-model="value" placeholder="请选择搜索引擎">
+            <el-select v-model="searchEngine" placeholder="请选择搜索引擎">
                 <el-option
                 v-for="item in options"
-                :key="item.value"
+                :key="item.label"
                 :label="item.label"
                 :value="item.value">
                 <span style="float: left">{{ item.label }}</span>
@@ -32,39 +32,13 @@
         </div> 
 
         <!-- 快捷方式 -->
-        <div class="shortcutList">
+        <div class="shortcutListDiv">
             <el-row :gutter="20">
-                <el-col :span="6">
-                    <div class="grid-content bg-purple">
-                            <div class="shortcut">
-                                <img :src="defaultSrc" class="icon">
-                                <div class="icon-name">知乎</div>
-                            </div>     
-                    </div>
-                </el-col>
-                <el-col :span="6">
-                    <div class="grid-content bg-purple">
-                            <div class="shortcut">
-                                <img :src="defaultSrc" class="icon">
-                                <div class="icon-name">知乎</div>
-                            </div>     
-                    </div>
-                </el-col>
-                <el-col :span="6">
-                    <div class="grid-content bg-purple">
-                            <div class="shortcut">
-                                <img :src="defaultSrc" class="icon">
-                                <div class="icon-name">知乎</div>
-                            </div>     
-                    </div>
-                </el-col>
-                <el-col :span="6">
-                    <div class="grid-content bg-purple">
-                            <div class="shortcut">
-                                <img :src="defaultSrc" class="icon">
-                                <div class="icon-name">知乎</div>
-                            </div>     
-                    </div>
+                <el-col :span="6" v-for="(element,index) in shortcutList" :key="element.id">
+                    <div class="shortcutDiv" @click="hrefIncon(element.url)">
+                        <img :src="element.img" class="icon">
+                        <div class="icon-name">{{element.name}}</div>
+                    </div>     
                 </el-col>
             </el-row>
         </div>
@@ -80,18 +54,17 @@
     export default {
         data: function(){
             return {
-                // defaultSrc:'https://infinityicon.infinitynewtab.com/user-share-icon/2b89ebe968d8cafe77a5c587daa79c7f.png?imageMogr2/thumbnail/260x/format/webp/blur/1x0/quality/100|imageslim',
-                defaultSrc: require('../../assets/img/zhihu.png'),
                 options: [{
-                value: 'Baidu',
-                label: '百度'
-                }, {
-                value: 'Google',
-                label: '谷歌'
+                    value: '百度',
+                    label: 'Baidu'
+                    }, {
+                    value: '谷歌',
+                    label: 'Google'
                 }],
-                value: '百度',
-                loadwd: [],
-                wd: ''
+                searchEngine: 'Google',
+                loadwd: [],//动态提示
+                wd: '',//搜索关键字
+                shortcutList:[],
             }
         },
         methods: {
@@ -117,12 +90,22 @@
                 cb(this.loadwd);
             },
             searchWord() {
-                window.location.href='https://www.baidu.com/s?ie=UTF-8&wd='+this.wd;
+                if(this.searchEngine=='Google'){
+                    window.location.href='https://www.google.com/search?q='+this.wd;
+                }else{
+                    window.location.href='https://www.baidu.com/s?ie=UTF-8&wd='+this.wd;
+                }
             },
             hrefHome(){
                 this.$router.push('/');
+            },
+            hrefIncon(url){
+                window.location.href=url;
             }
         },
+        created(){
+            this.shortcutList = Global.shortcutList;
+        }
     }
 </script>
 
@@ -141,17 +124,18 @@
         font-size: 20px;
     }
 
-    .shortcutList{
+    .shortcutListDiv{
         width: 70%;
         margin: 0 auto;
     }
 
-    .shortcut{
+    .shortcutDiv{
         margin: 0 auto;
         display: flex;
         flex-direction: column;
         width: calc(100%/5);
         align-items: center;
+        padding: 10px;
     }
 </style>
 <style scoped>
@@ -214,6 +198,7 @@
         font-size: 28px;
         display: flex;
         width: 100px;
+        height: 100px;
         cursor: pointer;
         transition: transform .2s linear;
         transform: translate3d(0,0,0);
