@@ -42,10 +42,7 @@
                 </el-col>
             </el-row>
         </div>
-
-
     </div>
-
 </template>
 
 <script>
@@ -73,6 +70,8 @@
                 console.log("queryString:"+queryString);
                 if(queryString.indexOf('\\')==-1){
                     let request = {'wd':queryString}
+                    let user = JSON.parse(localStorage.getItem('user'));
+                    request.account = user.account;
                     axios.post(Global.baseurl+"/auth-api/ProxyBaiduWebRest/loadWd",request)
                     .then(res=>{
                         if(res.data.code==2){
@@ -101,10 +100,21 @@
             },
             hrefIncon(url){
                 window.location.href=url;
+            },
+            getUserInfo(){
+                var request = {};
+                // request.outIp = returnCitySN["cip"];
+                // request.city = returnCitySN["cname"];
+                let user = JSON.parse(localStorage.getItem('user'));
+                request.account = user.account;
+                axios.post(Global.baseurl+"/auth-api/userWebRest/currentInfo",request)
+                    .then(res=>{
+                })
             }
         },
         created(){
             this.shortcutList = Global.shortcutList;
+            this.getUserInfo();
         }
     }
 </script>
