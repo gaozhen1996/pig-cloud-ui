@@ -127,10 +127,15 @@
 
     .search-div .el-input--small .el-input__inner{
         text-align: center;
-        width:150px;
         border-radius: 50px
     }
-    .search-div .el-select-dropdown__item{
+
+    .search-div .el-select{
+        width:20%;
+    }
+
+    .search-div .el-autocomplete{
+        width: 77%;
         font-size: 20px;
     }
 
@@ -155,16 +160,6 @@
 		background-image: url(../../assets/img/bg0.jpg);
 		background-size:100% 100%;
     }
-
-    /* .wrap{
-        display: flex; 
-	    align-items: center;
-	    justify-content: center;
-	    height: 100%;
-	    font-size: 48px;
-		background-image: url(../../assets/img/bg0.jpg);
-		background-size:100% 100%;
-    } */
 
     .search-div{
         font-size: 20px;
@@ -227,7 +222,7 @@
         font-size: 15px;
         overflow: hidden;
         box-sizing: border-box;
-        max-width: 70%;
+        max-width: 300%;
         padding-top: 20px;
         transform: translate3d(0,0,0);
         text-align: left;

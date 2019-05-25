@@ -15,7 +15,7 @@ const sayings = ['岁月催人老，风月花鸟一笑尘缘了',
 const shortcutList = [{
                         id:1,                        
                         img:require('../../assets/img/ext.png'),
-                        name:'插件',
+                        name:'chrome扩展',
                         url:'https://chrome.google.com/webstore/category/extensions',
                     },{
                         id:2,                        
@@ -35,12 +35,12 @@ const shortcutList = [{
                     },{
                         id:5,
                         img:require('../../assets/img/qqmail.png'),
-                        name:'邮箱',
+                        name:'QQ邮箱',
                         url:'https://mail.qq.com/',
                     },{
                         id:6,
                         img:require('../../assets/img/zuimei.png'),
-                        name:'最美',
+                        name:'最美应用',
                         url:'http://zuimeia.com/',
                     }
                 ]
