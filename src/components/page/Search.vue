@@ -33,7 +33,7 @@
 
         <!-- 快捷方式 -->
         <div class="shortcutListDiv">
-            <el-row :gutter="20">
+            <el-row :gutter="10">
                 <el-col :span="6" v-for="(element,index) in shortcutList" :key="element.id">
                     <div class="shortcutDiv" @click="hrefIncon(element.url)">
                         <img :src="element.img" class="icon">
