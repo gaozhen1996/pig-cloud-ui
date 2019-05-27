@@ -35,3 +35,8 @@ function setColor(index){
     $("#icon").css('background-color',hex);
     request.color = hex;
 }
+
+$("#addTitle").bind("input propertychange",function(event){
+    var text = $("#addTitle").val();
+    $("#icon").text(text.substring(0,2));
+});
