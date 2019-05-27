@@ -17,24 +17,26 @@ chrome.tabs.getSelected(null, function (tab) {
 //     $("#icon").append(tab.title.substring(0,2))
 // }
 
+
 $('#addBu').click(function(){
     console.log(request);
     $("#addView").hide();
     $("#tipsView").show();
 })
 
-function setColor(index){
-    var bgcolors = $('.icobgColor');
-    var bgcolor = bgcolors[index].style.backgroundColor;
-    //转十六进制
-    var rgb = bgcolor.split(',');
-    var r = parseInt(rgb[0].split('(')[1]);
-    var g = parseInt(rgb[1]);
-    var b = parseInt(rgb[2].split(')')[0]);
-    var hex = "#" + ((1 << 24) + (r << 16) + (g << 8) + b).toString(16).slice(1);
-    $("#icon").css('background-color',hex);
-    request.color = hex;
-}
+$(".icobgColor").click(function(){
+    $(this).click(function(){
+        var color = $(this).css("background-color");
+        //转十六进制
+        var rgb = color.split(',');
+        var r = parseInt(rgb[0].split('(')[1]);
+        var g = parseInt(rgb[1]);
+        var b = parseInt(rgb[2].split(')')[0]);
+        var hex = "#" + ((1 << 24) + (r << 16) + (g << 8) + b).toString(16).slice(1);
+        $("#icon").css('background-color',hex);
+        request.color = hex;
+    })
+})
 
 $("#addTitle").bind("input propertychange",function(event){
     var text = $("#addTitle").val();
