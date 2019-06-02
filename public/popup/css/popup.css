@@ -129,7 +129,9 @@ body {
 
 #tipsView{
 	text-align:center;
-	color: #2d2929a8;
+	font-size: 20px;
+	line-height: 45px;
+	color: #6bbf8f;
 	display: table-cell;
 	vertical-align: middle;
 	width: 248px;
