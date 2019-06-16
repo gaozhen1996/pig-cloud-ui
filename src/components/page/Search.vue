@@ -7,10 +7,10 @@
 
         <!-- 搜索框 -->
         <div class="search-div">
-            <el-select v-model="searchEngine" placeholder="请选择搜索引擎">
+            <el-select v-model="searchEngine" placeholder="请选择搜索引擎" @change="changeEngine()">
                 <el-option
                 v-for="item in options"
-                :key="item.label"
+                :key="item.vaule"
                 :label="item.label"
                 :value="item.value">
                 <span style="float: left">{{ item.label }}</span>
@@ -35,10 +35,14 @@
         <div class="shortcutListDiv">
             <el-row :gutter="10">
                 <el-col :span="6" v-for="(element,index) in shortcutList" :key="element.id">
-                    <div class="shortcutDiv" @click="hrefIncon(element.url)">
+                    <div v-if="element.rflag" class="shortcutDiv" @click="hrefIncon(element.url)">
                         <img :src="element.img" class="icon">
                         <div class="icon-name">{{element.name}}</div>
                     </div>     
+                    <div v-if="!element.rflag" class="shortcutDiv" @click="hrefIncon(element.url)">
+                        <div class="icon" :style="element.img">{{element.iconname}}</div>
+                        <div class="icon-name">{{element.name}}</div>
+                    </div>                      
                 </el-col>
             </el-row>
         </div>
@@ -62,6 +66,7 @@
                 loadwd: [],//动态提示
                 wd: '',//搜索关键字
                 shortcutList:[],
+                user:{}
             }
         },
         methods: {
@@ -89,7 +94,7 @@
                 cb(this.loadwd);
             },
             searchWord() {
-                if(this.searchEngine=='Google'){
+                if(this.searchEngine=='Google' || this.searchEngine=='谷歌'){
                     window.location.href='https://www.google.com/search?q='+this.wd;
                 }else{
                     window.location.href='https://www.baidu.com/s?ie=UTF-8&wd='+this.wd;
@@ -106,15 +111,68 @@
                 // request.outIp = returnCitySN["cip"];
                 // request.city = returnCitySN["cname"];
                 let user = JSON.parse(localStorage.getItem('user'));
+                this.user = user;
                 request.account = user.account;
                 axios.post(Global.baseurl+"/auth-api/userWebRest/currentInfo",request)
                     .then(res=>{
                 })
+            },
+            changeEngine(){
+                if(this.searchEngine=='百度'){
+                    localStorage.setItem('searchEngine','Baidu');
+                }else if(this.searchEngine=='谷歌'){
+                    localStorage.setItem('searchEngine','Google');
+                }else{
+                    //暂无
+                }
+            },
+            getShortcutList(){
+                axios.get(Global.baseurl+"/plan-api/web/rest/chortcut/selectChortcutByUid?uid="+this.user.id)
+                    .then((response) => {
+                        var code = response.data.code;
+                        if(code==2){
+                            var list = response.data.data;
+                            for(let i=0;i<list.length;i++){
+                                let shortcut = list[i];
+                                if(shortcut.relation!=0){
+                                    let obj = {
+                                        id:shortcut.id,                        
+                                        img:require('../../assets/img/'+shortcut.imgUrl),
+                                        name:shortcut.name,
+                                        url:shortcut.url,
+                                        rflag:true,
+                                    }
+                                    this.shortcutList.push(obj);
+                                }else{
+                                    let obj = {
+                                        id:shortcut.id,                        
+                                        img:"background-color:"+shortcut.imgUrl,
+                                        name:shortcut.name,
+                                        iconname:shortcut.name.substring(0,5),
+                                        url:shortcut.url,
+                                        rflag:false,
+                                    }
+                                    this.shortcutList.push(obj);
+                                }
+                                
+                            }
+                        }else{
+                            this.$message.error('亲，错了哦，出了一点小异常,请联系管理员');
+                        }
+                    })
+                    .catch(function (error) {
+                    console.log(error);
+                });
+
             }
         },
         created(){
-            this.shortcutList = Global.shortcutList;
             this.getUserInfo();
+            this.getShortcutList();
+            let searchEngine = localStorage.getItem('searchEngine')
+            if(searchEngine != null){
+                this.searchEngine = searchEngine;
+            }
         }
     }
 </script>

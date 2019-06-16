@@ -8,7 +8,7 @@
                         <div class="handle-box">
                             <el-button type="primary" icon="search" @click="handleAdd">新建备忘录</el-button>
                         </div>
-                        <el-table :data="data" border class="table">
+                        <el-table :data="data" stripe class="table">
                             <el-table-column prop="title" label="标题" sortable width="200">
                             </el-table-column>
                             <el-table-column label="操作" align="center">

@@ -78,7 +78,7 @@ export default new Router({
                     meta: { title: '文件上传' }   
                 },
                 {
-                    // chart
+                    // wormConfig
                     path: '/wormConfig',
                     component: resolve => require(['../components/page/WormConfig.vue'], resolve),
                     meta: { title: '爬虫控制' }   
@@ -88,6 +88,12 @@ export default new Router({
                     path: '/note',
                     component: resolve => require(['../components/page/Note.vue'], resolve),
                     meta: { title: '笔记' }   
+                },
+                {
+                    // shortcutManage
+                    path: '/shortcutManage',
+                    component: resolve => require(['../components/page/ShortcutManage.vue'], resolve),
+                    meta: { title: '快捷方式' }   
                 },
                 {
                     path: '/404',

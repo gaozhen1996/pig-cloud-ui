@@ -19,9 +19,32 @@ chrome.tabs.getSelected(null, function (tab) {
 
 
 $('#addBu').click(function(){
-    console.log(request);
     $("#addView").hide();
-    $("#tipsView").show();
+    request.name = $("#addTitle").val();
+    //获取uid
+    var userStr = localStorage.getItem('user');
+    if(userStr != null){
+        request.uid = JSON.parse(userStr).id;
+        $.ajax({
+            type: "POST",
+            url: "http://47.94.131.201:9050/plan-api/web/rest/chortcut/addChortcut",
+            contentType: "application/json; charset=utf-8",
+            data: JSON.stringify(request),
+            dataType: "json",
+            success: function (message) {
+                if(message.code==2){
+                    $("#tipsView").show();
+                }else{
+                    $("#tipsView").html("添加失败");
+                    $("#tipsView").show();
+                }
+            },
+            error: function (message) {
+                
+            }
+        });
+    }
+    
 })
 
 $(".icobgColor").click(function(){

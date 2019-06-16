@@ -115,7 +115,8 @@
                         if(code==2){
                         this.tableData=response.data.data;
                         }else if(response.data.code==4){
-                            this.$message.error('亲，登录过期哟');
+                            this.$message.error('亲,将进入登录页面，需要确认您的身份');
+                            this.$router.push('/login');
                         }else{
                             this.$message.error('亲，错了哦，出了一点小异常');
                         }
