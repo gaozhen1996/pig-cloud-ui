@@ -252,7 +252,7 @@
         transition: background-color ease .35s;
         border-radius: 50%;
         background-color: rgba(0,0,0,.3);
-        background-image: url(../../assets/img/setting.png);
+        background-image: url(../../assets/img/home.png);
         background-repeat: no-repeat;
         background-position: center;
     }

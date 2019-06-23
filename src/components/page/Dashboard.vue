@@ -103,11 +103,11 @@
                 <div slot="header" class="clearfix">
                     <span>{{planTypeNames[fullScreenPalnType]}}</span>
                     <i class="el-icon-close" style="float: right; padding: 3px 0px" @click="fullScreenVisible = false"></i>
-                    <el-button style="float: right; padding: 3px 10px" type="text" v-on:click="handleAdd(0)">添加</el-button>
+                    <el-button style="float: right; padding: 3px 10px" type="text" v-on:click="handleAdd(fullScreenPalnType)">添加</el-button>
                 </div>
                 <div class="scroll" style="height:500px;">
                     <draggable :list="plans[fullScreenPalnType]" group="people" @change="log">
-                        <div class="text item" v-for="(element) in plans[0]" :key="element.id" @dblclick="showPlan(element)">
+                        <div class="text item" v-for="(element) in plans[fullScreenPalnType]" :key="element.id" @dblclick="showPlan(element)">
                             <el-checkbox v-model="element.status" @change="changeStatus(element)"></el-checkbox>
                             <a class="todo-item" :class="{'del': element.status}">{{element.showContent}}</a>
                             <i class="el-icon-delete update" v-on:click="handleDelete(element)"></i>
@@ -210,7 +210,8 @@
             plan: {},
             plans:[],
             lastArrLen: [],
-            planTypeNames:['重要且紧急','重要不紧急','紧急但不重要','不重要不紧急'], //计划类型名称
+            // planTypeNames:['重要且紧急','重要不紧急','紧急但不重要','不重要不紧急'], //计划类型名称
+            planTypeNames:['今日计划','学习目标','长期目标','项目计划'], //计划类型名称
             fullScreenPalnType:0,//默认计划类型
         };
     },
