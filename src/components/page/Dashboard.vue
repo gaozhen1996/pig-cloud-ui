@@ -4,8 +4,9 @@
             <el-row :span="11">
                 <el-card shadow="hover" style="height:300px;">
                     <div slot="header" class="clearfix">
-                        <span>重要且紧急</span>
+                        <span>{{planTypeNames[0]}}</span>
                         <el-button style="float: right; padding: 3px 0" type="text" v-on:click="handleAdd(0)">添加</el-button>
+                        <i class="el-icon-full-screen" style="float: right; padding: 3px 10px" v-on:click="handleFullScreen(0)"></i>
                     </div>
                     <div class="scroll">
                         <draggable :list="plans[0]" group="people" @change="log">
@@ -23,8 +24,9 @@
             <el-row :span="11">
                 <el-card shadow="hover" style="height:300px;">
                     <div slot="header" class="clearfix">
-                        <span>紧急但不重要</span>
+                        <span>{{planTypeNames[2]}}</span>
                         <el-button style="float: right; padding: 3px 0" type="text" v-on:click="handleAdd(2)">添加</el-button>
+                        <i class="el-icon-full-screen" style="float: right; padding: 3px 10px" v-on:click="handleFullScreen(2)"></i>
                     </div>
                     <div class="scroll">
                         <draggable :list="plans[2]" group="people" @change="log">
@@ -45,8 +47,9 @@
             <el-row :span="11">
                 <el-card shadow="hover" style="height:300px;">
                     <div slot="header" class="clearfix">
-                        <span>重要不紧急</span>
+                        <span>{{planTypeNames[1]}}</span>
                         <el-button style="float: right; padding: 3px 0" type="text" v-on:click="handleAdd(1)">添加</el-button>
+                        <i class="el-icon-full-screen" style="float: right; padding: 3px 10px" v-on:click="handleFullScreen(1)"></i>
                     </div>
                     <div class="scroll">
                         <draggable :list="plans[1]" group="people" @change="log">
@@ -64,8 +67,9 @@
             <el-row :span="11">
                 <el-card shadow="hover" style="height:300px;">
                     <div slot="header" class="clearfix">
-                        <span>不重要不紧急</span>
+                        <span>{{planTypeNames[3]}}</span>
                         <el-button style="float: right; padding: 3px 0" type="text" v-on:click="handleAdd(3)">添加</el-button>
+                        <i class="el-icon-full-screen" style="float: right; padding: 3px 10px" v-on:click="handleFullScreen(3)"></i>
                     </div>
                     <div class="scroll">
                         <draggable :list="plans[3]" group="people" @change="log">
@@ -92,6 +96,28 @@
                 </el-card>
             </el-row>
         </el-col> 
+
+        <!-- 全屏框 -->
+        <el-dialog class="fullScreenDiv" title="全屏显示" :visible.sync="fullScreenVisible" fullscreen>
+            <el-card shadow="hover" style="height:600px;">
+                <div slot="header" class="clearfix">
+                    <span>{{planTypeNames[fullScreenPalnType]}}</span>
+                    <i class="el-icon-close" style="float: right; padding: 3px 0px" @click="fullScreenVisible = false"></i>
+                    <el-button style="float: right; padding: 3px 10px" type="text" v-on:click="handleAdd(0)">添加</el-button>
+                </div>
+                <div class="scroll" style="height:500px;">
+                    <draggable :list="plans[fullScreenPalnType]" group="people" @change="log">
+                        <div class="text item" v-for="(element) in plans[0]" :key="element.id" @dblclick="showPlan(element)">
+                            <el-checkbox v-model="element.status" @change="changeStatus(element)"></el-checkbox>
+                            <a class="todo-item" :class="{'del': element.status}">{{element.showContent}}</a>
+                            <i class="el-icon-delete update" v-on:click="handleDelete(element)"></i>
+                            <i class="el-icon-edit update" v-on:click="handleUpdate(element)"></i>
+                            <a class="todo-item update" :class="{'delay': element.delay}">{{element.delayDay}}</a> 
+                        </div>
+                    </draggable>
+                </div>
+            </el-card>
+        </el-dialog>  
 
         <!-- 查看提示框 -->
         <el-dialog title="查看" :visible.sync="showVisible" width="500px">
@@ -177,12 +203,15 @@
             addVisible: false,
             delVisible: false,
             updateVisible:false,
+            fullScreenVisible:false,
             uid:'',
             today:'',
             changeDay:0,//上一天，下一天
             plan: {},
             plans:[],
             lastArrLen: [],
+            planTypeNames:['重要且紧急','重要不紧急','紧急但不重要','不重要不紧急'], //计划类型名称
+            fullScreenPalnType:0,//默认计划类型
         };
     },
     mounted: function () {
@@ -294,6 +323,10 @@
                 }         
             })
 
+        },
+        handleFullScreen:function(planType){
+            this.fullScreenVisible = true;
+            this.fullScreenPalnType = planType;
         },
         handleAdd: function(planType) {
             this.plan.planType=planType;
@@ -436,6 +469,16 @@
     };
 
 </script>
+<style>
+    .fullScreenDiv .el-dialog{
+        background-color:aliceblue;
+    }
+
+    .fullScreenDiv .el-dialog__header{
+        display:none;
+    }
+
+</style>
 
 <style scoped>
     .el-row {
