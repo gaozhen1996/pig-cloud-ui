@@ -72,7 +72,6 @@
         methods: {
             loadKeyWord(queryString, cb) {
                 this.loadwd = [];
-                console.log("queryString:"+queryString);
                 if(queryString.indexOf('\\')==-1){
                     let request = {'wd':queryString}
                     let user = JSON.parse(localStorage.getItem('user'));
@@ -81,8 +80,6 @@
                     .then(res=>{
                         if(res.data.code==2){
                             let arr=res.data.data;
-                            console.log("queryresult:")
-                            console.log(arr);
                             for(let i=0;i<arr.length;i++){
                                 let obj = { "value": arr[i].q}
                                 this.loadwd.push(obj);
