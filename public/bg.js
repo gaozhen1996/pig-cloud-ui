@@ -2368,7 +2368,7 @@ function(t, e) {
         chrome.tabs.query({},
         function(t) {
             for (var e = t.length - 1; e >= 0; e--) {
-                console.log(t[e].url);
+                //console.log(t[e].url);
                 var n = t[e].url;
                 for (var r in l.redirects) if (l.redirects[r].r.test(n) && !l.redirects[r].t.test(n)) {
                     var o = n.replace(l.redirects[r].r, l.redirects[r].s);
