@@ -96,6 +96,12 @@ export default new Router({
                     meta: { title: '快捷方式' }   
                 },
                 {
+                    // 壁纸设置
+                    path: '/bgimage',
+                    component: resolve => require(['../components/page/Bgimage.vue'], resolve),
+                    meta: { title: '壁纸设置' }   
+                },
+                {
                     path: '/404',
                     component: resolve => require(['../components/page/404.vue'], resolve),
                     meta: { title: '404' }
