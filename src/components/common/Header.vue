@@ -21,7 +21,7 @@
                 </div>
                 <!-- 跳转搜索页 -->
                  <div class="search">
-                    <i class="el-icon-location" @click="hrefSearch()"></i>
+                    <i class="el-icon-search" @click="hrefSearch()"></i>
                 </div>               
                 <!-- 消息中心 -->
                 <div class="btn-bell">
@@ -127,7 +127,7 @@
             }
         },
         mounted(){
-            if(document.body.clientWidth < 1200){
+            if(document.body.clientWidth < 1500){
                 this.collapseChage();
             }
             //填充诗句
@@ -205,11 +205,8 @@
         font-size: 24px;
     }
     .btn-bell, .btn-fullscreen{
-        position: relative;
-        width: 30px;
-        height: 30px;
-        text-align: center;
-        border-radius: 15px;
+        margin-right: 5px;
+        font-size: 24px;
         cursor: pointer;
     }
     .btn-bell-badge{
@@ -246,7 +243,6 @@
     }
 
     .search{
-        transform: rotate(45deg);
         margin-right: 5px;
         font-size: 24px;
         cursor: pointer;

@@ -1,5 +1,5 @@
 <template>
-    <div class="wrap"> 
+    <div class="wrap" :style="{backgroundImage:'url('+currbg+')'}"> 
         <!-- 头部 -->
         <div class="header">
             <div class="setting-btn" @click="hrefHome()"></div>
@@ -34,7 +34,7 @@
         <!-- 快捷方式 -->
         <div class="shortcutListDiv">
             <el-row :gutter="10">
-                <el-col :span="6" v-for="(element,index) in shortcutList" :key="element.id">
+                <el-col :span="6" v-for="(element) in shortcutList" :key="element.id">
                     <div v-if="element.rflag" class="shortcutDiv" @click="hrefIncon(element.url)">
                         <img :src="element.img" class="icon">
                         <div class="icon-name">{{element.name}}</div>
@@ -66,7 +66,8 @@
                 loadwd: [],//动态提示
                 wd: '',//搜索关键字
                 shortcutList:[],
-                user:{}
+                user:{},
+                currbg:'img/bg0.e6f83dd1.jpg'
             }
         },
         methods: {
@@ -124,10 +125,16 @@
                 }
             },
             getShortcutList(){
+                //首先获取缓存里面的快捷方式,避免闪屏
+                let temp = localStorage.getItem('shortcutList');
+                if(temp!=null){
+                    this.shortcutList = JSON.parse(temp);
+                }
                 axios.get(Global.baseurl+"/plan-api/web/rest/chortcut/selectChortcutByUid?uid="+this.user.id)
                     .then((response) => {
                         var code = response.data.code;
                         if(code==2){
+                            this.shortcutList = [];
                             var list = response.data.data;
                             for(let i=0;i<list.length;i++){
                                 let shortcut = list[i];
@@ -150,8 +157,8 @@
                                         rflag:false,
                                     }
                                     this.shortcutList.push(obj);
-                                }
-                                
+                                } 
+                                localStorage.setItem('shortcutList',JSON.stringify(this.shortcutList));              
                             }
                         }else{
                             this.$message.error('亲，错了哦，出了一点小异常,请联系管理员');
@@ -169,6 +176,11 @@
             let searchEngine = localStorage.getItem('searchEngine')
             if(searchEngine != null){
                 this.searchEngine = searchEngine;
+            }
+            // 获取背景
+            let currbg = localStorage.getItem('bgimage');
+            if(currbg!=null){
+                this.currbg = currbg;
             }
         }
     }
