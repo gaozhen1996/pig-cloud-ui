@@ -158,15 +158,15 @@ export default {
                 }
 
             };
-            for(let i=-29;i<=0;i++){
+            for(let i=-14;i<=0;i++){
                 chartData.xdata.push(this.getNowFormatDate(i).substring(5,10));
             }
-            var date = this.getNowFormatDate(-29);
+            var date = this.getNowFormatDate(-14);
             axios.get(Global.baseurl+"/video-api/web/rest/videoInfo/selectCountGreaterDate?date="+date)
                 .then((response) => {
                     var code = response.data.code;
                     if(code==2){
-                        let less = 30-response.data.data.length;
+                        let less = 15-response.data.data.length;
                         if(less>0){
                             for(let i = 0 ; i<less ; i++){
                                 response.data.data.push(0);
