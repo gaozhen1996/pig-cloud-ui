@@ -109,7 +109,7 @@
                     <draggable :list="plans[fullScreenPalnType]" group="people" @change="log">
                         <div class="text item" v-for="(element) in plans[fullScreenPalnType]" :key="element.id" @dblclick="showPlan(element)">
                             <el-checkbox v-model="element.status" @change="changeStatus(element)"></el-checkbox>
-                            <a class="todo-item" :class="{'del': element.status}">{{element.showContent}}</a>
+                            <a class="todo-item" :class="{'del': element.status}">{{element.content}}</a>
                             <i class="el-icon-delete update" v-on:click="handleDelete(element)"></i>
                             <i class="el-icon-edit update" v-on:click="handleUpdate(element)"></i>
                             <a class="todo-item update" :class="{'delay': element.delay}">{{element.delayDay}}</a> 
