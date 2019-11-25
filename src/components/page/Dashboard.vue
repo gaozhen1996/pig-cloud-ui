@@ -1,8 +1,8 @@
 <template>
-    <div>
+    <div style="height:100%;">
         <el-col :span="11">
             <el-row :span="11">
-                <el-card shadow="hover" style="height:300px;">
+                <el-card shadow="hover" style="height:95%;">
                     <div slot="header" class="clearfix">
                         <span>{{planTypeNames[0]}}</span>
                         <el-button style="float: right; padding: 3px 0" type="text" v-on:click="handleAdd(0)">添加</el-button>
@@ -22,7 +22,7 @@
                 </el-card>
             </el-row>
             <el-row :span="11">
-                <el-card shadow="hover" style="height:300px;">
+                <el-card shadow="hover" style="height:95%;">
                     <div slot="header" class="clearfix">
                         <span>{{planTypeNames[2]}}</span>
                         <el-button style="float: right; padding: 3px 0" type="text" v-on:click="handleAdd(2)">添加</el-button>
@@ -45,7 +45,7 @@
 
         <el-col :span="11">
             <el-row :span="11">
-                <el-card shadow="hover" style="height:300px;">
+                <el-card shadow="hover" style="height:95%;">
                     <div slot="header" class="clearfix">
                         <span>{{planTypeNames[1]}}</span>
                         <el-button style="float: right; padding: 3px 0" type="text" v-on:click="handleAdd(1)">添加</el-button>
@@ -65,7 +65,7 @@
                 </el-card>
             </el-row>
             <el-row :span="11">
-                <el-card shadow="hover" style="height:300px;">
+                <el-card shadow="hover" style="height:95%;">
                     <div slot="header" class="clearfix">
                         <span>{{planTypeNames[3]}}</span>
                         <el-button style="float: right; padding: 3px 0" type="text" v-on:click="handleAdd(3)">添加</el-button>
@@ -88,8 +88,8 @@
 
         <!-- 时间选择 -->
         <el-col :span="2">
-            <el-row>
-                <el-card shadow="hover" style="height:605px;text-align:center;line-height:60px">
+            <el-row style="height:98%;">
+                <el-card shadow="hover" style="height:100%;text-align:center;line-height:60px">
                     <el-button type="primary" icon="el-icon-arrow-up" circle v-on:click="toNextDay(-1)"></el-button>
                     <h1 style="color: #909399">今日事 今日毕</h1>
                     <el-button type="primary" icon="el-icon-arrow-down" circle v-on:click="toNextDay(1)"></el-button>
@@ -484,6 +484,11 @@
 <style scoped>
     .el-row {
         margin: 5px;
+        height: 50%;
+    }
+
+    .el-col{
+        height: 100%;
     }
 
     .text {
