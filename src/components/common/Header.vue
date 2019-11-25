@@ -155,7 +155,7 @@
     .header .logo1 {
         float: left;
         width:64px;
-        line-height: 70px;
+        line-height: 72px;
         background:#000000;
         text-align: center;
     }
@@ -166,7 +166,7 @@
     .header .logo2 {
         float: left;
         width:250px;
-        line-height: 70px;
+        line-height: 72px;
         background:#000000;
         text-align: center;
     }
