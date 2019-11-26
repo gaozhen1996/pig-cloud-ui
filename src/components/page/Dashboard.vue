@@ -6,7 +6,7 @@
                     <div slot="header" class="clearfix">
                         <span>{{planTypeNames[0]}}</span>
                         <el-button style="float: right; padding: 3px 0" type="text" v-on:click="handleAdd(0)">添加</el-button>
-                        <i class="el-icon-full-screen" style="float: right; padding: 3px 10px" v-on:click="handleFullScreen(0)"></i>
+                        <i class="el-icon-full-screen" style="float: right; padding: 3px 10px;cursor:pointer" v-on:click="handleFullScreen(0)"></i>
                     </div>
                     <div class="scroll">
                         <draggable :list="plans[0]" group="people" @change="log">
@@ -26,7 +26,7 @@
                     <div slot="header" class="clearfix">
                         <span>{{planTypeNames[2]}}</span>
                         <el-button style="float: right; padding: 3px 0" type="text" v-on:click="handleAdd(2)">添加</el-button>
-                        <i class="el-icon-full-screen" style="float: right; padding: 3px 10px" v-on:click="handleFullScreen(2)"></i>
+                        <i class="el-icon-full-screen" style="float: right; padding: 3px 10px;cursor:pointer" v-on:click="handleFullScreen(2)"></i>
                     </div>
                     <div class="scroll">
                         <draggable :list="plans[2]" group="people" @change="log">
@@ -49,7 +49,7 @@
                     <div slot="header" class="clearfix">
                         <span>{{planTypeNames[1]}}</span>
                         <el-button style="float: right; padding: 3px 0" type="text" v-on:click="handleAdd(1)">添加</el-button>
-                        <i class="el-icon-full-screen" style="float: right; padding: 3px 10px" v-on:click="handleFullScreen(1)"></i>
+                        <i class="el-icon-full-screen" style="float: right; padding: 3px 10px;cursor:pointer" v-on:click="handleFullScreen(1)"></i>
                     </div>
                     <div class="scroll">
                         <draggable :list="plans[1]" group="people" @change="log">
@@ -69,7 +69,7 @@
                     <div slot="header" class="clearfix">
                         <span>{{planTypeNames[3]}}</span>
                         <el-button style="float: right; padding: 3px 0" type="text" v-on:click="handleAdd(3)">添加</el-button>
-                        <i class="el-icon-full-screen" style="float: right; padding: 3px 10px" v-on:click="handleFullScreen(3)"></i>
+                        <i class="el-icon-full-screen" style="float: right; padding: 3px 10px;cursor:pointer" v-on:click="handleFullScreen(3)"></i>
                     </div>
                     <div class="scroll">
                         <draggable :list="plans[3]" group="people" @change="log">
@@ -102,7 +102,7 @@
             <el-card shadow="hover" style="height:600px;">
                 <div slot="header" class="clearfix">
                     <span>{{planTypeNames[fullScreenPalnType]}}</span>
-                    <i class="el-icon-close" style="float: right; padding: 3px 0px" @click="fullScreenVisible = false"></i>
+                    <i class="el-icon-close" style="float: right; padding: 3px 0px;cursor:pointer" @click="fullScreenVisible = false"></i>
                     <el-button style="float: right; padding: 3px 10px" type="text" v-on:click="handleAdd(fullScreenPalnType)">添加</el-button>
                 </div>
                 <div class="scroll" style="height:500px;">
