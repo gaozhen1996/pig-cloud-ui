@@ -112,11 +112,11 @@
                 axios.get(Global.baseurl+"/plan-api/web/rest/chortcut/selectChortcutByUid?uid="+this.user.id)
                     .then((response) => {
                         var code = response.data.code;
-                        if(code==2){
+                        if(code==200){
                             this.tableData=response.data.data;
                             this.total=1;
                         }else{
-                            this.$message.error('亲，错了哦，出了一点小异常');
+                            this.$message.error('亲，获取用户快捷方式错了哦，出了一点小异常');
                         }
                     })
                     .catch(function (error) {
@@ -126,11 +126,11 @@
                 axios.get(Global.baseurl+"/plan-api/web/rest/chortcut/selectSystemChortcutByUid?uid="+this.user.id)
                     .then((response) => {
                         var code = response.data.code;
-                        if(code==2){
+                        if(code==200){
                             this.systemShortcuts=response.data.data;
                             this.total=1;
                         }else{
-                            this.$message.error('亲，错了哦，出了一点小异常');
+                            this.$message.error('亲，获取系统快捷方式错了哦，出了一点小异常');
                         }
                     })
                     .catch(function (error) {

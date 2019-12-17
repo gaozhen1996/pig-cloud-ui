@@ -133,7 +133,7 @@
                 axios.get(Global.baseurl+"/plan-api/web/rest/chortcut/selectChortcutByUid?uid="+this.user.id)
                     .then((response) => {
                         var code = response.data.code;
-                        if(code==2){
+                        if(code==200){
                             this.shortcutList = [];
                             var list = response.data.data;
                             for(let i=0;i<list.length;i++){
@@ -161,7 +161,7 @@
                                 localStorage.setItem('shortcutList',JSON.stringify(this.shortcutList));              
                             }
                         }else{
-                            this.$message.error('亲，错了哦，出了一点小异常,请联系管理员');
+                            this.$message.error('亲，获取快捷方式错了哦，出了一点小异常,请联系管理员');
                         }
                     })
                     .catch(function (error) {
