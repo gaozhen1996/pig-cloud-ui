@@ -151,13 +151,13 @@
                 axios.post(Global.baseurl+"/plan-api/web/rest/chortcut/deleteChortcut",request)
                 .then(res=>{
                     this.updateVisible = false;
-                    if(res.data.code==2){
+                    if(res.data.code==200){
                         this.getData();
                         this.$message.success('删除成功');
                         this.delVisible = false;
                     }else{
                         console.log(res.data.msg)
-                        this.$message.error('亲，错了哦，出了一点小异常,请联系维护人员');
+                        this.$message.error('亲，删除快捷方式错了哦，出了一点小异常,请联系维护人员');
                     }         
                 })
             },
@@ -170,12 +170,12 @@
                 axios.post(Global.baseurl+"/plan-api/web/rest/chortcut/updateChortcut",request)
                 .then(res=>{
                     this.updateVisible = false;
-                    if(res.data.code==2){
+                    if(res.data.code==200){
                         this.updateVisible = false;
                         this.$message.success('修改成功');
                     }else{
                         console.log(res.data.msg)
-                        this.$message.error('亲，错了哦，出了一点小异常,请联系维护人员');
+                        this.$message.error('亲，更新快捷方式错了哦，出了一点小异常,请联系维护人员');
                     }         
                 })
             },
@@ -183,17 +183,17 @@
                 let request = {
                     relation:row.id,
                     uid:this.user.id,
-                    color:''
+                    imgUrl:''
                 };
                 axios.post(Global.baseurl+"/plan-api/web/rest/chortcut/addChortcut",request)
                 .then(res=>{
                     this.updateVisible = false;
-                    if(res.data.code==2){
+                    if(res.data.code==200){
                         this.getData();
-                        this.$message.success('删除成功');
+                        this.$message.success('添加成功');
                     }else{
                         console.log(res.data.msg)
-                        this.$message.error('亲，错了哦，出了一点小异常,请联系维护人员');
+                        this.$message.error('亲，删除快捷方式错了哦，出了一点小异常,请联系维护人员');
                     }         
                 })
             }

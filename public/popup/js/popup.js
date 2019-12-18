@@ -1,5 +1,5 @@
 var request = {
-    "color":"#1abc9c"
+    "imgUrl":"#1abc9c"
 };
 $("#tipsView").hide();
 chrome.tabs.getSelected(null, function (tab) {
@@ -27,12 +27,13 @@ $('#addBu').click(function(){
         request.uid = JSON.parse(userStr).id;
         $.ajax({
             type: "POST",
-            url: "http://47.94.131.201:9050/plan-api/web/rest/chortcut/addChortcut",
+            url: "http://127.0.0.1:9050/plan-api/web/rest/chortcut/addChortcut",
             contentType: "application/json; charset=utf-8",
             data: JSON.stringify(request),
             dataType: "json",
             success: function (message) {
-                if(message.code==2){
+                console.log(message)
+                if(message.code==200){
                     $("#tipsView").show();
                 }else{
                     $("#tipsView").html("添加失败");
@@ -57,7 +58,7 @@ $(".icobgColor").click(function(){
         var b = parseInt(rgb[2].split(')')[0]);
         var hex = "#" + ((1 << 24) + (r << 16) + (g << 8) + b).toString(16).slice(1);
         $("#icon").css('background-color',hex);
-        request.color = hex;
+        request.imgUrl = hex;
     })
 })
 
