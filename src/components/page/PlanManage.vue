@@ -105,7 +105,7 @@
                 axios.get(url)
                     .then((response) => {
                         var code = response.data.code;
-                        if(code==2){
+                        if(code==200){
                         this.tableData=response.data.data.data;
                         this.total=response.data.data.row-1;
                         }else{
