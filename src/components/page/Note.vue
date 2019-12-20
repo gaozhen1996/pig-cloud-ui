@@ -110,14 +110,14 @@
                             +startRow+"&rowSize=10")
                 .then((response) => {
                     var code = response.data.code;
-                    if(code==2){
+                    if(code==200){
                         this.tableData=response.data.data.data;
                         if(this.tableData.length>0){
                             this.note = this.tableData[0];
                         }
                         this.total=response.data.data.row-1;
                     }else{
-                        this.$message.error('亲，错了哦，出了一点小异常');
+                        this.$message.error('亲，获取备忘录错了哦，出了一点小异常，请联系维护人员');
                     }
                 })
                 .catch(function (error) {
@@ -155,7 +155,7 @@
                 let request = {"id":this.note.id};
                 axios.post(Global.baseurl+"/plan-api/web/rest/note/deleteNoteById",request)
                 .then(res=>{
-                    if(res.data.code==2){
+                    if(res.data.code==200){
                         this.tableData.splice(this.idx, 1);
                         this.$message.success('删除成功');
                         this.delVisible = false;
@@ -171,7 +171,7 @@
                                "title":this.note.title};
                 axios.post(Global.baseurl+"/plan-api/web/rest/note/addNote",request)
                 .then(res=>{
-                    if(res.data.code==2){
+                    if(res.data.code==200){
                         this.updateVisible=true;
                         this.tableData.unshift(res.data.data);
                         this.$message.success('提交成功！');
@@ -186,7 +186,7 @@
                                "title":this.note.title};
                 axios.post(Global.baseurl+"/plan-api/web/rest/note/updateNoteById",request)
                 .then(res=>{
-                    if(res.data.code==2){
+                    if(res.data.code==200){
                         this.$message.success('修改成功！');
                     }else{
                         console.log("新增失败")
