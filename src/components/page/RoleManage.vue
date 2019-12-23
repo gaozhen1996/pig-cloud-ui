@@ -112,13 +112,13 @@
                 axios.get(Global.baseurl+"/auth-api/userWebRest/listAllRole")
                     .then((response) => {
                         var code = response.data.code;
-                        if(code==2){
+                        if(code==200){
                         this.tableData=response.data.data;
-                        }else if(response.data.code==4){
-                            this.$message.error('亲,将进入登录页面，需要确认您的身份');
-                            this.$router.push('/login');
+                        }else if(response.data.code==403){
+                            this.$message.error('亲,您没有权限！');
+                            //this.$router.push('/login');
                         }else{
-                            this.$message.error('亲，错了哦，出了一点小异常');
+                            this.$message.error('亲，获取角色错了哦，出了一点小异常');
                         }
                     })
                     .catch(function (error) {
@@ -146,9 +146,9 @@
                 axios.post(Global.baseurl+"/auth-api/userWebRest/updateRoleById",request)
                 .then(res=>{
                     this.updateVisible = false;
-                    if(res.data.code==2){
+                    if(res.data.code==200){
                         this.$message.success('修改成功');
-                    }else if(res.data.code==4){
+                    }else if(res.data.code==403){
                         this.$message.error('权限不足');
                     }else{
                         console.log(res.data.msg)

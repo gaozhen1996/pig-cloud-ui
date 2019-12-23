@@ -48,7 +48,7 @@
                         let request = this.userInfo;
                         axios.post(Global.baseurl+"/auth-api/userWebRest/updatePasswdById",request)
                         .then(res=>{
-                            if(res.data.code==2){
+                            if(res.data.code==200){
                                 this.$message.success('修改成功!请重新登录');
                                 this.$router.push('/login');
                             }else{

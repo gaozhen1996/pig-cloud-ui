@@ -53,7 +53,7 @@
             let request = {"username":user.account};
             axios.post(Global.baseurl+"/auth-api/userWebRest/getMenuByAccount",request)
                     .then(res=>{
-                        if(res.data.code==2){
+                        if(res.data.code==200){
                             let menu = JSON.parse(res.data.data);
                             this.items = menu;
                         }else if(res.data.code==4){
