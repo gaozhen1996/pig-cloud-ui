@@ -228,7 +228,7 @@
             axios.get(Global.baseurl+"/plan-api/web/rest/plan/getPlansGroupType?today="+this.today+"&uid="+this.uid)
                 .then((response) => {
                     var code = response.data.code;
-                    if(code==200){
+                    if(code==2){
                         this.plans = response.data.data;
                         /**
                          * 1.添加过期标识
@@ -244,7 +244,7 @@
                                 tPlan = this.planToShowPlan(tPlan);
                             }
                         }
-                    }else if(code==401){
+                    }else if(code==4){
                         // this.$router.push('/login');
                     }else{
                         this.$message.error('亲，获取计划错了哦，出了一点小异常，请联系维护人员');
@@ -266,7 +266,7 @@
                                "newIndex":evt.moved.newIndex,"oldIndex":evt.moved.oldIndex};
                 axios.post(Global.baseurl+"/plan-api/web/rest/plan/updatePlanType",request)
                 .then(res=>{
-                    if(res.data.code==200){
+                    if(res.data.code==2){
                         this.getPlansGroupType();
                     }else{
                         console.log("移动失败")
@@ -356,7 +356,7 @@
                            "content":this.plan.content};
             axios.post(Global.baseurl+"/plan-api/web/rest/plan/addPlan",request)
             .then(res=>{
-                if(res.data.code==200){
+                if(res.data.code==2){
                     var obj = res.data.data;
                     obj = this.planToShowPlan(obj);
                     this.plans[obj.planType].push(obj);
@@ -375,7 +375,7 @@
                            "planIndex":this.plan.planIndex};
             axios.post(Global.baseurl+"/plan-api/web/rest/plan/deletePlanById",request)
             .then(res=>{
-                if(res.data.code==200){
+                if(res.data.code==2){
                     this.$message.success('删除成功');
                     this.getPlansGroupType();
                 }else{
@@ -389,7 +389,7 @@
             let request = this.plan;
             axios.post(Global.baseurl+"/plan-api/web/rest/plan/updateNonEmptyPlanById",request)
             .then(res=>{
-                if(res.data.code==200){
+                if(res.data.code==2){
                     this.$message.success('修改成功');
                     this.plan = this.planToShowPlan(this.plan);
                     // this.getPlansGroupType();

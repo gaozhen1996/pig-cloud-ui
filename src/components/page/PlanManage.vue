@@ -105,9 +105,9 @@
                 axios.get(url)
                     .then((response) => {
                         var code = response.data.code;
-                        if(code==200){
-                        this.tableData=response.data.data.data;
-                        this.total=response.data.data.row-1;
+                        if(code==2){
+                            this.tableData=response.data.data.data;
+                            this.total=response.data.data.row-1;
                         }else{
                             this.$message.error('亲，错了哦，出了一点小异常');
                         }

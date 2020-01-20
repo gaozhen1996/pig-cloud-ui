@@ -112,9 +112,9 @@
                 axios.get(Global.baseurl+"/auth-api/userWebRest/listAllRole")
                     .then((response) => {
                         var code = response.data.code;
-                        if(code==200){
-                        this.tableData=response.data.data;
-                        }else if(response.data.code==403){
+                        if(code==2){
+                            this.tableData=response.data.data;
+                        }else if(response.data.code==4){
                             this.$message.error('亲,您没有权限！');
                             //this.$router.push('/login');
                         }else{
@@ -146,9 +146,9 @@
                 axios.post(Global.baseurl+"/auth-api/userWebRest/updateRoleById",request)
                 .then(res=>{
                     this.updateVisible = false;
-                    if(res.data.code==200){
+                    if(res.data.code==2){
                         this.$message.success('修改成功');
-                    }else if(res.data.code==403){
+                    }else if(res.data.code==4){
                         this.$message.error('权限不足');
                     }else{
                         console.log(res.data.msg)

@@ -48,7 +48,7 @@
                 if(request.username!=""){
                     axios.post(Global.baseurl+"/auth-api/userWebRest/login",request)
                     .then(res=>{
-                        if(res.data.code==200){
+                        if(res.data.code==2){
                             var user = res.data.data;
                             localStorage.setItem('Authorization',user.token);
                             delete user.token;

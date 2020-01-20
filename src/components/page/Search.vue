@@ -133,7 +133,7 @@
                 axios.get(Global.baseurl+"/plan-api/web/rest/chortcut/selectChortcutByUid?uid="+this.user.id)
                     .then((response) => {
                         var code = response.data.code;
-                        if(code==200){
+                        if(code==2){
                             this.shortcutList = [];
                             var list = response.data.data;
                             for(let i=0;i<list.length;i++){

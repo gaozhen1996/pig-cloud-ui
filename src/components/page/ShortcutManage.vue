@@ -112,7 +112,7 @@
                 axios.get(Global.baseurl+"/plan-api/web/rest/chortcut/selectChortcutByUid?uid="+this.user.id)
                     .then((response) => {
                         var code = response.data.code;
-                        if(code==200){
+                        if(code==2){
                             this.tableData=response.data.data;
                             this.total=1;
                         }else{
@@ -126,7 +126,7 @@
                 axios.get(Global.baseurl+"/plan-api/web/rest/chortcut/selectSystemChortcutByUid?uid="+this.user.id)
                     .then((response) => {
                         var code = response.data.code;
-                        if(code==200){
+                        if(code==2){
                             this.systemShortcuts=response.data.data;
                             this.total=1;
                         }else{
@@ -151,7 +151,7 @@
                 axios.post(Global.baseurl+"/plan-api/web/rest/chortcut/deleteChortcut",request)
                 .then(res=>{
                     this.updateVisible = false;
-                    if(res.data.code==200){
+                    if(res.data.code==2){
                         this.getData();
                         this.$message.success('删除成功');
                         this.delVisible = false;
@@ -170,7 +170,7 @@
                 axios.post(Global.baseurl+"/plan-api/web/rest/chortcut/updateChortcut",request)
                 .then(res=>{
                     this.updateVisible = false;
-                    if(res.data.code==200){
+                    if(res.data.code==2){
                         this.updateVisible = false;
                         this.$message.success('修改成功');
                     }else{
@@ -188,7 +188,7 @@
                 axios.post(Global.baseurl+"/plan-api/web/rest/chortcut/addChortcut",request)
                 .then(res=>{
                     this.updateVisible = false;
-                    if(res.data.code==200){
+                    if(res.data.code==2){
                         this.getData();
                         this.$message.success('添加成功');
                     }else{
