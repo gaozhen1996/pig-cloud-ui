@@ -27,13 +27,13 @@ $('#addBu').click(function(){
         request.uid = JSON.parse(userStr).id;
         $.ajax({
             type: "POST",
-            url: "http://127.0.0.1:9050/plan-api/web/rest/chortcut/addChortcut",
+            url: "http://47.94.131.201:9050/plan-api/web/rest/chortcut/addChortcut",
             contentType: "application/json; charset=utf-8",
             data: JSON.stringify(request),
             dataType: "json",
             success: function (message) {
                 console.log(message)
-                if(message.code==200){
+                if(message.code==2){
                     $("#tipsView").show();
                 }else{
                     $("#tipsView").html("添加失败");
