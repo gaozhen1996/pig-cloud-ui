@@ -127,7 +127,7 @@
             }
         },
         mounted(){
-            if(document.body.clientWidth < 1500){
+            if(document.body.clientWidth < 1000){
                 this.collapseChage();
             }
             //填充诗句
