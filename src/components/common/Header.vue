@@ -4,7 +4,7 @@
             <div class="logo1" v-if="this.collapse"><font>PLAN</font></div>
         </transition>
         <transition name="el-zoom-in-center">
-            <div class="logo2" v-if="!this.collapse"><font>后台管理系统</font></div>
+            <div class="logo2" v-if="!this.collapse"><font>计划助手</font></div>
         </transition>
         <!-- 折叠按钮 -->
         <div class="collapse-btn" @click="collapseChage">
