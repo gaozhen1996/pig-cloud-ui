@@ -51,7 +51,7 @@
                         if(res.data.code==2){
                             var user = res.data.data;
                             localStorage.setItem('Authorization',user.token);
-                            delete user.token;
+                            // delete user.token;
                             localStorage.setItem('user',JSON.stringify(user));
                             this.$router.push('/');
                         }else{
