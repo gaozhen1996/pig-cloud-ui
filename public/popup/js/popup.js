@@ -10,21 +10,23 @@ chrome.tabs.getSelected(null, function (tab) {
     $("#icon").append(tab.title.substring(0,2))
 });
 
-// var tab = {"title":"赋值 val()方法 - Stephen__Wu的博客 - CSDN博客"}
+// var tab = {"title":"赋值 val()方法 - Stephen__Wu的博客 - CSDN博客","url":"http://www.baidu.com"}
 // if(tab!=null){
 //     $("#addTitle").val(tab.title)
 //     $("#addBu").val("添加")
 //     $("#icon").append(tab.title.substring(0,2))
+//     request.url = tab.url
 // }
 
 
 $('#addBu').click(function(){
     $("#addView").hide();
-    request.name = $("#addTitle").val();
     //获取uid
     var userStr = localStorage.getItem('user');
     if(userStr != null){
         request.uid = JSON.parse(userStr).id;
+        request.name = $("#addTitle").val();
+        request.relation=0;
         $.ajax({
             type: "POST",
             url: "http://47.94.131.201:9050/plan-api/web/rest/chortcut/addChortcut",

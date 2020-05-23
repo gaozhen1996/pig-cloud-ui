@@ -296,6 +296,7 @@
         white-space: nowrap;
         text-overflow: ellipsis;
         color: rgba(255,255,255,.9);
+        font-family: 'PingFang SC', "Helvetica Neue", "microsoft yahei", arial, STHeiTi, sans-serif;
     }
 
     .el-row {
