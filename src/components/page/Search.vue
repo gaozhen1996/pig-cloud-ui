@@ -156,6 +156,13 @@
                                         url:shortcut.url,
                                         rflag:false,
                                     }
+                                    //汉字放2位长度就满了，字母可以放5位
+                                    var reg = new RegExp("[\\u4E00-\\u9FFF]+","g");
+                                    if(reg.test(shortcut.name)){
+                                        obj.iconname = shortcut.name.substring(0,2);
+                                    }else{
+                                        obj.iconname = shortcut.name.substring(0,5);
+                                    }
                                     this.shortcutList.push(obj);
                                 } 
                                 localStorage.setItem('shortcutList',JSON.stringify(this.shortcutList));              
