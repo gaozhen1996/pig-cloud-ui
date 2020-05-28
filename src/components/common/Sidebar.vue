@@ -49,13 +49,21 @@
         },
         created(){
             //获取侧边栏
+            /**
+             * 先获取缓存中的数据
+             */
+            let cacheMenu = JSON.parse(localStorage.getItem('menu'));
+            if(cacheMenu != null){
+                this.items = cacheMenu;
+            } 
             let user = JSON.parse(localStorage.getItem('user'));
             let request = {"username":user.account};
             axios.post(Global.baseurl+"/auth-api/userWebRest/getMenuByAccount",request)
                     .then(res=>{
                         if(res.data.code==2){
                             let menu = JSON.parse(res.data.data);
-                            this.items = menu;
+                            this.items = menu;                 
+                            localStorage.setItem('menu',JSON.stringify(menu));
                         }else if(res.data.code==4){
                              this.$router.push('/login');
                         }else{
