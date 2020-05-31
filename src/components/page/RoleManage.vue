@@ -98,6 +98,9 @@
         computed: {
             data() {
                 return this.tableData.filter((d) => {
+                    if(d.permission == null){
+                        d.permission = [];
+                    }
                     return d;
                 })
             }
