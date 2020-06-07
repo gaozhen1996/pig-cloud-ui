@@ -12,14 +12,14 @@
         <el-row :gutter="20">   
             <el-col :span="6" v-for="(element) in bgs" :key="element.name">
                 <span>{{element.name}}</span>
-                <el-image :src="element.path" @click="saveBgimage(element.path)">
+                <el-image :src="element.path" @click="saveBgimage(0,element.path)">
                 </el-image>
             </el-col>
         </el-row>
         <el-row :gutter="20">
             <el-col :span="24">
                 <span>自定义:</span>
-                <el-input v-model="selfpath" @change="saveBgimage(selfpath)" placeholder="如果您想自定义背景，请填入图片的全路径，如：F:\asd.jpeg"></el-input>
+                <el-input v-model="selfpath" @change="saveBgimage(1,selfpath)" placeholder="如果您想自定义背景，请填入图片的全路径，如：F:\asd.jpeg"></el-input>
             </el-col>
         </el-row>
     </div>
@@ -38,9 +38,16 @@
             }
         },
         methods:{
-            saveBgimage(path) {
-                localStorage.setItem('bgimage',path);
-                this.currbg = path;     
+            saveBgimage(type,path) {
+                let currBgPath = path.trim();
+                if(currBgPath!=''){
+                    if(type == 1){
+                        currBgPath = currBgPath.replace(/\\/g, '/');
+                    }
+                    console.log(currBgPath)
+                    localStorage.setItem('bgimage',currBgPath);
+                    this.currbg = currBgPath; 
+                }
             },
         },
         created(){
