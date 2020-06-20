@@ -48,8 +48,8 @@
             }
         },
         created(){
-            //获取菜单
             /**
+             * 获取菜单
              * 先获取缓存中的数据
              */
             let cacheMenu = JSON.parse(localStorage.getItem('menu'));
@@ -70,7 +70,9 @@
                             this.$message.error('亲，获取菜单栏异常，不要慌张呢，请联系管理员哟！');
                         }        
                     })
-            // 通过 Event Bus 进行组件间通信，来折叠侧边栏
+            /**
+             * 通过 Event Bus 进行组件间通信，来折叠侧边栏 
+             */
             bus.$on('collapse', msg => {
                 this.collapse = msg;
             })

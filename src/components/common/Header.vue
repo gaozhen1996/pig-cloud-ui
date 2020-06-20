@@ -100,7 +100,7 @@
                 saying:'人生不要错过两样东西：最后一班回家的车和一个深爱你的人',
                 collapse: false,
                 fullscreen: false,
-                upDownStruct:false,
+                upDownStruct:true,
                 name: 'gz',
                 message: 0, //消息
                 defaultSrc:require('../../assets/img/img.jpg'),
@@ -171,14 +171,28 @@
                 this.$router.push('/search');
             }
         },
-        mounted(){
-            if(document.body.clientWidth < 1000){
-                this.collapseChage();
+        created(){
+            /**
+             * 获取结构
+             */
+            let upDownStruct = localStorage.getItem('upDownStruct');
+            if(upDownStruct==null){
+               localStorage.setItem('upDownStruct',this.upDownStruct);
+            }else{
+                this.upDownStruct = upDownStruct == 'false'?false:true;
             }
             /**
              * 通知Home调整侧边栏
              */
             bus.$emit('upDownStruct', this.upDownStruct);
+        },
+        mounted(){
+            /**
+             * 根据屏幕显示调整宽度
+             */
+            if(document.body.clientWidth < 1000){
+                this.collapseChage();
+            }
             /**
              * 填充诗句,左右结构显示
              */
