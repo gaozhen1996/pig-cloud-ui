@@ -111,6 +111,7 @@
                 let user = JSON.parse(localStorage.getItem('user'));
                 this.user = user;
                 request.account = user.account;
+                request.id = user.id;
                 axios.post(Global.baseurl+"/auth-api/userWebRest/currentInfo",request)
                     .then(res=>{
                 })
