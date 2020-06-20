@@ -1,16 +1,55 @@
 <template>
     <div class="header">
-        <transition name="el-zoom-in-center">
-            <div class="logo1" v-if="this.collapse"><font>PLAN</font></div>
-        </transition>
-        <transition name="el-zoom-in-center">
-            <div class="logo2" v-if="!this.collapse"><font>计划助手</font></div>
-        </transition>
-        <!-- 折叠按钮 -->
-        <div class="collapse-btn" @click="collapseChage">
-            <i class="el-icon-menu"></i>
+        <!-- logo -->
+        <transition name="el-zoom-in-center" >
+            <div class="logo1" v-if="this.collapse" :style="{background:this.upDownStruct?'#ffffff':'#000000'}">
+                <font>PLAN</font>
         </div>
-        <div class="saying">{{this.saying}}</div>
+        </transition>
+        <transition name="el-zoom-in-center">
+            <div class="logo2" v-if="!this.collapse" :style="{background:this.upDownStruct?'#ffffff':'#000000'}">
+                <font>计划助手</font>
+            </div>
+        </transition>
+        <!-- 折叠按钮,左右结构显示-->
+        <div class="collapse-btn" v-if="!this.upDownStruct" @click="collapseChage">
+            <i class="el-icon-menu"></i>
+        </div> 
+         <!-- 菜单start,上下结构显示 -->
+        <div class="menu" v-if="this.upDownStruct">
+            <el-menu  class="sidebar-el-menu" mode="horizontal" :default-active="onRoutes" :collapse="collapse" 
+                text-color="#bfcbd9" active-text-color="#20a0ff" unique-opened router>
+                <template v-for="item in menu">
+                    <template v-if="item.subs">
+                        <el-submenu :index="item.index" :key="item.index">
+                            <template slot="title">
+                                <i :class="item.icon"></i><span slot="title">{{ item.title }}</span>
+                            </template>
+                            <template v-for="subItem in item.subs">
+                                <el-submenu v-if="subItem.subs" :index="subItem.index" :key="subItem.index">
+                                    <template slot="title">{{ subItem.title }}</template>
+                                    <el-menu-item v-for="(threeItem,i) in subItem.subs" :key="i" :index="threeItem.index">
+                                        {{ threeItem.title }}
+                                    </el-menu-item>
+                                </el-submenu>
+                                <el-menu-item v-else :index="subItem.index" :key="subItem.index">
+                                    {{ subItem.title }}
+                                </el-menu-item>
+                            </template>
+                        </el-submenu>
+                    </template>
+                    <template v-else>
+                        <el-menu-item :index="item.index" :key="item.index">
+                            <i :class="item.icon"></i><span slot="title">{{ item.title }}</span>
+                        </el-menu-item>
+                    </template>
+                </template>
+            </el-menu> 
+        </div>
+        <!-- 菜单end -->
+        <!-- 诗句，左右结构显示 -->
+        <div class="saying" v-if="!this.upDownStruct">{{this.saying}}</div>
+        <!-- 右侧工具start -->
         <div class="header-right">
             <div class="header-user-con">
                 <!-- 全屏显示 -->
@@ -47,6 +86,7 @@
                 </el-dropdown>
             </div>
         </div>
+        <!-- 右侧工具end -->
     </div>
 </template>
 <script>
@@ -60,12 +100,17 @@
                 saying:'人生不要错过两样东西：最后一班回家的车和一个深爱你的人',
                 collapse: false,
                 fullscreen: false,
+                upDownStruct:false,
                 name: 'gz',
                 message: 0, //消息
-                defaultSrc:require('../../assets/img/img.jpg')
+                defaultSrc:require('../../assets/img/img.jpg'),
+                menu:[]
             }
         },
         computed:{
+            onRoutes(){
+                return this.$route.path.replace('/','');
+            },
             username(){
                 let user = JSON.parse(localStorage.getItem('user'));
                 let username = user.name ? user.name : user.account;
@@ -130,14 +175,28 @@
             if(document.body.clientWidth < 1000){
                 this.collapseChage();
             }
-            //填充诗句
-            this.setSaying();
+            /**
+             * 通知Home调整侧边栏
+             */
+            bus.$emit('upDownStruct', this.upDownStruct);
+            /**
+             * 填充诗句,左右结构显示
+             */
+            if(!this.upDownStruct){
+                this.setSaying();
+            }
             //获取用户头像
             let user = JSON.parse(localStorage.getItem('user'));
             if(user.logo!=undefined){
                 this.defaultSrc=user.logo;
             }
-            // setInterval(this.setSaying, 1000);
+            /**
+             * 获取菜单只从缓存中取
+             */
+            let cacheMenu = JSON.parse(localStorage.getItem('menu'));
+            if(cacheMenu != null){
+                this.menu = cacheMenu;
+            } 
         }
     }
 </script>
@@ -146,17 +205,16 @@
         position: relative;
         box-sizing: border-box;
         width: 100%;
-        height: 70px;
+        height: 60px;
         font-size: 22px;
-        color: #000000;
-        background:#F8F8F8
+        /* color: #000000; */
+        background:#ffffff
     }
 
     .header .logo1 {
         float: left;
         width:64px;
-        line-height: 72px;
-        background:#000000;
+        line-height: 60px;
         text-align: center;
     }
 
@@ -165,13 +223,13 @@
     }
     .header .logo2 {
         float: left;
-        width:250px;
-        line-height: 72px;
-        background:#000000;
+        width:200px;
+        line-height: 60px;
         text-align: center;
     }
     .header .logo2 font{
-        color: white;
+        /* color: white; */
+        color: #bfcbd9;
     }
 
 
@@ -185,10 +243,14 @@
     .saying{
         float: left;
         padding: 0 21px;
-        line-height: 70px;
+        line-height: 60px;
         color:#7B7B7B
     }
 
+    .menu{
+        float: left;
+        padding: 0px;
+    }
 
     .header-right{
         float: right;
@@ -196,7 +258,7 @@
     }
     .header-user-con{
         display: flex;
-        height: 70px;
+        height: 60px;
         align-items: center;
     }
     .btn-fullscreen{
