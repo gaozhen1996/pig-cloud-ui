@@ -9,6 +9,7 @@
             <div class="text item">
             <template>
                 <div>
+                    <p>修改请刷新之后即可看到效果</p>
                     <el-radio v-model="upDownStruct" label="true" border  @change="saveUpDownStruct">上下结构</el-radio>
                     <el-radio v-model="upDownStruct" label="false" border @change="saveUpDownStruct">左右结构</el-radio>
                 </div>
