@@ -187,7 +187,7 @@ export default {
                 }
 
             };
-            var currDate = this.getNowFormatDate(0);
+            var currDate = this.getNowFormatDate(1);
             var before7Date = this.getNowFormatDate(-7);
             axios.get(Global.baseurl+"/auth-api/userActivityRest/listNewTabCountByDate?startDate="+before7Date+"&endDate="+currDate)
                 .then((response) => {
