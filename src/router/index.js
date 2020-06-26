@@ -79,9 +79,9 @@ export default new Router({
                 },
                 {
                     // wormConfig
-                    path: '/wormConfig',
-                    component: resolve => require(['../components/page/WormConfig.vue'], resolve),
-                    meta: { title: '爬虫控制' }   
+                    path: '/userActivity',
+                    component: resolve => require(['../components/page/UserActivity.vue'], resolve),
+                    meta: { title: '活跃日志' }   
                 },
                 {
                     // note
