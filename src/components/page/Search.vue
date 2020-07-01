@@ -67,7 +67,7 @@
                 wd: '',//搜索关键字
                 shortcutList:[],
                 user:{},
-                currbg:'img/bg0.e6f83dd1.jpg'
+                currbg:'img/bg0.630e57aa.jpg'
             }
         },
         methods: {
