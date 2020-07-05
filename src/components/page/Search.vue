@@ -106,8 +106,6 @@
             },
             getUserInfo(){
                 var request = {};
-                // request.outIp = returnCitySN["cip"];
-                // request.city = returnCitySN["cname"];
                 let user = JSON.parse(localStorage.getItem('user'));
                 this.user = user;
                 request.account = user.account;
