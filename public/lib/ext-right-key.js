@@ -69,18 +69,29 @@ function rightKeySearch(){
  */
 function createOnlineUserMenu(online_users){
     //根据在线的用户创建子菜单
+    // var online_users = [
+    //     {id:1,name:'东方不败'},
+    //     {id:2,name:'独孤求败'},
+    //     {id:3,name:'逍遥子'}
+    // ]
     for(var i = 0;i<online_users.length;i++){
         var userid = online_users[i].id;
         var name = online_users[i].name;
-        chrome.contextMenus.create({
+        var option = {
+            id:userid+'',//id需要传string类型
             title:name,
-            parentId:'push_url',
-            onclick: function(){
-                console.log('function():'+userid)
-                getCurrUrl(userid);
-            }
-        });
+            parentId:'push_url'
+        }
+        console.log(option);
+        createMenu(option)
     }
+}
+
+function createMenu(option){
+    chrome.contextMenus.create(option,function(){
+        var toUser = Number(option.id)
+        getCurrUrl(toUser);
+    });
 }
 
 /**
