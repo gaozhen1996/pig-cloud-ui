@@ -68,15 +68,15 @@ function rightKeySearch(){
  * 根据当前在线的用户，创建右键子菜单
  */
 function createOnlineUserMenu(online_users){
-    //获取在线的用户
-    // var online_users = ['东方不败','风清扬','独孤求败'];
+    //根据在线的用户创建子菜单
     for(var i = 0;i<online_users.length;i++){
         var userid = online_users[i].id;
         var name = online_users[i].name;
         chrome.contextMenus.create({
             title:name,
             parentId:'push_url',
-            onclick: function(id){
+            onclick: function(){
+                console.log('function():'+userid)
                 getCurrUrl(userid);
             }
         });
@@ -88,7 +88,6 @@ function createOnlineUserMenu(online_users){
  */
 function getCurrUrl(toUser){
     chrome.tabs.query({currentWindow: true, active: true}, function(tabs){
-        console.log(toUser)
         //获取URL
         var request = {};
         request.title = tabs[0].url;
@@ -109,7 +108,8 @@ function connect(){
     stompClient = Stomp.over(socket); 
     stompClient.connect({}, function(frame) { 
         //接收消息
-        stompClient.subscribe('/topic/'+user.id, function(data){  
+        stompClient.subscribe('/topic/'+user.id, function(data){ 
+            console.log('接收消息：') 
             console.log(JSON.parse(data.body))
             var msg = JSON.parse(data.body);
             if(msg.type == 'onlineUsers'){
@@ -139,12 +139,14 @@ function sendmsg(toUserId,message) {
         return;
     }
     var user = JSON.parse(localStorage.getItem('user'));
-    console.log('发送消息:'+message)
-    stompClient.send("/accept", {}, JSON.stringify({
+    var resquest = {
         msg: message,
         toUser: toUserId,
         fromUser: user.id
-    }));
+    };
+    console.log('发送消息:')
+    console.log(resquest)
+    stompClient.send("/accept", {}, JSON.stringify(resquest));
 }
 //通知
 function notify(title,message){
