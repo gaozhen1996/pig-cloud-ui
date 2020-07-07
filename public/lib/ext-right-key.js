@@ -80,34 +80,39 @@ function createOnlineUserMenu(online_users){
         var option = {
             id:userid+'',//id需要传string类型
             title:name,
-            parentId:'push_url'
+            parentId:'push_url',
+            onclick: function(info, tab){           
+                //给服务端方法消息
+                sendmsg(Number(info.menuItemId),info.pageUrl);
+                //返回提醒
+                notify('推送成功',info.pageUrl);
+            }
         }
-        console.log(option);
         createMenu(option)
     }
 }
 
+/**
+ * 创建菜单的方法
+ */
 function createMenu(option){
-    chrome.contextMenus.create(option,function(){
-        var toUser = Number(option.id)
-        getCurrUrl(toUser);
-    });
+    chrome.contextMenus.create(option);
 }
 
 /**
- * 获取当前URL
+ * 获取当前URL,callback 可以直接获取当前路径，目前不需要使用该方法
  */
-function getCurrUrl(toUser){
-    chrome.tabs.query({currentWindow: true, active: true}, function(tabs){
-        //获取URL
-        var request = {};
-        request.title = tabs[0].url;
-        request.url = tabs[0].url;
-        sendmsg(toUser,request.url);
-        //返回提醒
-        notify('推送成功',request.url);
-    });
-}
+// function sendCurrUrl(toUser){
+//     chrome.tabs.query({currentWindow: true, active: true}, function(tabs){
+//         //获取URL
+//         var request = {};
+//         request.title = tabs[0].url;
+//         request.url = tabs[0].url;
+//         sendmsg(toUser,request.url);
+//         //返回提醒
+//         notify('推送成功',request.url);
+//     });
+// }
 function connect(){
     if(localStorage.getItem('user') == null){
         //如果没有用户没有登录，则不连接
@@ -146,7 +151,7 @@ function connect(){
 
 function sendmsg(toUserId,message) {
     if(localStorage.getItem('user') == null){
-        //如果没有用户没有登录，则不连接
+        //如果没有用户没有登录，则不发送消息
         return;
     }
     var user = JSON.parse(localStorage.getItem('user'));
