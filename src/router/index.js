@@ -102,6 +102,12 @@ export default new Router({
                     meta: { title: '壁纸设置' }   
                 },
                 {
+                    // 稍后阅读
+                    path: '/readlater',
+                    component: resolve => require(['../components/page/Readlater.vue'], resolve),
+                    meta: { title: '稍后阅读' }   
+                },                
+                {
                     path: '/404',
                     component: resolve => require(['../components/page/404.vue'], resolve),
                     meta: { title: '404' }
