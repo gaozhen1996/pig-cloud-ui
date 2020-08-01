@@ -6,8 +6,8 @@
  *      |-----getCurrUrl()  //获取当前url创给后台
  *   |-----getCurrUrl() //稍后阅读测试方法后期会修改
  */
-// const ip = '127.0.0.1';
-const ip = '47.94.131.201';
+const ip = '127.0.0.1';
+// const ip = '47.94.131.201';
 var stompClient;
 connect();
 rightKeySearch();
@@ -23,7 +23,7 @@ function addRightMenu(){
         }
     });
     /**
-     * 添加右键菜单-推送
+     * 添加右键菜单-推送至
      */
     chrome.contextMenus.create({
         id:'push_url',
@@ -67,7 +67,19 @@ function rightKeySearch(){
 /**
  * 根据当前在线的用户，创建右键子菜单
  */
-function createOnlineUserMenu(online_users){
+function createPushUrlMenu(online_users){
+    /**
+     * 添加右键菜单-推送，先删后插
+     */
+    chrome.contextMenus.remove('push_url',function(){
+
+
+    })
+
+    chrome.contextMenus.create({
+        id:'push_url',
+        title: '推送至'
+    });
     //根据在线的用户创建子菜单
     // var online_users = [
     //     {id:1,name:'东方不败'},
@@ -123,21 +135,33 @@ function connect(){
     var socket = new SockJS(url);  
     stompClient = Stomp.over(socket); 
     stompClient.connect({}, function(frame) { 
-        //接收消息
+        //接收消息(私有消息)
         stompClient.subscribe('/topic/'+user.id, function(data){ 
             console.log('接收消息：') 
             console.log(JSON.parse(data.body))
             var msg = JSON.parse(data.body);
             if(msg.type == 'onlineUsers'){
                 /**
-                 * 创建推送的子菜单
+                 * 创建推送菜单
                  */
-                createOnlineUserMenu(msg.data);
+                createPushUrlMenu(msg.data);
             }else if(msg.type == 'sharePage'){
                 notify('消息通知',msg.fromUser+'给您分享了链接');
                 chrome.tabs.create({url: msg.url});
             }
-        });  
+        });
+        //接收消息(公共消息)
+        stompClient.subscribe('/topic/-99', function(data){ 
+            console.log('接收消息：') 
+            console.log(JSON.parse(data.body))
+            var msg = JSON.parse(data.body);
+            if(msg.type == 'onlineUsers'){
+                /**
+                 * 创建推送菜单
+                 */
+                createPushUrlMenu(msg.data);
+            }
+        });           
         //发送上线消息
         stompClient.send("/accept", {}, JSON.stringify({
             msg: 'openSession',
@@ -173,8 +197,8 @@ function notify(title,message){
         message:message
     });
 }
-//心跳
-// var timer;
-// timer = setInterval(function(){
-//     sendmsg(-1,'ping');
-// },10000);
+// 心跳
+var timer;
+timer = setInterval(function(){
+    sendmsg(-1,'ping');
+},25000);
