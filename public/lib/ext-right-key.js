@@ -9,6 +9,7 @@
 const ip = '127.0.0.1';
 // const ip = '47.94.131.201';
 var stompClient;
+var config = {'lastHeartStatus':0 }//心跳状态，0,1,2正常，大于5认为异常,因为服务器是50秒发送一次心跳
 connect();
 rightKeySearch();
 addRightMenu();
@@ -18,8 +19,20 @@ function addRightMenu(){
      */
     chrome.contextMenus.create({
         title:'稍后阅读',
-        onclick: function(){
-            alert('开发中。。。');
+        onclick: function(info, tab){   
+            if(localStorage.getItem('user') == null){
+                notify('消息通知','您可能是第一次登陆或者缓存失效，需要重启一下浏览器!');
+                return;
+            }
+            var user = JSON.parse(localStorage.getItem('user'));
+            //给服务端方法消息
+            stompClient.send("/accept", {}, JSON.stringify({
+                msg: 'readlater',
+                toUser: -1,
+                fromUser: user.id,
+                url:tab.url,
+                title:tab.title
+            }));
         }
     });
     /**
@@ -141,6 +154,8 @@ function connect(){
             console.log(JSON.parse(data.body))
             var msg = JSON.parse(data.body);
             if(msg.type == 'onlineUsers'){
+                //更新心跳
+                config.lastHeartTime = 0;
                 /**
                  * 创建推送菜单
                  */
@@ -156,6 +171,8 @@ function connect(){
             console.log(JSON.parse(data.body))
             var msg = JSON.parse(data.body);
             if(msg.type == 'onlineUsers'){
+                //更新心跳
+                config.lastHeartTime = 0;               
                 /**
                  * 创建推送菜单
                  */
@@ -201,4 +218,8 @@ function notify(title,message){
 var timer;
 timer = setInterval(function(){
     sendmsg(-1,'ping');
+    config.lastHeartStatus++;
+    if(config.lastHeartStatus>5){
+        connect();
+    }
 },25000);
