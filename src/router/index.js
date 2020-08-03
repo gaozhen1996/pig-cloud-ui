@@ -78,7 +78,7 @@ export default new Router({
                     meta: { title: '文件上传' }   
                 },
                 {
-                    // wormConfig
+                    // userActivity
                     path: '/userActivity',
                     component: resolve => require(['../components/page/UserActivity.vue'], resolve),
                     meta: { title: '活跃日志' }   

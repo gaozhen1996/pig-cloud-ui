@@ -5,10 +5,13 @@
                 <el-button type="primary" icon="search" @click="handleAdd">新建稍后阅读</el-button>
             </div>            
             <!-- 表格版本 -->
-            <el-table :data="data" border class="table">
+            <el-table :data="data" border class="table" stripe>
                 <el-table-column prop="createTime" label="创建时间" width="200">
                 </el-table-column>
-                <el-table-column prop="title" label="收藏内容">
+                <el-table-column label="收藏内容">
+                    <template slot-scope="scope">
+                        <a :href="scope.row.url" target="_blank">{{ scope.row.title}}</a>
+                    </template>
                 </el-table-column>
                 <el-table-column label="操作" width="180" align="center">
                     <template slot-scope="scope">
