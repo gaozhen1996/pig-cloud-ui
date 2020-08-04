@@ -6,8 +6,8 @@
  *      |-----getCurrUrl()  //获取当前url创给后台
  *   |-----getCurrUrl() //稍后阅读测试方法后期会修改
  */
-const ip = '127.0.0.1';
-// const ip = '47.94.131.201';
+// const ip = '127.0.0.1';
+const ip = '47.94.131.201';
 var stompClient;
 var config = {'lastHeartStatus':0 }//心跳状态，0,1,2正常，大于5认为异常,因为服务器是50秒发送一次心跳
 connect();
@@ -150,8 +150,7 @@ function connect(){
     stompClient.connect({}, function(frame) { 
         //接收消息(私有消息)
         stompClient.subscribe('/topic/'+user.id, function(data){ 
-            console.log('接收消息：') 
-            console.log(JSON.parse(data.body))
+
             var msg = JSON.parse(data.body);
             if(msg.type == 'onlineUsers'){
                 //更新心跳
@@ -167,8 +166,8 @@ function connect(){
         });
         //接收消息(公共消息)
         stompClient.subscribe('/topic/-99', function(data){ 
-            console.log('接收消息：') 
-            console.log(JSON.parse(data.body))
+            // console.log('接收消息：') 
+            // console.log(JSON.parse(data.body))
             var msg = JSON.parse(data.body);
             if(msg.type == 'onlineUsers'){
                 //更新心跳
@@ -201,8 +200,8 @@ function sendmsg(toUserId,message) {
         toUser: toUserId,
         fromUser: user.id
     };
-    console.log('发送消息:')
-    console.log(resquest)
+    // console.log('发送消息:')
+    // console.log(resquest)
     stompClient.send("/accept", {}, JSON.stringify(resquest));
 }
 //通知
