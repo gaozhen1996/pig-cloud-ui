@@ -154,7 +154,7 @@ function connect(){
             var msg = JSON.parse(data.body);
             if(msg.type == 'onlineUsers'){
                 //更新心跳
-                config.lastHeartTime = 0;
+                config.lastHeartStatus = 0;
                 /**
                  * 创建推送菜单
                  */
@@ -171,7 +171,7 @@ function connect(){
             var msg = JSON.parse(data.body);
             if(msg.type == 'onlineUsers'){
                 //更新心跳
-                config.lastHeartTime = 0;               
+                config.lastHeartStatus = 0;               
                 /**
                  * 创建推送菜单
                  */
