@@ -62,7 +62,7 @@
                     value: '谷歌',
                     label: 'Google'
                 }],
-                searchEngine: 'Google',
+                searchEngine: 'Baidu',
                 loadwd: [],//动态提示
                 wd: '',//搜索关键字
                 shortcutList:[],
