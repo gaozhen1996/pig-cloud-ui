@@ -113,19 +113,20 @@
             },
             getData() {
                 axios.get(Global.baseurl+"/auth-api/userWebRest/listAllRole")
-                    .then((response) => {
-                        var code = response.data.code;
-                        if(code==2){
-                            this.tableData=response.data.data;
-                        }else if(response.data.code==4){
-                            this.$message.error('亲,您没有权限！');
-                            //this.$router.push('/login');
+                    .then((res) => {
+                        var code = res.data.code;
+                        if(code==Global.status_success){
+                            this.tableData=res.data.data;
                         }else{
-                            this.$message.error('亲，获取角色错了哦，出了一点小异常');
+                            if(res.data.msg!=null){
+                                this.$message.error(Global.message.error+res.data.msg);
+                            }else{
+                                this.$message.error(Global.message.error);
+                            }
                         }
                     })
                     .catch(function (error) {
-                    console.log(error);
+                        console.log(error);
                 });
             },
             handleUpdate(index, row) {
@@ -151,11 +152,12 @@
                     this.updateVisible = false;
                     if(res.data.code==2){
                         this.$message.success('修改成功');
-                    }else if(res.data.code==4){
-                        this.$message.error('权限不足');
                     }else{
-                        console.log(res.data.msg)
-                        this.$message.error('亲，错了哦，出了一点小异常');
+                        if(res.data.msg!=null){
+                            this.$message.error(Global.message.error+res.data.msg);
+                        }else{
+                            this.$message.error(Global.message.error);
+                        }
                     }         
                 })
             },
@@ -165,7 +167,7 @@
             showInput() {
                 this.inputVisible = true;
                 this.$nextTick(_ => {
-                this.$refs.saveTagInput.$refs.input.focus();
+                    this.$refs.saveTagInput.$refs.input.focus();
                 });
             },
             handleInputConfirm() {

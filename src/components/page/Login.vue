@@ -48,20 +48,21 @@
                 if(request.username!=""){
                     axios.post(Global.baseurl+"/auth-api/userWebRest/login",request)
                     .then(res=>{
-                        if(res.data.code==2){
+                        if(res.data.code==Global.status_success){
                             var user = res.data.data;
                             localStorage.setItem('Authorization',user.token);
-                            // delete user.token;
-                            localStorage.setItem('user',JSON.stringify(user));
+                            localStorage.setItem('menu',user.menu)
+                            delete user.token
+                            delete user.menu
+                            localStorage.setItem('user',JSON.stringify(user));  
                             this.$router.push('/');
                         }else{
                             console.log("登录异常")
                             if(res.data.msg!=null){
-                                this.$message.error(res.data.msg);
+                                this.$message.error(Global.message.error+res.data.msg);
                             }else{
-                                this.$message.error("亲，登陆失败了，请联系系统管理员协助解决哟！");
+                                this.$message.error(Global.message.error);
                             }
-                            
                         }         
                     })
                 }else{

@@ -33,8 +33,6 @@
 
 <script>
     import bus from '../common/bus';
-    import Global from '../common/Global'
-    import axios from 'axios'
     export default {
         data() {
             return {
@@ -50,26 +48,13 @@
         created(){
             /**
              * 获取菜单
-             * 先获取缓存中的数据
+             * 获取缓存中的数据
              */
             let cacheMenu = JSON.parse(localStorage.getItem('menu'));
             if(cacheMenu != null){
-                this.items = cacheMenu;
+                this.items = cacheMenu
             } 
             let user = JSON.parse(localStorage.getItem('user'));
-            let request = {"username":user.account};
-            axios.post(Global.baseurl+"/auth-api/userWebRest/getMenuByAccount",request)
-                    .then(res=>{
-                        if(res.data.code==2){
-                            let menu = JSON.parse(res.data.data);
-                            this.items = menu;                 
-                            localStorage.setItem('menu',JSON.stringify(menu));
-                        }else if(res.data.code==4){
-                             this.$router.push('/login');
-                        }else{
-                            this.$message.error('亲，获取菜单栏异常，不要慌张呢，请联系管理员哟！');
-                        }        
-                    })
             /**
              * 通过 Event Bus 进行组件间通信，来折叠侧边栏 
              */

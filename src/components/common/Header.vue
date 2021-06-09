@@ -201,7 +201,7 @@
             }
             //获取用户头像
             let user = JSON.parse(localStorage.getItem('user'));
-            if(user.logo!=undefined){
+            if(user.logo!=undefined && user.logo!=""){
                 this.defaultSrc=user.logo;
             }
             /**
