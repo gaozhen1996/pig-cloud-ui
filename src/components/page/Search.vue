@@ -79,10 +79,10 @@
                     request.account = user.account;
                     axios.post(Global.baseurl+"/auth-api/ProxyBaiduWebRest/loadWd",request)
                     .then(res=>{
-                        if(res.data.code==2){
+                        if(res.data.code==Global.status_success){
                             let arr=res.data.data;
                             for(let i=0;i<arr.length;i++){
-                                let obj = { "value": arr[i].q}
+                                let obj = { "value": arr[i].Q}
                                 this.loadwd.push(obj);
                             }
                         }

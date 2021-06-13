@@ -150,15 +150,20 @@
                 axios.post(Global.baseurl+"/auth-api/userWebRest/updateRoleById",request)
                 .then(res=>{
                     this.updateVisible = false;
-                    if(res.data.code==2){
-                        this.$message.success('修改成功');
-                    }else{
-                        if(res.data.msg!=null){
-                            this.$message.error(Global.message.error+res.data.msg);
+                        var code = res.data.code;
+                        if(code==Global.status_success){
+                            this.$message.success('修改成功');
                         }else{
-                            this.$message.error(Global.message.error);
-                        }
-                    }         
+                            if(res.data.msg!=null){
+                                this.$message.error(Global.message.error+res.data.msg);
+                            }else{
+                                if(res.data.msg!=null){
+                                    this.$message.error(Global.message.error+res.data.msg);
+                                }else{
+                                    this.$message.error(Global.message.error);
+                                }
+                            }
+                        }       
                 })
             },
             handleClose(tag) {

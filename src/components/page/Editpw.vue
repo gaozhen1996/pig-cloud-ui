@@ -33,7 +33,7 @@
         data: function(){
             return {
                 userInfo: {
-                    userId:'',
+                    id:'',
                     passwd:'',
                     passwdCheck: '',
                 }
@@ -45,10 +45,13 @@
                 if(this.userInfo.passwd!=''){
                     if(this.userInfo.passwd==this.userInfo.passwdCheck){
                         // 发送请求
-                        let request = this.userInfo;
+                        let request = {
+                            id : this.userInfo.id,
+                            password : this.userInfo.passwd
+                        }
                         axios.post(Global.baseurl+"/auth-api/userWebRest/updatePasswdById",request)
                         .then(res=>{
-                            if(res.data.code==2){
+                            if(res.data.code==Global.status_success){
                                 this.$message.success('修改成功!请重新登录');
                                 this.$router.push('/login');
                             }else{
@@ -67,7 +70,7 @@
             //填充基本信息
             let user = JSON.parse(localStorage.getItem('user'));
             this.userInfo = {
-                userId:user.id,
+                id:user.id,
                 account:user.account,
             };
         },

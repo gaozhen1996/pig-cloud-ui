@@ -14,7 +14,7 @@ Vue.use(ElementUI, {
 });
 
 //配置axios
-function loadAuthorization(){
+function configAxios(){
     let Authorization = localStorage.getItem("Authorization");
     axios.defaults.headers.common['Authorization'] = Authorization;
     Vue.prototype.$axios = axios
@@ -26,7 +26,7 @@ router.beforeEach((to, from, next) => {
     if(user==null && to.path !== '/login'){
         next('/login');
     }else {
-        loadAuthorization()
+        configAxios()
         // 简单的判断IE10及以下不进入富文本编辑器，该组件不兼容
         if (navigator.userAgent.indexOf('MSIE') > -1 && to.path === '/editor') {
             Vue.prototype.$alert('vue-quill-editor组件不兼容IE10及以下浏览器，请使用更高版本的浏览器查看', '浏览器不兼容通知', {

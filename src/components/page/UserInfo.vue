@@ -89,19 +89,23 @@
             },
             saveUserInfo(){
                 let request = {
-                    userId:this.userInfo.id,
+                    id:this.userInfo.id,
                     name:this.userInfo.name,
                     sex:this.userInfo.sex=="我是小哥哥"?0:1,
                     logo:this.cropImg
                 }
                 axios.post(Global.baseurl+"/auth-api/userWebRest/updateUserById",request)
-                .then(res=>{
-                    if(res.data.code==2){
-                        this.$message.success('修改成功!请重新登录');
-                        this.$router.push('/login');
+                .then(res=>{  
+                    var code = res.data.code;
+                    if(code==Global.status_success){
+                            this.$message.success('修改成功,重新登录后生效!');
                     }else{
-                        this.$message.error(res.data.msg);
-                    }         
+                        if(res.data.msg!=null){
+                            this.$message.error(Global.message.error+res.data.msg);
+                        }else{
+                            this.$message.error(Global.message.error);
+                        }
+                    }      
                 })
 
             }
@@ -116,7 +120,7 @@
                 sex:user.sex==0?'我是小哥哥':'我是小姐姐',
             };
             //获取用户头像
-            if(user.logo!=undefined){
+            if(user.logo!=undefined && user.logo!=''){
                 this.defaultSrc=user.logo;
             }
             this.cropImg = this.defaultSrc;
