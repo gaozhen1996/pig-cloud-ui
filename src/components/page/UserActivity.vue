@@ -192,15 +192,21 @@ export default {
             axios.get(Global.baseurl+"/auth-api/userActivityRest/listNewTabCountByDate?startDate="+before7Date+"&endDate="+currDate)
                 .then((response) => {
                     var code = response.data.code;
-                    if(code==2){
+                    if(code==Global.status_success){
                         let data = response.data.data;
                         chartData.xdata = data.total_x;
                         chartData.ydata.data = data.total_y;
                         this.chartTotalDailyConfig(chartData,this.createDetailDailyChart);
                         //详细newTab数据
                         this.newTabDetailCounts = data.newTabDetailCounts;
+                        console.log(data.newTabDetailCounts)
+
                     }else{
-                        this.$message.error('亲，错了哦，出了一点小异常');
+                        if(res.data.msg!=null){
+                            this.$message.error(Global.message.error+res.data.msg);
+                        }else{
+                            this.$message.error(Global.message.error);
+                        }
                     }
                 })
                 .catch(function (error) {
