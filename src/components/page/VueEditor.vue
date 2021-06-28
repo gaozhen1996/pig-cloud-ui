@@ -1,44 +1,46 @@
 <template>
-    <div>
-        <div class="container">
-            <quill-editor ref="myTextEditor" v-model="content" :options="editorOption"></quill-editor>
-            <el-button class="editor-btn" type="primary" @click="submit">提交</el-button>
-        </div>
-    </div>
+	<div class="container">
+		<div style="height: 400px;width: auto" id="minder-container"></div>
+		<div>
+			<div><h1><a id="1-javase" class="anchor" href="#1-javase"></a>1-JavaSE</h1><ul><li>Java-虚拟机<ul><li><a href="/gaozhen1996/study-note/blob/master/1-JavaSE/Java-%E8%99%9A%E6%8B%9F%E6%9C%BA/1.%E5%AF%B9%E8%B1%A1%E5%86%85%E5%AD%98%E5%B8%83%E5%B1%80.md">1.对象内存布局.md</a></li><li><a href="/gaozhen1996/study-note/blob/master/1-JavaSE/Java-%E8%99%9A%E6%8B%9F%E6%9C%BA/2.%E8%87%AA%E5%8A%A8%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86%E6%9C%BA%E5%88%B6.md">2.自动内存管理机制.md</a></li><li><a href="/gaozhen1996/study-note/blob/master/1-JavaSE/Java-%E8%99%9A%E6%8B%9F%E6%9C%BA/3.%E5%9E%83%E5%9C%BE%E6%94%B6%E9%9B%86%E5%99%A8%E4%B8%8E%E5%86%85%E5%AD%98%E5%88%86%E9%85%8D%E7%AD%96%E7%95%A5.md">3.垃圾收集器与内存分配策略.md</a></li><li><a href="/gaozhen1996/study-note/blob/master/1-JavaSE/Java-%E8%99%9A%E6%8B%9F%E6%9C%BA/4.jvm%E5%8F%82%E6%95%B0%E8%AE%BE%E7%BD%AE.md">4.jvm参数设置.md</a></li><li><a href="/gaozhen1996/study-note/blob/master/1-JavaSE/Java-%E8%99%9A%E6%8B%9F%E6%9C%BA/8.%E5%AD%97%E8%8A%82%E7%A0%81%E6%96%87%E4%BB%B6%E8%A7%A3%E6%9E%90.md">8.字节码文件解析.md</a></li><li><a href="/gaozhen1996/study-note/blob/master/1-JavaSE/Java-%E8%99%9A%E6%8B%9F%E6%9C%BA/9.jvm%E5%91%BD%E4%BB%A4.md">9.jvm命令.md</a></li></ul></li><li>java-IO<ul><li><a href="/gaozhen1996/study-note/blob/master/1-JavaSE/java-IO/IO%E5%AF%B9%E8%B1%A1%E7%9A%84%E5%88%86%E7%B1%BB.pdf">IO对象的分类.pdf</a></li></ul></li><li>java-反射<ul><li><a href="/gaozhen1996/study-note/blob/master/1-JavaSE/java-%E5%8F%8D%E5%B0%84/Class.forName%E5%92%8CClassLoader%E5%8C%BA%E5%88%AB.md">Class.forName和ClassLoader区别.md</a></li><li><a href="/gaozhen1996/study-note/blob/master/1-JavaSE/java-%E5%8F%8D%E5%B0%84/%E5%8F%8D%E5%B0%84%E5%88%9B%E5%BB%BA%E5%AF%B9%E8%B1%A1%E7%9A%84%E4%B8%89%E7%A7%8D%E6%96%B9%E5%BC%8F.md">反射创建对象的三种方式.md</a></li></ul></li><li>java-基础<ul><li><a href="/gaozhen1996/study-note/blob/master/1-JavaSE/java-%E5%9F%BA%E7%A1%80/Integer%E7%B1%BB.md">Integer类.md</a></li><li><a href="/gaozhen1996/study-note/blob/master/1-JavaSE/java-%E5%9F%BA%E7%A1%80/final%E5%85%B3%E9%94%AE%E5%AD%97.md">final关键字.md</a></li><li><a href="/gaozhen1996/study-note/blob/master/1-JavaSE/java-%E5%9F%BA%E7%A1%80/static%E5%85%B3%E9%94%AE%E5%AD%97.md">static关键字.md</a></li></ul></li><li>java-并发<ul><li><a href="/gaozhen1996/study-note/blob/master/1-JavaSE/java-%E5%B9%B6%E5%8F%91/1.%E5%AE%9E%E7%8E%B0%E5%A4%9A%E7%BA%BF%E7%A8%8B%E6%96%B9%E5%BC%8F.md">1.实现多线程方式.md</a></li><li><a href="/gaozhen1996/study-note/blob/master/1-JavaSE/java-%E5%B9%B6%E5%8F%91/2.%E7%BA%BF%E7%A8%8B%E6%B1%A0.md">2.线程池.md</a></li><li><a href="/gaozhen1996/study-note/blob/master/1-JavaSE/java-%E5%B9%B6%E5%8F%91/3.java%E5%B8%B8%E7%94%A8%E7%BA%BF%E7%A8%8B%E6%B1%A0.md">3.java常用线程池.md</a></li><li><a href="/gaozhen1996/study-note/blob/master/1-JavaSE/java-%E5%B9%B6%E5%8F%91/4.sleep%E4%B8%8Ewait%E7%9A%84%E5%8C%BA%E5%88%AB.md">4.sleep与wait的区别.md</a></li><li><a href="/gaozhen1996/study-note/blob/master/1-JavaSE/java-%E5%B9%B6%E5%8F%91/%E8%AF%A6%E8%A7%A3synchronized%E4%B8%8ELock%E7%9A%84%E5%8C%BA%E5%88%AB%E4%B8%8E%E4%BD%BF%E7%94%A8%20.md">详解synchronized与Lock的区别与使用 .md</a></li></ul></li><li><a href="/gaozhen1996/study-note/blob/master/1-JavaSE/java%E5%BC%80%E5%8F%91%E8%A7%84%E8%8C%83.md">java开发规范.md</a></li><li><a href="/gaozhen1996/study-note/blob/master/1-JavaSE/mac%E9%85%8D%E7%BD%AE%E5%A4%9Ajdk.md">mac配置多jdk.md</a></li></ul><h1><a id="2-javaee" class="anchor" href="#2-javaee"></a>2-JavaEE</h1><ul><li>JavaScript<ul><li><a href="/gaozhen1996/study-note/blob/master/2-JavaEE/JavaScript/js%E8%8E%B7%E5%8F%96%E5%A4%96%E7%BD%91%E4%B8%8E%E5%86%85%E7%BD%91IP.md">js获取外网与内网IP.md</a></li></ul></li><li>git<ul><li><a href="/gaozhen1996/study-note/blob/master/2-JavaEE/git/git-liunx%E4%B8%8A%E9%83%A8%E7%BD%B2%E7%A7%81%E6%9C%8D.md">git-liunx上部署私服.md</a></li><li><a href="/gaozhen1996/study-note/blob/master/2-JavaEE/git/git%E5%91%BD%E4%BB%A4%E7%9A%84%E4%BB%A3%E7%A0%81%E7%BB%9F%E8%AE%A1%E6%96%B9%E6%B3%95.md">git命令的代码统计方法.md</a></li></ul></li><li>maven<ul><li><a href="/gaozhen1996/study-note/blob/master/2-JavaEE/maven/mac-%E5%AE%89%E8%A3%85maven.md">mac-安装maven.md</a></li></ul></li><li>nginx<ul><li><a href="/gaozhen1996/study-note/blob/master/2-JavaEE/nginx/nginx%E6%9F%A5%E7%9C%8B%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6nginx.conf%E8%B7%AF%E5%BE%84.md">nginx查看配置文件nginx.conf路径.md</a></li><li><a href="/gaozhen1996/study-note/blob/master/2-JavaEE/nginx/%E5%9C%A8Ubuntu%E7%B3%BB%E7%BB%9F%E4%B8%8A%E5%AE%89%E8%A3%85Nginx%E6%9C%8D%E5%8A%A1%E5%99%A8.md">在Ubuntu系统上安装Nginx服务器.md</a></li></ul></li><li>spring<ul><li><a href="/gaozhen1996/study-note/blob/master/2-JavaEE/spring/@Configuration%E4%B8%8E@Component%E7%9A%84%E5%8C%BA%E5%88%AB.md">@Configuration与@Component的区别.md</a></li><li><a href="/gaozhen1996/study-note/blob/master/2-JavaEE/spring/spring%E6%89%A7%E8%A1%8C%E6%B5%81%E7%A8%8B.md">spring执行流程.md</a></li><li><a href="/gaozhen1996/study-note/blob/master/2-JavaEE/spring/spring%E6%BA%90%E7%A0%811-%E6%B3%A8%E5%86%8C%E9%85%8D%E7%BD%AEbean.md">spring源码1-注册配置bean.md</a></li><li><a href="/gaozhen1996/study-note/blob/master/2-JavaEE/spring/spring%E6%BA%90%E7%A0%812-%E6%89%AB%E6%8F%8Fbean.md">spring源码2-扫描bean.md</a></li><li><a href="/gaozhen1996/study-note/blob/master/2-JavaEE/spring/spring%E6%BA%90%E7%A0%813-%E5%AE%9E%E4%BE%8B%E5%8C%96%E5%8D%95%E4%BE%8B%E5%AF%B9%E8%B1%A1.md">spring源码3-实例化单例对象.md</a></li></ul></li></ul><h1><a id="3-liunx" class="anchor" href="#3-liunx"></a>3-Liunx</h1><ul><li><a href="/gaozhen1996/study-note/blob/master/3-Liunx/10%E3%80%81liunx%E8%BF%9B%E7%A8%8B.md">10、liunx进程.md</a></li><li><a href="/gaozhen1996/study-note/blob/master/3-Liunx/5%E3%80%81liunx%E6%96%87%E4%BB%B6.md">5、liunx文件.md</a></li><li><a href="/gaozhen1996/study-note/blob/master/3-Liunx/liunx%E5%85%8D%E5%AF%86%E7%99%BB%E5%BD%95.md">liunx免密登录.md</a></li><li><a href="/gaozhen1996/study-note/blob/master/3-Liunx/liunx%E5%AE%89%E8%A3%85jdk.md">liunx安装jdk.md</a></li><li><a href="/gaozhen1996/study-note/blob/master/3-Liunx/top%E5%91%BD%E4%BB%A4.md">top命令.md</a></li><li><a href="/gaozhen1996/study-note/blob/master/3-Liunx/ubuntu%E9%85%8D%E7%BD%AENFS.md">ubuntu配置NFS.md</a></li><li><a href="/gaozhen1996/study-note/blob/master/3-Liunx/%E9%98%BF%E9%87%8C%E4%BA%91%E9%85%8D%E7%BD%AE%E5%AE%89%E5%85%A8%E7%BB%84.pdf">阿里云配置安全组.pdf</a></li></ul><h1><a id="4-数据库" class="anchor" href="#4-%E6%95%B0%E6%8D%AE%E5%BA%93"></a>4-数据库</h1><ul><li><a href="/gaozhen1996/study-note/blob/master/4-%E6%95%B0%E6%8D%AE%E5%BA%93/1.%E4%BA%8B%E7%89%A9%E5%9B%9B%E5%A4%A7%E7%89%B9%E6%80%A7ACID.md">1.事物四大特性ACID.md</a></li><li><a href="/gaozhen1996/study-note/blob/master/4-%E6%95%B0%E6%8D%AE%E5%BA%93/2.%E5%B9%B6%E5%8F%91%E4%B8%80%E8%87%B4%E6%80%A7%E9%97%AE%E9%A2%98.md">2.并发一致性问题.md</a></li><li><a href="/gaozhen1996/study-note/blob/master/4-%E6%95%B0%E6%8D%AE%E5%BA%93/3.%E9%9A%94%E7%A6%BB%E7%BA%A7%E5%88%AB.md">3.隔离级别.md</a></li><li><a href="/gaozhen1996/study-note/blob/master/4-%E6%95%B0%E6%8D%AE%E5%BA%93/4.%E5%B0%81%E9%94%81%E5%8A%9B%E5%BA%A6.md">4.封锁力度.md</a></li><li><a href="/gaozhen1996/study-note/blob/master/4-%E6%95%B0%E6%8D%AE%E5%BA%93/5.SQL%E7%BC%96%E5%86%99%E8%A7%84%E8%8C%83.md">5.SQL编写规范.md</a></li><li>MySQL<ul><li><a href="/gaozhen1996/study-note/blob/master/4-%E6%95%B0%E6%8D%AE%E5%BA%93/MySQL/MySQL%E6%9F%A5%E7%9C%8B%E5%8D%A0%E7%94%A8%E7%A9%BA%E9%97%B4.md">MySQL查看占用空间.md</a></li><li><a href="/gaozhen1996/study-note/blob/master/4-%E6%95%B0%E6%8D%AE%E5%BA%93/MySQL/MySQL%E9%99%90%E5%88%B6IP%E7%99%BB%E5%BD%95.md">MySQL限制IP登录.md</a></li><li><a href="/gaozhen1996/study-note/blob/master/4-%E6%95%B0%E6%8D%AE%E5%BA%93/MySQL/Mysql%201175%E9%94%99%E8%AF%AF.md">Mysql 1175错误.md</a></li><li><a href="/gaozhen1996/study-note/blob/master/4-%E6%95%B0%E6%8D%AE%E5%BA%93/MySQL/Mysql%20packet%20bigger%20%E9%94%99%E8%AF%AF.md">Mysql packet bigger 错误.md</a></li><li><a href="/gaozhen1996/study-note/blob/master/4-%E6%95%B0%E6%8D%AE%E5%BA%93/MySQL/mysql%20%E5%90%AF%E5%8A%A8%EF%BC%8C%E5%81%9C%E6%AD%A2.md">mysql 启动，停止.md</a></li><li><a href="/gaozhen1996/study-note/blob/master/4-%E6%95%B0%E6%8D%AE%E5%BA%93/MySQL/mysql%20%E5%AE%89%E8%A3%85%E3%80%81%E9%85%8D%E7%BD%AE%E8%BF%9C%E7%A8%8B.md">mysql 安装、配置远程.md</a></li><li><a href="/gaozhen1996/study-note/blob/master/4-%E6%95%B0%E6%8D%AE%E5%BA%93/MySQL/mysql%E6%B8%85%E9%99%A4%E8%A1%A8%E4%B8%AD%E6%95%B0%E6%8D%AE.md">mysql清除表中数据.md</a></li></ul></li><li>oracle<ul><li><a href="/gaozhen1996/study-note/blob/master/4-%E6%95%B0%E6%8D%AE%E5%BA%93/oracle/oralce%E5%AF%BC%E5%BA%93%E3%80%81%E8%A1%A8%E7%A9%BA%E9%97%B4%E3%80%81%E7%94%A8%E6%88%B7%E3%80%81%E6%95%B0%E6%8D%AE%E6%B3%B5.md">oralce导库、表空间、用户、数据泵.md</a></li><li><a href="/gaozhen1996/study-note/blob/master/4-%E6%95%B0%E6%8D%AE%E5%BA%93/oracle/oralce%E6%81%A2%E5%A4%8Ddrop%E7%9A%84%E8%A1%A8%E6%95%B0%E6%8D%AE.md">oralce恢复drop的表数据.md</a></li><li><a href="/gaozhen1996/study-note/blob/master/4-%E6%95%B0%E6%8D%AE%E5%BA%93/oracle/sqlload%E4%BD%BF%E7%94%A8.md">sqlload使用.md</a></li></ul></li><li>redis<ul><li><a href="/gaozhen1996/study-note/blob/master/4-%E6%95%B0%E6%8D%AE%E5%BA%93/redis/redis%E4%BD%BF%E7%94%A8.md">redis使用.md</a></li><li><a href="/gaozhen1996/study-note/blob/master/4-%E6%95%B0%E6%8D%AE%E5%BA%93/redis/redis%E5%AE%89%E8%A3%85%EF%BC%8C%E5%90%AF%E5%8A%A8%EF%BC%8C%E8%BF%9C%E7%A8%8B.md">redis安装，启动，远程.md</a></li><li><a href="/gaozhen1996/study-note/blob/master/4-%E6%95%B0%E6%8D%AE%E5%BA%93/redis/redis%E6%9C%8D%E5%8A%A1%E5%81%9C%E6%AD%A2%EF%BC%8C%E9%87%8D%E5%90%AF%EF%BC%8C%E5%90%AF%E5%8A%A8.md">redis服务停止，重启，启动.md</a></li></ul></li></ul><h1><a id="5-分布式框架" class="anchor" href="#5-%E5%88%86%E5%B8%83%E5%BC%8F%E6%A1%86%E6%9E%B6"></a>5-分布式框架</h1><ul><li>docker<ul><li><a href="/gaozhen1996/study-note/blob/master/5-%E5%88%86%E5%B8%83%E5%BC%8F%E6%A1%86%E6%9E%B6/docker/docker%E5%AE%89%E8%A3%85-%E5%9F%BA%E4%BA%8Eubuntu.md">docker安装-基于ubuntu.md</a></li><li><a href="/gaozhen1996/study-note/blob/master/5-%E5%88%86%E5%B8%83%E5%BC%8F%E6%A1%86%E6%9E%B6/docker/docker%E5%AE%89%E8%A3%85wordpress.md">docker安装wordpress.md</a></li><li><a href="/gaozhen1996/study-note/blob/master/5-%E5%88%86%E5%B8%83%E5%BC%8F%E6%A1%86%E6%9E%B6/docker/docker%E6%9F%A5%E7%9C%8Bmysql%E6%95%B0%E6%8D%AE.md">docker查看mysql数据.md</a></li></ul></li><li>springboot<ul><li><a href="/gaozhen1996/study-note/blob/master/5-%E5%88%86%E5%B8%83%E5%BC%8F%E6%A1%86%E6%9E%B6/springboot/springboot%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95.md">springboot单元测试.md</a></li><li><a href="/gaozhen1996/study-note/blob/master/5-%E5%88%86%E5%B8%83%E5%BC%8F%E6%A1%86%E6%9E%B6/springboot/springboot%E8%B7%A8%E5%9F%9F.md">springboot跨域.md</a></li></ul></li></ul><h1><a id="6-大数据" class="anchor" href="#6-%E5%A4%A7%E6%95%B0%E6%8D%AE"></a>6-大数据</h1><ul><li>hadoop<ul><li><a href="/gaozhen1996/study-note/blob/master/6-%E5%A4%A7%E6%95%B0%E6%8D%AE/hadoop/hadoop%E6%90%AD%E5%BB%BA.md">hadoop搭建.md</a></li><li><a href="/gaozhen1996/study-note/blob/master/6-%E5%A4%A7%E6%95%B0%E6%8D%AE/hadoop/%E5%AD%A6%E4%B9%A0%E8%B7%AF%E7%BA%BF.md">学习路线.md</a></li></ul></li></ul></div>	
+		</div>
+	</div>	
 </template>
 
 <script>
-    import 'quill/dist/quill.core.css';
-    import 'quill/dist/quill.snow.css';
-    import 'quill/dist/quill.bubble.css';
-    import { quillEditor } from 'vue-quill-editor';
-    export default {
-        name: 'editor',
-        data: function(){
-            return {
-                content: '',
-                editorOption: {
-                    placeholder: 'Hello World'
-                }
-            }
+  import kity from 'kity'
+  import kityminder from 'kityminder-core'
+
+  export default {
+    name: "page",
+    data() {
+      return {}
+    },
+    methods: {},
+    mounted() {
+      this.km = new window.kityminder.Minder({
+        renderTo: '#minder-container'
+      });
+      this.km.importJson({
+        "root": {
+          "data": {"text": "test111"},
+          "children": [
+            {"data": {"text": "网页"}},
+            {"data": {"text": "贴吧"}},
+            {"data": {"text": "知道"}},
+            {"data": {"text": "音乐"}},
+            {"data": {"text": "图片"}},
+            {"data": {"text": "视频"}},
+            {"data": {"text": "地图"}},
+            {"data": {"text": "百科", "expandState": "collapse"}}
+          ]
         },
-        components: {
-            quillEditor
-        },
-        methods: {
-            onEditorChange({ editor, html, text }) {
-                this.content = html;
-                console.log(this.content)
-            },
-            submit(){
-                console.log(this.content);
-                this.$message.success('提交成功！');
-            }
-        }
+        "template": "default"
+      });
     }
+  }
 </script>
+
 <style scoped>
-    .editor-btn{
-        margin-top: 20px;
-    }
+
 </style>

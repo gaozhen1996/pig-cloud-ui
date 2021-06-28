@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no">
+	<link rel="stylesheet" href="http://at.alicdn.com/t/font_830376_qzecyukz0s.css">
+	<title>个人计划助手</title>
+</head>
+<body>    
+<div style="height: 400px;width: auto" id="minder-container"></div>
+</body>
+<script type="text/javascript" src="lib/kity.min.js">
+<script type="text/javascript" src="lib/kityminder.core.js"></script>
+<script type="text/javascript" src="lib/kityminder.core.min.js"></script>
+<script type="text/javascript">
+var minder =  new kityminder.Minder({
+        renderTo: '#minder-container'
+      });
+minder.importJson({
+"root": {
+  "data": {"text": "test111"},
+  "children": [
+	{"data": {"text": "网页"}},
+	{"data": {"text": "贴吧"}},
+	{"data": {"text": "知道"}},
+	{"data": {"text": "音乐"}},
+	{"data": {"text": "图片"}},
+	{"data": {"text": "视频"}},
+	{"data": {"text": "地图"}},
+	{"data": {"text": "百科", "expandState": "collapse"}}
+  ]
+},
+"template": "default"
+});
+</script>  
+</html>
