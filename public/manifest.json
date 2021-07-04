@@ -1,1 +1,33 @@
-{"background":{"scripts":["lib/stomp.js","lib/sockjs.min.js","lib/ext-right-key.js"]},"browser_action":{"default_icon":"icons/icon.png","default_popup":"popup/popup.html","default_title":"zh_CN"},"content_scripts":[{"all_frames":false,"js":["bg.js"],"matches":["http://*/*","https://*/*"],"run_at":"document_end"}],"content_security_policy":"script-src 'self' 'unsafe-eval' https://ssl.google-analytics.com; object-src 'self'","default_locale":"zh_CN","description":"plan new tab.","icons":{"128":"icons/icon-128.png","16":"icons/icon.png"},"manifest_version":2,"minimum_chrome_version":"18.0.0","name":"plan newtab","permissions":["proxy","tabs","contextMenus","webRequest","webRequestBlocking","webNavigation","unlimitedStorage","notifications","\u003Call_urls>","http://*/*","https://*/*","ftp://*/*"],"version":"1.0.0","web_accessible_resources":["first.html"],"author":"gsqc","chrome_url_overrides":{"newtab":"index.html#/search"}}
+{
+	"background": {
+		"scripts": ["lib/stomp.js", "lib/sockjs.min.js", "lib/ext-right-key.js"]
+	},
+	"browser_action": {
+		"default_icon": "icons/icon.png",
+		"default_popup": "popup/popup.html",
+		"default_title": "zh_CN"
+	},
+	"content_scripts": [{
+		"all_frames": false,
+		"js": ["lib/kity.min.js", "lib/kityminder.core.js", "lib/kityminder.core.min.js","bg.js"],
+		"matches": ["http://*/*", "https://*/*"],
+		"run_at": "document_end"
+	}],
+	"content_security_policy": "script-src 'self' 'unsafe-eval' https://ssl.google-analytics.com; object-src 'self'",
+	"default_locale": "zh_CN",
+	"description": "plan new tab.",
+	"icons": {
+		"128": "icons/icon-128.png",
+		"16": "icons/icon.png"
+	},
+	"manifest_version": 2,
+	"minimum_chrome_version": "18.0.0",
+	"name": "plan newtab",
+	"permissions": ["proxy", "tabs", "contextMenus", "webRequest", "webRequestBlocking", "webNavigation", "unlimitedStorage", "notifications", "\u003Call_urls>", "http://*/*", "https://*/*", "ftp://*/*"],
+	"version": "1.0.0",
+	"web_accessible_resources": ["first.html"],
+	"author": "gsqc",
+	"chrome_url_overrides": {
+		"newtab": "index.html#/search"
+	}
+}
