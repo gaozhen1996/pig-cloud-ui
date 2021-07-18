@@ -247,7 +247,12 @@
                     }else if(code==4){
                         // this.$router.push('/login');
                     }else{
-                        this.$message.error('亲，获取计划错了哦，出了一点小异常，请联系维护人员');
+                        this.$message.error('亲，错了哦，出了一点小异常');
+                        if(response.data.msg!=null){
+                            console.log(Global.message.error+response.data.msg);
+                        }else{
+                            console.log(this.$message.error(Global.message.error))
+                        }                        
                     }
                 })
                 .catch(function (error) {

@@ -57,7 +57,6 @@
                             localStorage.setItem('user',JSON.stringify(user));  
                             this.$router.push('/');
                         }else{
-                            console.log("登录异常")
                             if(res.data.msg!=null){
                                 this.$message.error(Global.message.error+res.data.msg);
                             }else{

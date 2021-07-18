@@ -167,7 +167,12 @@
                                 localStorage.setItem('shortcutList',JSON.stringify(this.shortcutList));              
                             }
                         }else{
-                            this.$message.error('亲，获取快捷方式错了哦，出了一点小异常,请联系管理员');
+                        this.$message.error('亲，错了哦，出了一点小异常');
+                            if(response.data.msg!=null){
+                                console.log(Global.message.error+response.data.msg);
+                            }else{
+                                console.log(this.$message.error(Global.message.error))
+                            }    
                         }
                     })
                     .catch(function (error) {
